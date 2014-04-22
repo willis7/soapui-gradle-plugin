@@ -4,6 +4,7 @@ import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUILoadTestRunner
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -23,11 +24,13 @@ class LoadTestTask extends DefaultTask {
     /**
      * The TestSuite to run
      */
+    @Optional
     String testSuite
 
     /**
      * The TestCase to run
      */
+    @Optional
     String testCase
 
     /**
@@ -38,11 +41,13 @@ class LoadTestTask extends DefaultTask {
     /**
      * The username to use for authentication challenges
      */
+    @Optional
     String username
 
     /**
      * The password to use for authentication challenges
      */
+    @Optional
     String password
 
     /**
@@ -50,36 +55,43 @@ class LoadTestTask extends DefaultTask {
      * in the addition of WS-Security UsernamePassword tokens to any outgoing request containing
      * the specified username and password. Set to either 'Text' or 'Digest'
      */
+    @Optional
     String wssPasswordType
 
     /**
      * The domain to use for authentication challenges
      */
+    @Optional
     String domain
 
     /**
      * The host to use for requests
      */
+    @Optional
     String host
 
     /**
      * Overrides the endpoint to use for requests
      */
+    @Optional
     String endpoint
 
     /**
      * Overrides the LoadTest limit
      */
+    @Optional
     Integer limit
 
     /**
      * Overrides the LoadTest threadCount
      */
+    @Optional
     Integer threadCount
 
     /**
      * Sets the output folder for reports
      */
+    @Optional
     String outputFolder
 
     /**
@@ -90,31 +102,37 @@ class LoadTestTask extends DefaultTask {
     /**
      * Specifies soapUI settings file to use
      */
+    @Optional
     String settingsFile
 
     /**
      * Tells Test Runner to skip tests.
      */
+    @Optional
     boolean skip
 
     /**
      * Specifies password for encrypted soapUI project file
      */
+    @Optional
     String projectPassword
 
     /**
      * Specifies password for encrypted soapui-settings file
      */
+    @Optional
     String settingsPassword
 
     /**
      * Specified global property values
      */
+    @Optional
     String[] globalProperties
 
     /**
      * Specified project property values
      */
+    @Optional
     String[] projectProperties
 
     /**
@@ -125,6 +143,7 @@ class LoadTestTask extends DefaultTask {
     /**
      * SoapUI Properties.
      */
+    @Optional
     Properties soapuiProperties
 
     @TaskAction

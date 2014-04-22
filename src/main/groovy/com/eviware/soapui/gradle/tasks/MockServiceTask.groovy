@@ -4,6 +4,7 @@ import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUIMockServiceRunner
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -20,21 +21,25 @@ class MockServiceTask extends DefaultTask{
     /**
      * The mockservice to run
      */
+    @Optional
     String mockService
 
     /**
      * The path to listen on
      */
+    @Optional
     String path
 
     /**
      * The port to listen on
      */
+    @Optional
     String port
 
     /**
      * Specifies soapUI settings file to use
      */
+    @Optional
     String settingsFile
 
     /**
@@ -45,26 +50,31 @@ class MockServiceTask extends DefaultTask{
     /**
      * Tells Test Runner to skip tests.
      */
+    @Optional
     boolean skip
 
     /**
      * Specifies password for encrypted soapUI project file
      */
+    @Optional
     String projectPassword
 
     /**
      * Specifies password for encrypted soapui-settings file
      */
+    @Optional
     String settingsPassword
 
     /**
      * Specified global property values
      */
+    @Optional
     String [] globalProperties
 
     /**
      * Specified project property values
      */
+    @Optional
     String [] projectProperties
 
     /**
@@ -75,6 +85,7 @@ class MockServiceTask extends DefaultTask{
     /**
      * SoapUI Properties.
      */
+    @Optional
     Properties soapuiProperties
 
     @TaskAction

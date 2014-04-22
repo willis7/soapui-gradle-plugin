@@ -4,6 +4,7 @@ import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUITestCaseRunner
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -21,21 +22,25 @@ class TestTask extends DefaultTask {
     /**
      * The TestSuite to run project file to test with
      */
+    @Optional
     String testSuite
 
     /**
      * The TestCase to run project file to test with
      */
+    @Optional
     String testCase
 
     /**
      * The username to use for authentication challenges
      */
+    @Optional
     String username
 
     /**
      * The password to use for authentication challenges
      */
+    @Optional
     String password
 
     /**
@@ -44,26 +49,31 @@ class TestTask extends DefaultTask {
      * outgoing request containing the specified username and password. Set to
      * either 'Text' or 'Digest'
      */
+    @Optional
     String wssPasswordType
 
     /**
      * The domain to use for authentication challenges
      */
+    @Optional
     String domain
 
     /**
      * The host to use for requests
      */
+    @Optional
     String host
 
     /**
      * Overrides the endpoint to use for requests
      */
+    @Optional
     String endpoint
 
     /**
      * Sets the output folder for reports
      */
+    @Optional
     String outputFolder
 
     /**
@@ -89,21 +99,25 @@ class TestTask extends DefaultTask {
     /**
      * Specifies soapUI settings file to use
      */
+    @Optional
     String settingsFile
 
     /**
      * Tells Test Runner to skip tests.
      */
+    @Optional
     boolean skip
 
     /**
      * Specifies password for encrypted soapUI project file
      */
+    @Optional
     String projectPassword
 
     /**
      * Specifies password for encrypted soapui-settings file
      */
+    @Optional
     String settingsPassword
 
     /**
@@ -114,11 +128,13 @@ class TestTask extends DefaultTask {
     /**
      * Specified global property values soapui.saveAfterRun
      */
+    @Optional
     String[] globalProperties
 
     /**
      * Specified project property values
      */
+    @Optional
     String[] projectProperties
 
     /**
@@ -132,81 +148,92 @@ class TestTask extends DefaultTask {
     Properties soapuiProperties
 
     @TaskAction
-    public void run() throws GradleException {
+    void run() throws GradleException {
 
-        if( projectFile == null )
-        {
-            throw new GradleException( "soapui-project-file setting is required" )
+        if ( !projectFile ) {
+            throw new GradleException( 'soapui-project-file setting is required' )
         }
 
-        SoapUITestCaseRunner runner = new SoapUITestCaseRunner( "soapUI " + SoapUI.SOAPUI_VERSION
-                + " Gradle TestCase Runner" )
-        runner.setProjectFile( projectFile )
+        SoapUITestCaseRunner runner = new SoapUITestCaseRunner( 'soapUI ' + SoapUI.SOAPUI_VERSION
+                + ' Gradle TestCase Runner' )
+        runner.projectFile = projectFile
 
-        if( endpoint != null )
-            runner.setEndpoint( endpoint )
+        if ( endpoint ) {
+            runner.endpoint = endpoint
+        }
 
-        if( testSuite != null )
-            runner.setTestSuite( testSuite )
+        if ( testSuite ) {
+            runner.testSuite = testSuite
+        }
 
-        if( testCase != null )
-            runner.setTestCase( testCase )
+        if ( testCase ) {
+            runner.testCase = testCase
+        }
 
-        if( username != null )
-            runner.setUsername( username )
+        if ( username ) {
+            runner.username = username
+        }
 
-        if( password != null )
-            runner.setPassword( password )
+        if ( password ) {
+            runner.password = password
+        }
 
-        if( wssPasswordType != null )
-            runner.setWssPasswordType( wssPasswordType )
+        if ( wssPasswordType ) {
+            runner.wssPasswordType = wssPasswordType
+        }
 
-        if( domain != null )
-            runner.setDomain( domain )
+        if ( domain ) {
+            runner.domain = domain
+        }
 
-        if( host != null )
-            runner.setHost( host )
+        if ( host ) {
+            runner.host = host
+        }
 
-        if( outputFolder != null )
-            runner.setOutputFolder( outputFolder )
+        if ( outputFolder ) {
+            runner.outputFolder = outputFolder
+        }
 
-        runner.setPrintReport( printReport )
-        runner.setExportAll( exportAll )
-        runner.setJUnitReport( junitReport )
-        runner.setEnableUI( interactive )
-        runner.setIgnoreError( testFailIgnore )
-        runner.setSaveAfterRun( saveAfterRun )
+        runner.printReport = printReport
+        runner.exportAll = exportAll
+        runner.junitReport = junitReport
+        runner.enableUI = interactive
+        runner.ignoreError = testFailIgnore
+        runner.saveAfterRun = saveAfterRun
 
-        if( settingsFile != null )
-            runner.setSettingsFile( settingsFile )
+        if ( settingsFile ) {
+            runner.settingsFile = settingsFile
+        }
 
-        if( projectPassword != null )
-            runner.setProjectPassword( projectPassword )
+        if ( projectPassword ) {
+            runner.projectPassword = projectPassword
+        }
 
-        if( settingsPassword != null )
-            runner.setSoapUISettingsPassword( settingsPassword )
+        if ( settingsPassword ) {
+            runner.soapUISettingsPassword = settingsPassword
+        }
 
-        if( globalProperties != null )
-            runner.setGlobalProperties( globalProperties )
+        if ( globalProperties ) {
+            runner.globalProperties = globalProperties
+        }
 
-        if( projectProperties != null )
-            runner.setProjectProperties( projectProperties )
+        if ( projectProperties ) {
+            runner.projectProperties = projectProperties
+        }
 
-        if( soapuiProperties != null && soapuiProperties.size() > 0 )
-            for( Object key : soapuiProperties.keySet() )
-            {
-                System.out.println( "Setting " + ( String )key + " value " + soapuiProperties.getProperty( ( String )key ) )
+        if ( soapuiProperties && soapuiProperties.size() > 0 ) {
+            for ( Object key : soapuiProperties.keySet() ) {
+                System.out.println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
-
-        try
-        {
-            runner.run();
         }
-        catch( Exception e )
-        {
-            getLog().error( e.toString() );
-            throw new GradleException( "SoapUI Test(s) failed" + e.getMessage() )
+
+        try {
+            runner.run()
+        }
+        catch ( Exception e ) {
+            logger.error( e.toString() )
+            throw new GradleException( 'SoapUI Test(s) failed: ' + e.message )
         }
     }
 }

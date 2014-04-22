@@ -9,7 +9,7 @@ import spock.lang.Specification
 /**
  * Specification for the soapTest task
  *
- * @author Sion
+ * @author Sion Williams
  */
 class TestTaskSpec extends Specification {
     Project project
