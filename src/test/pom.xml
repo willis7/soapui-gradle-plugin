@@ -1,0 +1,29 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>eviware</groupId>
+  <artifactId>soapui-test-project</artifactId>
+  <version>SNAPSHOT</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>eviware</groupId>
+        <artifactId>maven-soapui-plugin</artifactId>
+        <version>SNAPSHOT</version>
+        <configuration>
+    		<projectFile>sample-soapui-project.xml</projectFile>
+    		<testSuite>OleTest</testSuite>
+    		<iface>IOrderService</iface>
+    		<tool>wsi,axis1,axis2</tool>
+    		<settingsFile>C:\workspace\core\soapui-settings.xml</settingsFile>
+  		</configuration>
+      </plugin>
+    </plugins>
+  </build>
+   <repositories>
+    <repository>
+      <id>eviwareRepository</id>
+      <name>eviware repository</name>
+      <url>http://www.eviware.com/repository/m2</url>
+    </repository>
+  </repositories>
+</project>
