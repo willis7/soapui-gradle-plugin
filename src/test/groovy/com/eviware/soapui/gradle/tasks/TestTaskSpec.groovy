@@ -35,6 +35,8 @@ class TestTaskSpec extends Specification {
         then:
             Task task = project.tasks.findByName(TASK_NAME)
             task != null
+            task.group == 'SoapUI'
+            task.description == 'Runs soapUI functional tests'
 
             task.projectFile == 'sample-soapui-project.xml'
             task.printReport == true

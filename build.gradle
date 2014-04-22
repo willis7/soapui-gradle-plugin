@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 
-group = 'eviware'
-version = '4.5.0-SNAPSHOT'
+group = 'com.eviware.soapui.gradle'
+version = '0.1-SNAPSHOT'
 
 description = """soapUI - Gradle compatible plugin"""
 

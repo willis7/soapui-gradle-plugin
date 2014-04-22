@@ -26,7 +26,19 @@ class SoapUIPluginTest extends Specification {
         expect:
             project.tasks.findByName(SOAP_TEST_TASK) == null
         when:
-            project.apply plugin: 'soapui'
+            project.apply( plugin: 'soapui' )
+            project.soapui{
+                projectFile = 'sample-soapui-project.xml'
+
+                test {
+                    printReport = true
+                    exportAll = true
+                    junitReport = true
+                    interactive = false
+                    testFailIgnore = true
+                    saveAfterRun = false
+                }
+            }
         then:
             Task soapTestTask = project.tasks.findByName(SOAP_TEST_TASK)
             soapTestTask != null

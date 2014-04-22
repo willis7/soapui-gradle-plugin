@@ -18,49 +18,49 @@ class ToolTask extends DefaultTask {
      * The soapUI project file to test with
      * default-value="${project.artifactId}-soapui-project.xml"
      */
-    String projectFile;
+    String projectFile
 
     /**
      * The tool to run
      */
     @Optional
-    String tool;
+    String tool
 
     /**
      * The interface to run for
      */
     @Optional
-    String iface;
+    String iface
 
     /**
      * Specifies soapUI settings file to use
      */
     @Optional
-    String settingsFile;
+    String settingsFile
 
     /**
      * Specifies password for encrypted soapUI project file
      */
     @Optional
-    String projectPassword;
+    String projectPassword
 
     /**
      * Specifies password for encrypted soapui-settings file
      */
     @Optional
-    String settingsPassword;
+    String settingsPassword
 
     /**
      * Specifies output forder for report created by runned tool
      */
     @Optional
-    String outputFolder;
+    String outputFolder
 
     /**
      * SoapUI Properties.
      */
     @Optional
-    Properties soapuiProperties;
+    Properties soapuiProperties
 
     @TaskAction
     public void run() throws GradleException {

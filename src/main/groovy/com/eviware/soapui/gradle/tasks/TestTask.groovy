@@ -12,13 +12,7 @@ import org.gradle.api.tasks.TaskAction
  * task name - soapTest
  * @author Sion Williams
  */
-class TestTask extends DefaultTask {
-    /**
-     * The soapUI project file to test with
-     * default-value="${project.artifactId}-soapui-project.xml"
-     */
-    String projectFile
-
+class TestTask extends SoapUITask {
     /**
      * The TestSuite to run project file to test with
      */
@@ -97,28 +91,10 @@ class TestTask extends DefaultTask {
     boolean junitReport
 
     /**
-     * Specifies soapUI settings file to use
-     */
-    @Optional
-    String settingsFile
-
-    /**
      * Tells Test Runner to skip tests.
      */
     @Optional
     boolean skip
-
-    /**
-     * Specifies password for encrypted soapUI project file
-     */
-    @Optional
-    String projectPassword
-
-    /**
-     * Specifies password for encrypted soapui-settings file
-     */
-    @Optional
-    String settingsPassword
 
     /**
      * If set ignore failed tests
@@ -147,12 +123,13 @@ class TestTask extends DefaultTask {
      */
     Properties soapuiProperties
 
-    @TaskAction
-    void run() throws GradleException {
+    TestTask() {
+        super('Runs soapUI functional tests')
+    }
 
-        if ( !projectFile ) {
-            throw new GradleException( 'soapui-project-file setting is required' )
-        }
+
+    @Override
+    void executeAction() {
 
         SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner' )
@@ -228,12 +205,6 @@ class TestTask extends DefaultTask {
             }
         }
 
-        try {
-            runner.run()
-        }
-        catch ( Exception e ) {
-            logger.error( e.toString() )
-            throw new GradleException( 'SoapUI Test(s) failed: ' + e.message )
-        }
+        runner.run()
     }
 }
