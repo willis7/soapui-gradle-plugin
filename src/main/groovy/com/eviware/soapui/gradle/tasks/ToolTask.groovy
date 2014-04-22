@@ -64,39 +64,39 @@ class ToolTask extends DefaultTask {
 
     @TaskAction
     public void run() throws GradleException {
-        if (projectFile == null)
+        if ( !projectFile )
         {
-            throw new GradleException("soapui-project-file setting is required")
+            throw new GradleException('soapui-project-file setting is required')
         }
 
-        SoapUIToolRunner runner = new SoapUIToolRunner("soapUI " + SoapUI.SOAPUI_VERSION + " Gradle Tool Runner");
+        SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner');
         runner.projectFile = projectFile
 
-        if (iface != null){
+        if (iface){
             runner.interface = iface
         }
 
-        if (tool != null) {
+        if (tool) {
             runner.tool = tool
         }
 
-        if (settingsFile != null) {
+        if (settingsFile) {
             runner.settingsFile = settingsFile
         }
 
-        if (projectPassword != null) {
+        if (projectPassword) {
             runner.projectPassword = projectPassword
         }
 
-        if (settingsPassword != null) {
+        if (settingsPassword) {
             runner.soapUISettingsPassword = settingsPassword
         }
 
-        if (outputFolder != null) {
+        if (outputFolder) {
             runner.outputFolder = outputFolder
         }
 
-        if( soapuiProperties != null && soapuiProperties.size() > 0 )
+        if( soapuiProperties && soapuiProperties.size() > 0 )
             for( Object key : soapuiProperties.keySet() )
             {
                 System.out.println( "Setting " + ( String )key + " value " + soapuiProperties.getProperty( ( String )key ) )
@@ -110,7 +110,7 @@ class ToolTask extends DefaultTask {
         catch (Exception e)
         {
             logger.error(e.toString())
-            throw new GradleException( "SoapUI Tool(s) failed" + e.getMessage())
+            throw new GradleException( "SoapUI Tool(s) failed" + e.message)
         }
     }
 }

@@ -13,7 +13,7 @@ import spock.lang.Specification
  */
 class TestTaskSpec extends Specification {
     Project project
-    final static String TASK_NAME = 'soapTest'
+    final static TASK_NAME = 'soapTest'
 
     def setup() {
         project = ProjectBuilder.builder().build()

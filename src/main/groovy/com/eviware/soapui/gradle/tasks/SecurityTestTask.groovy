@@ -157,72 +157,87 @@ class SecurityTestTask extends DefaultTask{
     @TaskAction
     public void run() throws GradleException {
 
-        if( projectFile == null )
+        if( !projectFile )
         {
-            throw new GradleException( "soapui-project-file setting is required" )
+            throw new GradleException( 'soapui-project-file setting is required' )
         }
 
-        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner( "soapUI " + SoapUI.SOAPUI_VERSION
-                + " Gradle Security Test Runner" )
-        runner.setProjectFile( projectFile )
+        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner( 'soapUI ' + SoapUI.SOAPUI_VERSION
+                + ' Gradle Security Test Runner' )
+        runner.projectFile = projectFile
 
-        if( endpoint != null )
-            runner.setEndpoint( endpoint )
+        if ( endpoint ) {
+            runner.endpoint = endpoint
+        }
 
-        if( testSuite != null )
-            runner.setTestSuite( testSuite )
+        if ( testSuite ) {
+            runner.testSuite = testSuite
+        }
 
-        if( testCase != null )
-            runner.setTestCase( testCase )
+        if ( testCase ) {
+            runner.testCase = testCase
+        }
 
-        if( username != null )
-            runner.setUsername( username )
+        if ( username ) {
+            runner.username = username
+        }
 
-        if( password != null )
-            runner.setPassword( password )
+        if ( password ) {
+            runner.password = password
+        }
 
-        if( wssPasswordType != null )
-            runner.setWssPasswordType( wssPasswordType )
+        if ( wssPasswordType ) {
+            runner.wssPasswordType = wssPasswordType
+        }
 
-        if( domain != null )
-            runner.setDomain( domain )
+        if ( domain ) {
+            runner.domain = domain
+        }
 
-        if( host != null )
-            runner.setHost( host )
+        if ( host ) {
+            runner.host = host
+        }
 
-        if( outputFolder != null )
-            runner.setOutputFolder( outputFolder )
+        if ( outputFolder ) {
+            runner.outputFolder = outputFolder
+        }
 
-        runner.setPrintReport( printReport )
-        runner.setExportAll( exportAll )
-        runner.setJUnitReport( junitReport )
-        runner.setEnableUI( interactive )
-        runner.setIgnoreError( testFailIgnore )
-        runner.setSaveAfterRun( saveAfterRun )
+        runner.printReport = printReport
+        runner.exportAll = exportAll
+        runner.junitReport = junitReport
+        runner.enableUI = interactive
+        runner.ignoreError = testFailIgnore
+        runner.saveAfterRun = saveAfterRun
 
-        if( settingsFile != null )
-            runner.setSettingsFile( settingsFile )
+        if ( settingsFile ) {
+            runner.settingsFile = settingsFile
+        }
 
-        if( projectPassword != null )
-            runner.setProjectPassword( projectPassword )
+        if ( projectPassword ) {
+            runner.projectPassword = projectPassword
+        }
 
-        if( settingsPassword != null )
-            runner.setSoapUISettingsPassword( settingsPassword )
+        if ( settingsPassword ) {
+            runner.soapUISettingsPassword = settingsPassword
+        }
 
-        if( globalProperties != null )
-            runner.setGlobalProperties( globalProperties )
+        if ( globalProperties ) {
+            runner.globalProperties = globalProperties
+        }
 
-        if( projectProperties != null )
-            runner.setProjectProperties( projectProperties )
+        if ( projectProperties ) {
+            runner.projectProperties = projectProperties
+        }
 
-        if( soapuiProperties != null && soapuiProperties.size() > 0 )
+        if( soapuiProperties && soapuiProperties.size() > 0 )
             for( Object key : soapuiProperties.keySet() )
             {
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
 
-        if ( securityTest != null && securityTest.length() > 0 )
-            runner.setSecurityTestName( securityTest )
+        if ( securityTest && securityTest.length() > 0 ) {
+            runner.securityTestName = securityTest
+        }
 
         try
         {
@@ -231,7 +246,7 @@ class SecurityTestTask extends DefaultTask{
         catch( Exception e )
         {
             logger.error( e.toString() )
-            throw new GradleException( "SoapUI Test(s) failed" + e.getMessage() )
+            throw new GradleException( 'SoapUI Test(s) failed' + e.message )
         }
     }
 }
