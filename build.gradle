@@ -69,5 +69,8 @@ dependencies {
     compile group: 'net.sourceforge.htmlunit', name: 'htmlunit-core-js', version: '2.7'
     compile group: 'net.sourceforge.cssparser', name: 'cssparser', version: '0.9.5'
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.14'
+
+    testCompile localGroovy()
+    testCompile 'org.spockframework:spock-core:0.6-groovy-1.8'
 }
 

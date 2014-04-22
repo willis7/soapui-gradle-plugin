@@ -133,19 +133,11 @@ class TestTask extends DefaultTask {
 
     @TaskAction
     public void run() throws GradleException {
-        if( skip || System.getProperty( "maven.test.skip", "false" ).equals( "true" ) )
-            return
 
         if( projectFile == null )
         {
             throw new GradleException( "soapui-project-file setting is required" )
         }
-
-//		if( !projectFile.startsWith( "http" ) )
-//			if( !new File( projectFile ).exists() )
-//			{
-//				throw new MojoExecutionException( "soapui-project-file [" + projectFile + "] is not found or not specified" );
-//			}
 
         SoapUITestCaseRunner runner = new SoapUITestCaseRunner( "soapUI " + SoapUI.SOAPUI_VERSION
                 + " Gradle TestCase Runner" )
