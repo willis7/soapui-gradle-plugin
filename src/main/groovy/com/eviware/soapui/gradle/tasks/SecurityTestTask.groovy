@@ -162,8 +162,8 @@ class SecurityTestTask extends DefaultTask{
             throw new GradleException( 'soapui-project-file setting is required' )
         }
 
-        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner( 'soapUI ' + SoapUI.SOAPUI_VERSION
-                + ' Gradle Security Test Runner' )
+        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner(
+                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Security Test Runner' )
         runner.projectFile = projectFile
 
         if ( endpoint ) {

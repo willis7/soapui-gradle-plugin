@@ -154,8 +154,8 @@ class TestTask extends DefaultTask {
             throw new GradleException( 'soapui-project-file setting is required' )
         }
 
-        SoapUITestCaseRunner runner = new SoapUITestCaseRunner( 'soapUI ' + SoapUI.SOAPUI_VERSION
-                + ' Gradle TestCase Runner' )
+        SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
+                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner' )
         runner.projectFile = projectFile
 
         if ( endpoint ) {
@@ -223,7 +223,7 @@ class TestTask extends DefaultTask {
 
         if ( soapuiProperties && soapuiProperties.size() > 0 ) {
             for ( Object key : soapuiProperties.keySet() ) {
-                System.out.println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
+                println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
         }

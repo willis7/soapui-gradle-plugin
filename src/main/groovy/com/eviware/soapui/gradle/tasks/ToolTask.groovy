@@ -69,7 +69,7 @@ class ToolTask extends DefaultTask {
             throw new GradleException('soapui-project-file setting is required')
         }
 
-        SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner');
+        SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner')
         runner.projectFile = projectFile
 
         if (iface){
@@ -99,13 +99,13 @@ class ToolTask extends DefaultTask {
         if( soapuiProperties && soapuiProperties.size() > 0 )
             for( Object key : soapuiProperties.keySet() )
             {
-                System.out.println( "Setting " + ( String )key + " value " + soapuiProperties.getProperty( ( String )key ) )
+                println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
 
         try
         {
-            runner.run();
+            runner.run()
         }
         catch (Exception e)
         {

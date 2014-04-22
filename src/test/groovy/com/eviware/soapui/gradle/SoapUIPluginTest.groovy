@@ -6,7 +6,8 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * TODO: Description
+ * Specification for the plugin implementation
+ *
  * @author Sion Williams
  */
 class SoapUIPluginTest extends Specification {
@@ -27,8 +28,18 @@ class SoapUIPluginTest extends Specification {
         when:
             project.apply plugin: 'soapui'
         then:
-            Task soapTesTask = project.tasks.findByName(SOAP_TEST_TASK)
-            soapTesTask != null
+            Task soapTestTask = project.tasks.findByName(SOAP_TEST_TASK)
+            soapTestTask != null
+            soapTestTask.group == 'SoapUI'
+            soapTestTask.description == 'Runs soapUI functional tests'
+
+            soapTestTask.projectFile == 'sample-soapui-project.xml'
+            soapTestTask.printReport == true
+            soapTestTask.exportAll == true
+            soapTestTask.junitReport == true
+            soapTestTask.interactive == false
+            soapTestTask.testFailIgnore == true
+            soapTestTask.saveAfterRun == false
     }
 
     def "applies plugin and adds mock task"() {
