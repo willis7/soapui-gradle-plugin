@@ -55,7 +55,7 @@ dependencies {
     compile group: 'xerces', name: 'xercesImpl', version: '2.9.1'
     compile group: 'wss4j', name: 'wss4j', version: '1.5.8'
     compile group: 'bouncycastle', name: 'bcprov-jdk15', version: '144'
-    compile group: 'jtidy', name: 'jtidy', version: 'r872-jdk15'
+    compile group: 'net.sf.jtidy', name: 'jtidy', version: 'r938'
     compile group: 'javax.jms', name: 'jms', version: '1.1'
     compile group: 'hermesjms', name: 'hermes', version: '1.14'
     compile group: 'amf', name: 'flex-messaging-common', version: '1.0'
