@@ -1,8 +1,9 @@
 package com.eviware.soapui.gradle.extensions
 
 /**
- * TODO: Description
- * @author Sion
+ * Defines soapui test task convention.
+ *
+ * @author Sion Williams
  */
 class SoapUITestConvention {
     String testSuite

@@ -8,6 +8,6 @@ package com.eviware.soapui.gradle.extensions
 class SoapUIToolConvention {
     String tool
     String iface
-    String outputFolder         // also, tool, securityTest,     , load
-    Properties soapuiProperties // also, tool,             , mock
+    String outputFolder
+    Properties soapuiProperties
 }

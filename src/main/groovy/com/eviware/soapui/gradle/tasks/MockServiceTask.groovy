@@ -12,11 +12,7 @@ import org.gradle.api.tasks.TaskAction
  * task name - mock
  * @author Sion Williams
  */
-class MockServiceTask extends DefaultTask{
-    /**
-     * The soapUI project file to test with
-     */
-    String projectFile
+class MockServiceTask extends SoapUITask{
 
     /**
      * The mockservice to run
@@ -28,19 +24,13 @@ class MockServiceTask extends DefaultTask{
      * The path to listen on
      */
     @Optional
-    String path
+    private String path
 
     /**
      * The port to listen on
      */
     @Optional
     String port
-
-    /**
-     * Specifies soapUI settings file to use
-     */
-    @Optional
-    String settingsFile
 
     /**
      * To not wait for input
@@ -52,18 +42,6 @@ class MockServiceTask extends DefaultTask{
      */
     @Optional
     boolean skip
-
-    /**
-     * Specifies password for encrypted soapUI project file
-     */
-    @Optional
-    String projectPassword
-
-    /**
-     * Specifies password for encrypted soapui-settings file
-     */
-    @Optional
-    String settingsPassword
 
     /**
      * Specified global property values
@@ -88,12 +66,12 @@ class MockServiceTask extends DefaultTask{
     @Optional
     Properties soapuiProperties
 
-    @TaskAction
-    public void run() throws GradleException {
+    MockServiceTask() {
+        super('Runs soapUI mock service')
+    }
 
-        if( !projectFile ) {
-            throw new GradleException('soapui-project-file setting is required' )
-        }
+    @Override
+    public void executeAction(){
 
         SoapUIMockServiceRunner runner = new SoapUIMockServiceRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle MockService Runner')
@@ -135,21 +113,13 @@ class MockServiceTask extends DefaultTask{
             runner.projectProperties = projectProperties
         }
 
-        if( soapuiProperties != null && soapuiProperties.size() > 0 )
-            for( Object key : soapuiProperties.keySet() )
-            {
+        if( soapuiProperties != null && soapuiProperties.size() > 0 ) {
+            for( Object key : soapuiProperties.keySet() ) {
                 System.out.println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
+        }
 
-        try
-        {
-            runner.run()
-        }
-        catch (Exception e)
-        {
-            logger.error( e.toString() )
-            throw new GradleException( 'SoapUI MockService(s) failed' + e.message )
-        }
+        runner.run()
     }
 }
