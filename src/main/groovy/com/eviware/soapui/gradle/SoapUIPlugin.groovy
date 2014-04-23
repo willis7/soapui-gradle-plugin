@@ -1,7 +1,10 @@
 package com.eviware.soapui.gradle
 
 import com.eviware.soapui.gradle.extensions.SoapUIPluginExtension
-import com.eviware.soapui.gradle.tasks.*
+import com.eviware.soapui.gradle.tasks.MockServiceTask
+import com.eviware.soapui.gradle.tasks.SoapUITask
+import com.eviware.soapui.gradle.tasks.TestTask
+import com.eviware.soapui.gradle.tasks.ToolTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -26,6 +29,7 @@ class SoapUIPlugin implements Plugin < Project > {
         configureParentTask( project, soapUIPluginExtension )
         configSoapTest( project, soapUIPluginExtension )
         configTool( project, soapUIPluginExtension )
+        configMock(project, soapUIPluginExtension)
     }
 
     /**
@@ -85,6 +89,22 @@ class SoapUIPlugin implements Plugin < Project > {
             conventionMapping.tool = { soapUIPluginExtension.tool.tool }
             conventionMapping.outputFolder = { soapUIPluginExtension.tool.outputFolder }
             conventionMapping.soapuiProperties = { soapUIPluginExtension.tool.soapuiProperties }
+        }
+    }
+
+    /**
+     * Configures mock task.
+     *
+     * @param project Project
+     * @param soapUIPluginExtension SoapUIPluginExtension
+     */
+    private void configMock(Project project, SoapUIPluginExtension soapUIPluginExtension) {
+        project.task(MOCK_TASK, type: MockServiceTask) {
+            conventionMapping.skip = { soapUIPluginExtension.mock.skip }
+            conventionMapping.globalProperties = { soapUIPluginExtension.mock.globalProperties }
+            conventionMapping.projectProperties = { soapUIPluginExtension.mock.projectProperties }
+            conventionMapping.saveAfterRun = { soapUIPluginExtension.mock.saveAfterRun }
+            conventionMapping.soapuiProperties = { soapUIPluginExtension.mock.soapuiProperties }
         }
     }
 }

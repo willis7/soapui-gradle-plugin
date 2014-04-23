@@ -1,10 +1,4 @@
 package com.eviware.soapui.gradle.extensions
-
-import com.eviware.soapui.gradle.extensions.SoapUILoadConvention
-import com.eviware.soapui.gradle.extensions.SoapUISecurityConvention
-import com.eviware.soapui.gradle.extensions.SoapUITestConvention
-import com.eviware.soapui.gradle.extensions.SoapUIToolConvention
-
 /**
  * SoapUI plug-in extension to expose the properties and methods accessed in the extension block
  *
@@ -23,6 +17,7 @@ class SoapUIPluginExtension {
     SoapUISecurityConvention security = new SoapUISecurityConvention()
     SoapUILoadConvention load = new SoapUILoadConvention()
     SoapUITestConvention test = new SoapUITestConvention()
+    SoapUIMockConvention mock = new SoapUIMockConvention()
 
     def tool( Closure closure ) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
@@ -45,6 +40,12 @@ class SoapUIPluginExtension {
     def test( Closure closure ) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = test
+        closure()
+    }
+
+    def mock(Closure closure) {
+        closure.resolveStrategy = Closure.DELEGATE_FIRST
+        closure.delegate = mock
         closure()
     }
 }
