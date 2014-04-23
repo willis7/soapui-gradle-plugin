@@ -13,12 +13,7 @@ import org.gradle.api.tasks.TaskAction
  *
  * @author Sion
  */
-class ToolTask extends DefaultTask {
-    /**
-     * The soapUI project file to test with
-     * default-value="${project.artifactId}-soapui-project.xml"
-     */
-    String projectFile
+class ToolTask extends SoapUITask {
 
     /**
      * The tool to run
@@ -33,24 +28,6 @@ class ToolTask extends DefaultTask {
     String iface
 
     /**
-     * Specifies soapUI settings file to use
-     */
-    @Optional
-    String settingsFile
-
-    /**
-     * Specifies password for encrypted soapUI project file
-     */
-    @Optional
-    String projectPassword
-
-    /**
-     * Specifies password for encrypted soapui-settings file
-     */
-    @Optional
-    String settingsPassword
-
-    /**
      * Specifies output forder for report created by runned tool
      */
     @Optional
@@ -62,12 +39,12 @@ class ToolTask extends DefaultTask {
     @Optional
     Properties soapuiProperties
 
-    @TaskAction
-    public void run() throws GradleException {
-        if ( !projectFile )
-        {
-            throw new GradleException('soapui-project-file setting is required')
-        }
+    ToolTask() {
+        super('Runs soapUI tools')
+    }
+
+    @Override
+    void executeAction() {
 
         SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner')
         runner.projectFile = projectFile
@@ -103,14 +80,6 @@ class ToolTask extends DefaultTask {
                 System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
             }
 
-        try
-        {
-            runner.run()
-        }
-        catch (Exception e)
-        {
-            logger.error(e.toString())
-            throw new GradleException( "SoapUI Tool(s) failed" + e.message)
-        }
+        runner.run()
     }
 }
