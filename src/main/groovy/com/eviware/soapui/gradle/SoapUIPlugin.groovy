@@ -25,6 +25,7 @@ class SoapUIPlugin implements Plugin < Project > {
 
         configureParentTask( project, soapUIPluginExtension )
         configSoapTest( project, soapUIPluginExtension )
+        configTool( project, soapUIPluginExtension )
     }
 
     /**
@@ -69,6 +70,21 @@ class SoapUIPlugin implements Plugin < Project > {
             conventionMapping.junitReport = { soapUIPluginExtension.test.junitReport }
             conventionMapping.testFailIgnore = { soapUIPluginExtension.test.testFailIgnore }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.test.saveAfterRun }
+        }
+    }
+
+    /**
+     * Configures tool task.
+     *
+     * @param project Project
+     * @param soapUIPluginExtension SoapUIPluginExtension
+     */
+    private void configTool( Project project, SoapUIPluginExtension soapUIPluginExtension   ) {
+        project.task( TOOL_TASK, type: ToolTask) {
+            conventionMapping.iface = { soapUIPluginExtension.tool.iface }
+            conventionMapping.tool = { soapUIPluginExtension.tool.tool }
+            conventionMapping.outputFolder = { soapUIPluginExtension.tool.outputFolder }
+            conventionMapping.soapuiProperties = { soapUIPluginExtension.tool.soapuiProperties }
         }
     }
 }

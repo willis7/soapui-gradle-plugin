@@ -1,5 +1,6 @@
 package com.eviware.soapui.gradle
 
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -23,9 +24,10 @@ class SoapUIPluginSpec extends Specification {
     }
 
     def "applies plugin and adds soapTest task"() {
-        expect:
+        expect: "no task to be found initially"
             project.tasks.findByName(SOAP_TEST_TASK) == null
-        when:
+
+        when: "the plugin is added to the project"
             project.apply( plugin: 'soapui' )
             project.soapui{
                 projectFile = 'sample-soapui-project.xml'
@@ -39,58 +41,109 @@ class SoapUIPluginSpec extends Specification {
                     saveAfterRun = false
                 }
             }
-        then:
-            Task soapTestTask = project.tasks.findByName(SOAP_TEST_TASK)
-            soapTestTask != null
-            soapTestTask.group == 'SoapUI'
-            soapTestTask.description == 'Runs soapUI functional tests'
+        then: "the task should be available and configured"
+            Task task = project.tasks.findByName(SOAP_TEST_TASK)
+            task != null
+            task.group == 'SoapUI'
+            task.description == 'Runs soapUI functional tests'
 
-            soapTestTask.projectFile == 'sample-soapui-project.xml'
-            soapTestTask.printReport == true
-            soapTestTask.exportAll == true
-            soapTestTask.junitReport == true
-            soapTestTask.interactive == false
-            soapTestTask.testFailIgnore == true
-            soapTestTask.saveAfterRun == false
+            task.projectFile == 'sample-soapui-project.xml'
+            task.printReport == true
+            task.exportAll == true
+            task.junitReport == true
+            task.interactive == false
+            task.testFailIgnore == true
+            task.saveAfterRun == false
     }
 
-    def "applies plugin and adds mock task"() {
-        expect:
-            project.tasks.findByName(MOCK_TASK) == null
-        when:
-            project.apply plugin: 'soapui'
-        then:
-            Task mockTask = project.tasks.findByName(MOCK_TASK)
-            mockTask != null
-    }
+    def "applies plugin but fails when projectFile not defined for soapTest Task"() {
+        expect: "no task to be found initially"
+            project.tasks.findByName(SOAP_TEST_TASK) == null
 
-    def "applies plugin and adds securityTest task"() {
-        expect:
-            project.tasks.findByName(SECURITY_TEST_TASK) == null
-        when:
-            project.apply plugin: 'soapui'
-        then:
-            Task securityTestTask = project.tasks.findByName(SECURITY_TEST_TASK)
-            securityTestTask != null
+        when: "the plugin is added to the project and the task run"
+            project.apply( plugin: 'soapui' )
+            Task task = project.tasks.findByName(SOAP_TEST_TASK)
+            task.run()
+
+        then: "a gradle exception should be thrown"
+            task != null
+            thrown(GradleException)
     }
 
     def "applies plugin and adds tool task"() {
-        expect:
+        expect: "no task to be found initially"
             project.tasks.findByName(TOOL_TASK) == null
-        when:
+
+        when: "the plugin is added to the project"
             project.apply plugin: 'soapui'
-        then:
-            Task toolTask = project.tasks.findByName(TOOL_TASK)
-            toolTask != null
+
+            project.soapui{
+                projectFile = 'sample-soapui-project.xml'
+
+                tool {
+                    tool = 'wsi,axis1,axis2'
+                    iface = 'IOrderService'
+                }
+            }
+
+        then: "the task should be available and configured"
+            Task task = project.tasks.findByName(TOOL_TASK)
+            task != null
+            task.group == 'SoapUI'
+            task.description == 'Runs soapUI tools'
+
+            task.projectFile == 'sample-soapui-project.xml'
+            task.tool == 'wsi,axis1,axis2'
+            task.iface == 'IOrderService'
+    }
+
+    def "applies plugin but fails when projectFile not defined for tool Task"() {
+        expect: "no task to be found initially"
+            project.tasks.findByName(TOOL_TASK) == null
+
+        when: "the plugin is added to the project and the task run"
+            project.apply( plugin: 'soapui' )
+            Task task = project.tasks.findByName(TOOL_TASK)
+            task.run()
+
+        then: "a gradle exception should be thrown"
+            task != null
+            thrown(GradleException)
+    }
+
+    def "applies plugin and adds mock task"() {
+        expect: "no task to be found initially"
+            project.tasks.findByName(MOCK_TASK) == null
+
+        when: "the plugin is added to the project"
+            project.apply plugin: 'soapui'
+
+        then: "the task should be available and configured"
+            Task task = project.tasks.findByName(MOCK_TASK)
+            task != null
+    }
+
+    def "applies plugin and adds securityTest task"() {
+        expect: "no task to be found initially"
+            project.tasks.findByName(SECURITY_TEST_TASK) == null
+
+        when: "the plugin is added to the project"
+            project.apply plugin: 'soapui'
+
+        then: "the task should be available and configured"
+            Task task = project.tasks.findByName(SECURITY_TEST_TASK)
+            task != null
     }
 
     def "applies plugin and adds loadTest task"() {
-        expect:
-        project.tasks.findByName(LOAD_TEST_TASK) == null
-        when:
-        project.apply plugin: 'soapui'
-        then:
-        Task loadTestTask = project.tasks.findByName(LOAD_TEST_TASK)
-        loadTestTask != null
+        expect: "no task to be found initially"
+            project.tasks.findByName(LOAD_TEST_TASK) == null
+
+        when: "the plugin is added to the project"
+            project.apply plugin: 'soapui'
+
+        then: "the task should be available and configured"
+            Task task = project.tasks.findByName(LOAD_TEST_TASK)
+            task != null
     }
 }

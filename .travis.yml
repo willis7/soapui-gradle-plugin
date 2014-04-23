@@ -1,0 +1,5 @@
+env:
+   - TERM=dumb
+
+script:
+   - ./gradlew check
