@@ -73,7 +73,7 @@ dependencies {
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.14'
 
     testCompile("org.spockframework:spock-core:0.7-groovy-1.8") {
-        exclude module:'groovy-all'
+        exclude module: 'groovy-all'
     }
 }
 

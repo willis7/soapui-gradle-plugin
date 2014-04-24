@@ -7,13 +7,13 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Specification for the mock task
+ * Specification for the loadtest task
  *
  * @author Sion Williams
  */
-class MockServiceTaskSpec extends Specification {
+class LoadTestTaskSpec extends Specification {
     Project project
-    final static TASK_NAME = 'mock'
+    final static TASK_NAME = 'loadtest'
 
     def setup() {
         project = ProjectBuilder.builder().build()
@@ -23,14 +23,14 @@ class MockServiceTaskSpec extends Specification {
         expect:
         project.tasks.findByName(TASK_NAME) == null
         when:
-        project.task(TASK_NAME, type: MockServiceTask) {
+        project.task(TASK_NAME, type: LoadTestTask) {
             projectFile = 'sample-soapui-project.xml'
         }
         then:
         Task task = project.tasks.findByName(TASK_NAME)
         task != null
         task.group == 'SoapUI'
-        task.description == 'Runs soapUI mock service'
+        task.description == 'Runs soapUI load tests.'
 
         task.projectFile == 'sample-soapui-project.xml'
     }
@@ -39,7 +39,7 @@ class MockServiceTaskSpec extends Specification {
         expect:
         project.tasks.findByName(TASK_NAME) == null
         when:
-        Task task = project.task(TASK_NAME, type: MockServiceTask)
+        Task task = project.task(TASK_NAME, type: LoadTestTask)
         task.run()
 
         then:

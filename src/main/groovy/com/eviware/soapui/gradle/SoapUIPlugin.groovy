@@ -120,7 +120,6 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.settingsFile = { soapUIPluginExtension.load.settingsFile }
             conventionMapping.projectPassword = { soapUIPluginExtension.load.projectPassword }
             conventionMapping.settingsPassword = { soapUIPluginExtension.load.settingsPassword }
-
             conventionMapping.testSuite = { soapUIPluginExtension.load.testSuite }
             conventionMapping.testCase = { soapUIPluginExtension.load.testCase }
             conventionMapping.username = { soapUIPluginExtension.load.username }

@@ -2,24 +2,15 @@ package com.eviware.soapui.gradle.tasks
 
 import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUILoadTestRunner
-import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.tasks.Optional
-import org.gradle.api.tasks.TaskAction
 
 /**
- * Runs soapUI loadtests
- * task name - loadTest
+ * Runs soapUI load tests
+ * task name - loadtest
  *
  * @author Sion Williams
  */
-class LoadTestTask extends DefaultTask {
-
-    /**
-     * The soapUI project file to test with
-     * 	default-value="${project.artifactId}-soapui-project.xml"
-     */
-    String projectFile
+class LoadTestTask extends SoapUITask {
 
     /**
      * The TestSuite to run
@@ -100,28 +91,10 @@ class LoadTestTask extends DefaultTask {
     boolean printReport
 
     /**
-     * Specifies soapUI settings file to use
-     */
-    @Optional
-    String settingsFile
-
-    /**
      * Tells Test Runner to skip tests.
      */
     @Optional
     boolean skip
-
-    /**
-     * Specifies password for encrypted soapUI project file
-     */
-    @Optional
-    String projectPassword
-
-    /**
-     * Specifies password for encrypted soapui-settings file
-     */
-    @Optional
-    String settingsPassword
 
     /**
      * Specified global property values
@@ -146,54 +119,53 @@ class LoadTestTask extends DefaultTask {
     @Optional
     Properties soapuiProperties
 
-    @TaskAction
-    public void run() throws GradleException {
+    LoadTestTask() {
+        super('Runs soapUI load tests.')
+    }
 
-        if (projectFile == null) {
-            throw new GradleException('soapui-project-file setting is required')
-        }
-
+    @Override
+    public void executeAction() {
         SoapUILoadTestRunner runner = new SoapUILoadTestRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle LoadTest Runner')
         runner.projectFile = projectFile
 
-        if ( endpoint ) {
+        if (endpoint) {
             runner.endpoint = endpoint
         }
 
-        if ( testSuite ) {
+        if (testSuite) {
             runner.testSuite = testSuite
         }
 
-        if ( testCase ) {
+        if (testCase) {
             runner.testCase = testCase
         }
 
-        if ( username ) {
+        if (username) {
             runner.username = username
         }
 
-        if ( password ) {
+        if (password) {
             runner.password = password
         }
 
-        if ( wssPasswordType ) {
+        if (wssPasswordType) {
             runner.wssPasswordType = wssPasswordType
         }
 
-        if ( domain ) {
+        if (domain) {
             runner.domain = domain
         }
 
-        if ( limit ) {
+        if (limit) {
             runner.limit = limit.intValue()
         }
 
-        if ( threadCouny ) {
+        if (threadCouny) {
             runner.threadCount = threadCount.intValue()
         }
 
-        if ( host ) {
+        if (host) {
             runner.host = host
         }
 
@@ -204,38 +176,32 @@ class LoadTestTask extends DefaultTask {
         runner.printReport = printReport
         runner.saveAfterRun = saveAfterRun
 
-        if ( settingsFile ) {
+        if (settingsFile) {
             runner.settingsFile = settingsFile
         }
 
-        if ( projectPassword ) {
+        if (projectPassword) {
             runner.projectPassword = projectPassword
         }
 
-        if ( settingsPassword ){
+        if (settingsPassword) {
             runner.soapUISettingsPassword = settingsPassword
         }
 
-        if ( globalProperties ) {
+        if (globalProperties) {
             runner.globalProperties = globalProperties
         }
 
-        if ( projectProperties ) {
+        if (projectProperties) {
             runner.projectProperties = projectProperties
         }
 
-        if ( !soapuiProperties && soapuiProperties.size() > 0)
+        if (!soapuiProperties && soapuiProperties.size() > 0)
             for (Object key : soapuiProperties.keySet()) {
                 println('Setting ' + (String) key + ' value ' + soapuiProperties.getProperty((String) key))
                 System.setProperty((String) key, soapuiProperties.getProperty((String) key))
             }
 
-        try {
-            runner.run()
-        }
-        catch (Throwable e) {
-            logger.error(e.toString())
-            throw new GradleException('SoapUI LoadTest(s) failed' + e.message)
-        }
+        runner.run()
     }
 }

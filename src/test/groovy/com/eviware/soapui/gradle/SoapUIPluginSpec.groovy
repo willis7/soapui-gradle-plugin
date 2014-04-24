@@ -121,18 +121,6 @@ class SoapUIPluginSpec extends Specification {
         task != null
     }
 
-    def "applies plugin and adds securityTest task"() {
-        expect: "no task to be found initially"
-        project.tasks.findByName(SECURITY_TEST_TASK) == null
-
-        when: "the plugin is added to the project"
-        project.apply plugin: 'soapui'
-
-        then: "the task should be available and configured"
-        Task task = project.tasks.findByName(SECURITY_TEST_TASK)
-        task != null
-    }
-
     def "applies plugin and adds loadTest task"() {
         expect: "no task to be found initially"
         project.tasks.findByName(LOAD_TEST_TASK) == null
@@ -144,4 +132,17 @@ class SoapUIPluginSpec extends Specification {
         Task task = project.tasks.findByName(LOAD_TEST_TASK)
         task != null
     }
+/*
+    def "applies plugin and adds securityTest task"() {
+        expect: "no task to be found initially"
+        project.tasks.findByName(SECURITY_TEST_TASK) == null
+
+        when: "the plugin is added to the project"
+        project.apply plugin: 'soapui'
+
+        then: "the task should be available and configured"
+        Task task = project.tasks.findByName(SECURITY_TEST_TASK)
+        task != null
+    }
+    */
 }
