@@ -13,11 +13,11 @@ import spock.lang.Specification
  */
 class SoapUIPluginSpec extends Specification {
     Project project
-    static final SOAP_TEST_TASK = 'soapTest'
+    static final SOAP_TEST_TASK = 'test'
     static final TOOL_TASK = 'tool'
     static final SECURITY_TEST_TASK = 'securityTest'
     static final MOCK_TASK = 'mock'
-    static final LOAD_TEST_TASK = 'loadTest'
+    static final LOAD_TEST_TASK = 'load'
 
     def setup() {
         project = ProjectBuilder.builder().build()
