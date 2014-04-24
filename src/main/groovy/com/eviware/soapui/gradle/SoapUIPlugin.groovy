@@ -1,6 +1,7 @@
 package com.eviware.soapui.gradle
 
 import com.eviware.soapui.gradle.extensions.SoapUIPluginExtension
+import com.eviware.soapui.gradle.tasks.LoadTestTask
 import com.eviware.soapui.gradle.tasks.MockServiceTask
 import com.eviware.soapui.gradle.tasks.TestTask
 import com.eviware.soapui.gradle.tasks.ToolTask
@@ -28,6 +29,7 @@ class SoapUIPlugin implements Plugin<Project> {
         configSoapTest(project, soapUIPluginExtension)
         configTool(project, soapUIPluginExtension)
         configMock(project, soapUIPluginExtension)
+        configLoad(project, soapUIPluginExtension)
     }
 
     /**
@@ -103,6 +105,37 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.projectProperties = { soapUIPluginExtension.mock.projectProperties }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.mock.saveAfterRun }
             conventionMapping.soapuiProperties = { soapUIPluginExtension.mock.soapuiProperties }
+        }
+    }
+
+    /**
+     * Configures load task.
+     *
+     * @param project Project
+     * @param soapUIPluginExtension SoapUIPluginExtension
+     */
+    private void configLoad(Project project, SoapUIPluginExtension soapUIPluginExtension) {
+        project.task(LOAD_TEST_TASK, type: LoadTestTask) {
+            conventionMapping.projectFile = { soapUIPluginExtension.load.projectFile }
+            conventionMapping.settingsFile = { soapUIPluginExtension.load.settingsFile }
+            conventionMapping.projectPassword = { soapUIPluginExtension.load.projectPassword }
+            conventionMapping.settingsPassword = { soapUIPluginExtension.load.settingsPassword }
+
+            conventionMapping.testSuite = { soapUIPluginExtension.load.testSuite }
+            conventionMapping.testCase = { soapUIPluginExtension.load.testCase }
+            conventionMapping.username = { soapUIPluginExtension.load.username }
+            conventionMapping.password = { soapUIPluginExtension.load.password }
+            conventionMapping.wssPasswordType = { soapUIPluginExtension.load.wssPasswordType }
+            conventionMapping.domain = { soapUIPluginExtension.load.domain }
+            conventionMapping.host = { soapUIPluginExtension.load.host }
+            conventionMapping.endpoint = { soapUIPluginExtension.load.endpoint }
+            conventionMapping.skip = { soapUIPluginExtension.load.skip }
+            conventionMapping.outputFolder = { soapUIPluginExtension.load.outputFolder }
+            conventionMapping.printReport = { soapUIPluginExtension.load.printReport }
+            conventionMapping.saveAfterRun = { soapUIPluginExtension.load.saveAfterRun }
+            conventionMapping.loadTest = { soapUIPluginExtension.load.loadTest }
+            conventionMapping.limit = { soapUIPluginExtension.load.limit }
+            conventionMapping.threadCount = { soapUIPluginExtension.load.threadCount }
         }
     }
 }
