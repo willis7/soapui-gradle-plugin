@@ -53,6 +53,11 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
         <td>Runs the SoapUI tests as specified by the plugin properties. Internally invokes the SoapUITestCaseRunner class as described there.</td>
     </tr>
     <tr>
+        <td>loadtest</td>
+        <td>LoadTestTask</td>
+        <td>Runs the SoapUI loadtests as specified by the plugin properties. Internally invokes the SoapUILoadTestRunner class as described there.</td>
+    </tr>
+    <tr>
         <td>tool</td>
         <td>ToolTask</td>
         <td>Runs the specified and configured code-generation tool. Internally invokes the SoapUIToolRunner class as described there.</td>
@@ -66,6 +71,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 
 
 ## Task properties
+### test settings
 
 To configure the SoapUI test task you can choose to set the following properties within the `test` closure of the
 `soapui` extension:
@@ -91,4 +97,47 @@ To configure the SoapUI test task you can choose to set the following properties
 * `saveAfterRun` : Saves project file after run
 * `testFailIgnore` : Ignore failed tests.
 
+### loadtest settings
 
+To configure the SoapUI load test task you can choose to set the following properties within the `loadtest` closure of the
+`soapui` extension:
+
+* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `testSuite` : Specifies the name of the TestSuite to run
+* `testCase` : Specifies the name of the TestCase to run
+* `loadTest` : Specifies the name of the LoadTest to run
+* `limit` : Overrides the limit of executed LoadTests
+* `endpoint` : Overrides the service endpoint to be invoked by any TestRequests
+* `host` : Overrides the target host:port to be invoked by any TestRequests
+* `username` : Overrides the username used by any TestRequests run
+* `password` : Overrides the password used by any TestRequests run
+* `domain` : Overrides the domain used by any TestRequests run
+* `printReport` : Controls if a small test report should be printed to the console (true/false)
+* `outputFolder` : Set which folder results/reports are saved to
+* `settingsFile` : Specifies SoapUI settings file to use
+* `wssPasswordType` : Specifies WSS password type
+* `projectPassword` : Specifies password for encrypted project
+* `settingsFilePassword` : Specifies password for encrypted settings file
+* `saveAfterRun` : Saves project file after run
+* `threadcount` : Number of threads in loadtest.
+
+### tool settings
+
+* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `iface` : Specifies the interface to generate for
+* `tool` : Specifies the tool(s) to run, a comma-separated list of axis1, axis2, dotnet, gsoap, jaxb, wstools, wsconsume, ora, wscompile, wsi, wsimport, xfire or xmlbeans
+* `settingsFile` : Specifies SoapUI settings file to use
+* `projectPassword` : Specifies password for encrypted project
+* `settingsFilePassword` : Specifies password for encrypted settings file
+* `outputFolder` : Set which folder results/reports are saved to
+
+### mock settings
+* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `mockService` : Specified the MockService to run
+* `port` : The local port to listen on, overrides the port configured for the MockService
+* `path` : The local path to listen on, overrides the path configured for the MockService
+* `noBlock` : Turns off blocking when MockRunner has started
+* `settingsFile` : Specifies SoapUI settings file to use
+* `projectPassword` : Specifies password for encrypted project
+* `settingsFilePassword` : Specifies password for encrypted settings file
+* `saveAfterRun` : Saves project file after run
