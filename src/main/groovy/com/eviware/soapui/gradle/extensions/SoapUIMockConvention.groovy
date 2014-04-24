@@ -5,12 +5,10 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion
  */
 class SoapUIMockConvention {
-
     String projectFile
     String settingsFile
     String projectPassword
     String settingsPassword
-
     boolean skip
     String[] globalProperties
     String[] projectProperties
