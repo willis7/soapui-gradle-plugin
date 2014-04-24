@@ -6,6 +6,11 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion
  */
 class SoapUIToolConvention {
+    String projectFile
+    String settingsFile
+    String projectPassword
+    String settingsPassword
+
     String tool
     String iface
     String outputFolder

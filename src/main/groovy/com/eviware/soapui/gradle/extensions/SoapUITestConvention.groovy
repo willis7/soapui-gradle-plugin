@@ -6,6 +6,11 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion Williams
  */
 class SoapUITestConvention {
+    String projectFile
+    String settingsFile
+    String projectPassword
+    String settingsPassword
+
     String testSuite
     String testCase
     String username

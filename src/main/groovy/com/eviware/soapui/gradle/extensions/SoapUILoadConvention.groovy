@@ -6,6 +6,11 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion
  */
 class SoapUILoadConvention {
+    String projectFile
+    String settingsFile
+    String projectPassword
+    String settingsPassword
+
     String loadTest
     Integer limit
     Integer threadCount

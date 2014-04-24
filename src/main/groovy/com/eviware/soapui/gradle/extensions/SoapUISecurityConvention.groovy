@@ -6,6 +6,12 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion
  */
 class SoapUISecurityConvention {
+
+    String projectFile
+    String settingsFile
+    String projectPassword
+    String settingsPassword
+
     String securityTest
     String mockService
     String path

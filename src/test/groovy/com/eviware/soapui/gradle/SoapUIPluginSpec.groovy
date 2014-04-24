@@ -30,9 +30,8 @@ class SoapUIPluginSpec extends Specification {
         when: "the plugin is added to the project"
         project.apply(plugin: 'soapui')
         project.soapui {
-            projectFile = 'sample-soapui-project.xml'
-
             test {
+                projectFile = 'sample-soapui-project.xml'
                 printReport = true
                 exportAll = true
                 junitReport = true
@@ -78,9 +77,8 @@ class SoapUIPluginSpec extends Specification {
         project.apply plugin: 'soapui'
 
         project.soapui {
-            projectFile = 'sample-soapui-project.xml'
-
             tool {
+                projectFile = 'sample-soapui-project.xml'
                 tool = 'wsi,axis1,axis2'
                 iface = 'IOrderService'
             }

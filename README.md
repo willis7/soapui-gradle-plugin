@@ -158,7 +158,7 @@ soapui {
         printReport = true
     }
     tool {
-        projectFile = 'sample-soapui-load-project.xml'
+        projectFile = 'sample-soapui-tool-project.xml'
         iface = 'IOrderService'
         tool = 'wsi,axis1,axis2'
     }

@@ -5,13 +5,6 @@ package com.eviware.soapui.gradle.extensions
  * @author Sion Williams
  */
 class SoapUIPluginExtension {
-    /*
-    * All Task Convention
-    */
-    String projectFile
-    String settingsFile
-    String projectPassword
-    String settingsPassword
 
     SoapUIToolConvention tool = new SoapUIToolConvention()
     SoapUISecurityConvention security = new SoapUISecurityConvention()
@@ -19,25 +12,25 @@ class SoapUIPluginExtension {
     SoapUITestConvention test = new SoapUITestConvention()
     SoapUIMockConvention mock = new SoapUIMockConvention()
 
-    def tool( Closure closure ) {
+    def tool(Closure closure) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = tool
         closure()
     }
 
-    def security( Closure closure ) {
+    def security(Closure closure) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = security
         closure()
     }
 
-    def load( Closure closure ) {
+    def load(Closure closure) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = load
         closure()
     }
 
-    def test( Closure closure ) {
+    def test(Closure closure) {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure.delegate = test
         closure()
