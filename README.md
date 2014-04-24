@@ -71,12 +71,12 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 
 
 ## Task properties
-### test settings
+### test properties
 
 To configure the SoapUI test task you can choose to set the following properties within the `test` closure of the
 `soapui` extension:
 
-* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `projectFile` : Specified the name of the SoapUI project file to use
 * `testSuite` : Specifies the name of the TestSuite to run
 * `testCase` : Specifies the name of the TestCase to run
 * `endpoint` : Overrides the service endpoint to be invoked by any TestRequests
@@ -97,12 +97,12 @@ To configure the SoapUI test task you can choose to set the following properties
 * `saveAfterRun` : Saves project file after run
 * `testFailIgnore` : Ignore failed tests.
 
-### loadtest settings
+### loadtest properties
 
 To configure the SoapUI load test task you can choose to set the following properties within the `loadtest` closure of the
 `soapui` extension:
 
-* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `projectFile` : Specified the name of the SoapUI project file to use
 * `testSuite` : Specifies the name of the TestSuite to run
 * `testCase` : Specifies the name of the TestCase to run
 * `loadTest` : Specifies the name of the LoadTest to run
@@ -121,9 +121,9 @@ To configure the SoapUI load test task you can choose to set the following prope
 * `saveAfterRun` : Saves project file after run
 * `threadcount` : Number of threads in loadtest.
 
-### tool settings
+### tool properties
 
-* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+* `projectFile` : Specified the name of the SoapUI project file to use
 * `iface` : Specifies the interface to generate for
 * `tool` : Specifies the tool(s) to run, a comma-separated list of axis1, axis2, dotnet, gsoap, jaxb, wstools, wsconsume, ora, wscompile, wsi, wsimport, xfire or xmlbeans
 * `settingsFile` : Specifies SoapUI settings file to use
@@ -131,8 +131,8 @@ To configure the SoapUI load test task you can choose to set the following prope
 * `settingsFilePassword` : Specifies password for encrypted settings file
 * `outputFolder` : Set which folder results/reports are saved to
 
-### mock settings
-* `projectFile` : Specified the name of the SoapUI project file to use, default value is ${pom.artifactId}-soapui-project.xml
+### mock properties
+* `projectFile` : Specified the name of the SoapUI project file to use
 * `mockService` : Specified the MockService to run
 * `port` : The local port to listen on, overrides the port configured for the MockService
 * `path` : The local path to listen on, overrides the path configured for the MockService
@@ -141,3 +141,27 @@ To configure the SoapUI load test task you can choose to set the following prope
 * `projectPassword` : Specifies password for encrypted project
 * `settingsFilePassword` : Specifies password for encrypted settings file
 * `saveAfterRun` : Saves project file after run
+
+
+## Full Example
+
+```groovy
+soapui {
+    test {
+        projectFile = 'sample-soapui-project.xml'
+        testSuite = 'OleTest'
+        printReport = true
+        junitReport = true
+    }
+    loadtest {
+        projectFile = 'sample-soapui-load-project.xml'
+        printReport = true
+    }
+    tool {
+        projectFile = 'sample-soapui-load-project.xml'
+        iface = 'IOrderService'
+        tool = 'wsi,axis1,axis2'
+    }
+}
+```
+
