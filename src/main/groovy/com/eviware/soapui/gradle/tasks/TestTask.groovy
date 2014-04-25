@@ -2,10 +2,7 @@ package com.eviware.soapui.gradle.tasks
 
 import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUITestCaseRunner
-import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.tasks.Optional
-import org.gradle.api.tasks.TaskAction
 
 /**
  * Runs soapUI functional tests
@@ -88,7 +85,7 @@ class TestTask extends SoapUITask {
     /**
      * Turns on creation of reports in junit style
      */
-    boolean junitReport
+    boolean junitReport = false
 
     /**
      * Tells Test Runner to skip tests.
@@ -132,42 +129,42 @@ class TestTask extends SoapUITask {
     void executeAction() {
 
         SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner' )
+                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
         runner.projectFile = projectFile
 
-        if ( endpoint ) {
+        if (endpoint) {
             runner.endpoint = endpoint
         }
 
-        if ( testSuite ) {
+        if (testSuite) {
             runner.testSuite = testSuite
         }
 
-        if ( testCase ) {
+        if (testCase) {
             runner.testCase = testCase
         }
 
-        if ( username ) {
+        if (username) {
             runner.username = username
         }
 
-        if ( password ) {
+        if (password) {
             runner.password = password
         }
 
-        if ( wssPasswordType ) {
+        if (wssPasswordType) {
             runner.wssPasswordType = wssPasswordType
         }
 
-        if ( domain ) {
+        if (domain) {
             runner.domain = domain
         }
 
-        if ( host ) {
+        if (host) {
             runner.host = host
         }
 
-        if ( outputFolder ) {
+        if (outputFolder) {
             runner.outputFolder = outputFolder
         }
 
@@ -178,30 +175,30 @@ class TestTask extends SoapUITask {
         runner.ignoreError = testFailIgnore
         runner.saveAfterRun = saveAfterRun
 
-        if ( settingsFile ) {
+        if (settingsFile) {
             runner.settingsFile = settingsFile
         }
 
-        if ( projectPassword ) {
+        if (projectPassword) {
             runner.projectPassword = projectPassword
         }
 
-        if ( settingsPassword ) {
+        if (settingsPassword) {
             runner.soapUISettingsPassword = settingsPassword
         }
 
-        if ( globalProperties ) {
+        if (globalProperties) {
             runner.globalProperties = globalProperties
         }
 
-        if ( projectProperties ) {
+        if (projectProperties) {
             runner.projectProperties = projectProperties
         }
 
-        if ( soapuiProperties && soapuiProperties.size() > 0 ) {
-            for ( Object key : soapuiProperties.keySet() ) {
-                println( 'Setting ' + ( String )key + ' value ' + soapuiProperties.getProperty( ( String )key ) )
-                System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
+        if (soapuiProperties && soapuiProperties.size() > 0) {
+            for (Object key : soapuiProperties.keySet()) {
+                println('Setting ' + (String) key + ' value ' + soapuiProperties.getProperty((String) key))
+                System.setProperty((String) key, soapuiProperties.getProperty((String) key))
             }
         }
 

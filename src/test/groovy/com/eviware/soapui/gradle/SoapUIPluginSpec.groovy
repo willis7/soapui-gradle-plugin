@@ -132,7 +132,7 @@ class SoapUIPluginSpec extends Specification {
         Task task = project.tasks.findByName(LOAD_TEST_TASK)
         task != null
     }
-/*
+
     def "applies plugin and adds securityTest task"() {
         expect: "no task to be found initially"
         project.tasks.findByName(SECURITY_TEST_TASK) == null
@@ -144,5 +144,5 @@ class SoapUIPluginSpec extends Specification {
         Task task = project.tasks.findByName(SECURITY_TEST_TASK)
         task != null
     }
-    */
+
 }

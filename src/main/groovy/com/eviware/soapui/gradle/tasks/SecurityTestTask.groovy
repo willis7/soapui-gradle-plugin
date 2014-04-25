@@ -2,8 +2,6 @@ package com.eviware.soapui.gradle.tasks
 
 import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUISecurityTestRunner
-import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
@@ -12,12 +10,7 @@ import org.gradle.api.tasks.TaskAction
  * task name - securityTest
  * @author Sion Williams
  */
-class SecurityTestTask extends DefaultTask{
-    /**
-     * The soapUI project file to test with
-     * default-value="${project.artifactId}-soapui-project.xml"
-     */
-    String projectFile
+class SecurityTestTask extends SoapUITask {
 
     /**
      * The TestSuite to run project file to test with
@@ -97,28 +90,10 @@ class SecurityTestTask extends DefaultTask{
     boolean junitReport
 
     /**
-     * Specifies soapUI settings file to use
-     */
-    @Optional
-    String settingsFile
-
-    /**
      * Tells Test Runner to skip tests.
      */
     @Optional
     boolean skip
-
-    /**
-     * Specifies password for encrypted soapUI project file
-     */
-    @Optional
-    String projectPassword
-
-    /**
-     * Specifies password for encrypted soapui-settings file
-     */
-    @Optional
-    String settingsPassword
 
     /**
      * If set ignore failed tests
@@ -154,51 +129,50 @@ class SecurityTestTask extends DefaultTask{
     @Optional
     String securityTest
 
-    @TaskAction
-    public void run() throws GradleException {
+    SecurityTestTask() {
+        super('Runs soapUI security tests')
+    }
 
-        if( !projectFile )
-        {
-            throw new GradleException( 'soapui-project-file setting is required' )
-        }
+    @TaskAction
+    public void executeAction() {
 
         SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Security Test Runner' )
+                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Security Test Runner')
         runner.projectFile = projectFile
 
-        if ( endpoint ) {
+        if (endpoint) {
             runner.endpoint = endpoint
         }
 
-        if ( testSuite ) {
+        if (testSuite) {
             runner.testSuite = testSuite
         }
 
-        if ( testCase ) {
+        if (testCase) {
             runner.testCase = testCase
         }
 
-        if ( username ) {
+        if (username) {
             runner.username = username
         }
 
-        if ( password ) {
+        if (password) {
             runner.password = password
         }
 
-        if ( wssPasswordType ) {
+        if (wssPasswordType) {
             runner.wssPasswordType = wssPasswordType
         }
 
-        if ( domain ) {
+        if (domain) {
             runner.domain = domain
         }
 
-        if ( host ) {
+        if (host) {
             runner.host = host
         }
 
-        if ( outputFolder ) {
+        if (outputFolder) {
             runner.outputFolder = outputFolder
         }
 
@@ -209,44 +183,35 @@ class SecurityTestTask extends DefaultTask{
         runner.ignoreError = testFailIgnore
         runner.saveAfterRun = saveAfterRun
 
-        if ( settingsFile ) {
+        if (settingsFile) {
             runner.settingsFile = settingsFile
         }
 
-        if ( projectPassword ) {
+        if (projectPassword) {
             runner.projectPassword = projectPassword
         }
 
-        if ( settingsPassword ) {
+        if (settingsPassword) {
             runner.soapUISettingsPassword = settingsPassword
         }
 
-        if ( globalProperties ) {
+        if (globalProperties) {
             runner.globalProperties = globalProperties
         }
 
-        if ( projectProperties ) {
+        if (projectProperties) {
             runner.projectProperties = projectProperties
         }
 
-        if( soapuiProperties && soapuiProperties.size() > 0 )
-            for( Object key : soapuiProperties.keySet() )
-            {
-                System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) )
+        if (soapuiProperties && soapuiProperties.size() > 0)
+            for (Object key : soapuiProperties.keySet()) {
+                System.setProperty((String) key, soapuiProperties.getProperty((String) key))
             }
 
-        if ( securityTest && securityTest.length() > 0 ) {
+        if (securityTest && securityTest.length() > 0) {
             runner.securityTestName = securityTest
         }
 
-        try
-        {
-            runner.run()
-        }
-        catch( Exception e )
-        {
-            logger.error( e.toString() )
-            throw new GradleException( 'SoapUI Test(s) failed' + e.message )
-        }
+        runner.run()
     }
 }
