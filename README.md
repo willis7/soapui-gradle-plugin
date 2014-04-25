@@ -5,6 +5,11 @@
 The plugin provides tasks for running SoapUI tests and mocks during a Gradle build.
 
 
+## Build Status
+
+[![Build Status](https://travis-ci.org/willis7/soapui-gradle-plugin.svg?branch=master)](https://travis-ci.org/willis7/soapui-gradle-plugin)
+
+
 ## Usage
 
 To use the plugin's functionality, you will need to add the its binary artifact to your build script's classpath and apply the plugin.
@@ -164,4 +169,9 @@ soapui {
     }
 }
 ```
+
+## CI build
+
+
+[![Built on Travis](http://about.travis-ci.org/images/travis-mascot-200px.png)](https://travis-ci.org/)
 

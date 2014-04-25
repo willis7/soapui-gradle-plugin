@@ -19,38 +19,38 @@ class ToolTaskSpec extends Specification {
         project = ProjectBuilder.builder().build()
     }
 
-    def "add tool tasks to project"(){
+    def "add tool tasks to project"() {
         expect:
-            project.tasks.findByName(TASK_NAME) == null
+        project.tasks.findByName(TASK_NAME) == null
         when:
-            project.task(TASK_NAME, type: TestTask){
-                projectFile = 'sample-soapui-project.xml'
-                tool = 'wsi,axis1,axis2'
-                iface = 'IOrderService'
-            }
+        project.task(TASK_NAME, type: TestTask) {
+            projectFile = 'sample-soapui-tool-project.xml'
+            tool = 'wsi,axis1,axis2'
+            iface = 'IOrderService'
+        }
         then:
-            Task task = project.tasks.findByName(TASK_NAME)
-            task != null
-            task.group == 'SoapUI'
-            task.description == 'Runs soapUI functional tests'
+        Task task = project.tasks.findByName(TASK_NAME)
+        task != null
+        task.group == 'SoapUI'
+        task.description == 'Runs soapUI functional tests'
 
-            task.projectFile == 'sample-soapui-project.xml'
-            task.tool == 'wsi,axis1,axis2'
-            task.iface == 'IOrderService'
+        task.projectFile == 'sample-soapui-tool-project.xml'
+        task.tool == 'wsi,axis1,axis2'
+        task.iface == 'IOrderService'
     }
 
-    def "run tool task with no project.xml defined"(){
+    def "run tool task with no project.xml defined"() {
         expect:
-            project.tasks.findByName(TASK_NAME) == null
+        project.tasks.findByName(TASK_NAME) == null
         when:
-            Task task = project.task(TASK_NAME, type: TestTask){
-                tool = 'wsi,axis1,axis2'
-                iface = 'IOrderService'
-            }
-            task.run()
+        Task task = project.task(TASK_NAME, type: TestTask) {
+            tool = 'wsi,axis1,axis2'
+            iface = 'IOrderService'
+        }
+        task.run()
 
         then:
-            project.tasks.findByName(TASK_NAME)!= null
-            thrown(GradleException)
+        project.tasks.findByName(TASK_NAME) != null
+        thrown(GradleException)
     }
 }
