@@ -53,7 +53,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
         <th>Description</th>
     </tr>
     <tr>
-        <td>test</td>
+        <td>soaptest</td>
         <td>TestTask</td>
         <td>Runs the SoapUI tests as specified by the plugin properties. Internally invokes the SoapUITestCaseRunner class as described there.</td>
     </tr>
@@ -78,7 +78,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 ## Task properties
 ### test properties
 
-To configure the SoapUI test task you can choose to set the following properties within the `test` closure of the
+To configure the SoapUI test task you can choose to set the following properties within the `soaptest` closure of the
 `soapui` extension:
 
 * `projectFile` : Specified the name of the SoapUI project file to use

@@ -1,8 +1,20 @@
+buildscript {
+    repositories {
+        maven { url 'http://jcenter.bintray.com' }
+    }
+
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+    }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
 
 group = 'com.smartbear.soapui.gradle'
-version = '0.1-SNAPSHOT'
+version = '0.1'
 
 description = """soapUI - Gradle compatible plugin"""
 
@@ -97,4 +109,78 @@ check.dependsOn integrationTest
 
 idea.module {
     testSourceDirs += file('src/integTest/groovy')
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Smartbear SoapUI plugin',
+                'Implementation-Version': version,
+                'Built-By': System.getProperty('user.name'),
+                'Built-Date': new Date(),
+                'Built-JDK': System.getProperty('java.version'),
+                'Built-Gradle': gradle.gradleVersion
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+task groovydocJar(type: Jar, dependsOn: groovydoc) {
+    classifier 'groovydoc'
+    from groovydoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives groovydocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact groovydocJar
+
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'Gradle Smartbear SoapUI plugin')
+                root.appendNode('description', 'Gradle plugin for running SoapUI projects.')
+                root.appendNode('inceptionYear', '2014')
+
+                def scm = root.appendNode('scm')
+                scm.appendNode('url', 'https://github.com/willis7/soapui-gradle-plugin')
+
+                def license = root.appendNode('licenses').appendNode('license')
+                license.appendNode('name', 'GPLv2')
+                license.appendNode('url', 'https://www.gnu.org/licenses/gpl-2.0.txt')
+                license.appendNode('distribution', 'repo')
+
+                def developers = root.appendNode('developers')
+                def willis7 = developers.appendNode('developer')
+                willis7.appendNode('id', 'willis7')
+                willis7.appendNode('name', 'Sion Williams')
+                willis7.appendNode('email', 'sion5@hotmail.co.uk')
+            }
+        }
+    }
+}
+
+bintrayUpload.dependsOn jar
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.getProperty('bintrayUser') : null
+    key = project.hasProperty('bintrayKey') ? project.getProperty('bintrayKey') : null
+    publications = ['mavenJava']
+
+    pkg {
+        repo = 'gradle-plugins'
+        name = 'soapui-gradle-plugin'
+        desc = 'Gradle plugin for running SoapUI projects.'
+        labels = ['gradle', 'groovy', 'soapui', 'plugin']
+        licenses = ['GPL-2.0']
+    }
+    dryRun = false // whether to run this as dry-run, without deploying
 }
