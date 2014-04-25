@@ -6,7 +6,7 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 /**
- * TODO: Description
+ * Abstract SoapUI task
  *
  * @author Sion Williams
  */

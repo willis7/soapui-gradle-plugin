@@ -11,7 +11,7 @@ import org.gradle.api.Project
  * @author Sion Williams
  */
 class SoapUIPlugin implements Plugin<Project> {
-    static final SOAP_TEST_TASK = 'test'
+    static final SOAP_TEST_TASK = 'soaptest'
     static final TOOL_TASK = 'tool'
     static final SECURITY_TEST_TASK = 'securitytest'
     static final MOCK_TASK = 'mock'

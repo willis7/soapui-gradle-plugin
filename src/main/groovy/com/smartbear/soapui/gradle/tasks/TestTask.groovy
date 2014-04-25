@@ -6,7 +6,7 @@ import org.gradle.api.tasks.Optional
 
 /**
  * Runs soapUI functional tests
- * task name - soapTest
+ * task name - soaptest
  * @author Sion Williams
  */
 class TestTask extends SoapUITask {

@@ -7,13 +7,13 @@ import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 /**
- * Specification for the soapTest task
+ * Specification for the soaptest task
  *
  * @author Sion Williams
  */
 class TestTaskSpec extends Specification {
     Project project
-    final static TASK_NAME = 'soapTest'
+    final static TASK_NAME = 'soaptest'
 
     def setup() {
         project = ProjectBuilder.builder().build()

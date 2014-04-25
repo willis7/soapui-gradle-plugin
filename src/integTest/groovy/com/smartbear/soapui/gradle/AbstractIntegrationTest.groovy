@@ -6,6 +6,7 @@ import org.gradle.tooling.ProjectConnection
 import org.gradle.tooling.model.GradleProject
 import spock.lang.Specification
 
+
 import static org.spockframework.util.Assert.fail
 
 /**
@@ -46,7 +47,6 @@ buildscript {
      * @param parent File
      * @param dirname String
      */
-
     protected File createNewDir(File parent, String dirname) {
         File dir = new File(parent, dirname)
 
@@ -65,7 +65,6 @@ buildscript {
      * @param parent File
      * @param filename String
      */
-
     protected File createNewFile(File parent, String filename) {
         File file = new File(parent, filename)
 
@@ -84,7 +83,6 @@ buildscript {
      * @param dir File
      * @param requiredFilenames List<String>
      */
-
     protected void assertExistingFiles(File dir, List<String> requiredFilenames) {
         assertExistingDirectory(dir)
         def dirFileNames = dir.listFiles()*.name
@@ -99,7 +97,6 @@ buildscript {
      *
      * @param dir File
      */
-
     private void assertExistingDirectory(File dir) {
         if (!dir || !dir.exists()) {
             fail("Unable to check target directory '${dir?.canonicalPath}' for files.")
@@ -110,7 +107,6 @@ buildscript {
      * @param projectDir File
      * @param tasks String...
      */
-
     protected GradleProject runTasks(File projectDir, String... tasks) {
         ProjectConnection connection = GradleConnector.newConnector().forProjectDirectory(projectDir).connect()
 
