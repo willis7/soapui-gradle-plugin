@@ -13,10 +13,7 @@ class SoapUISecurityConvention {
     String settingsPassword
 
     String securityTest
-    String mockService
-    String path
-    String port
-    boolean noBlock
+
     String testSuite
     String testCase
     String username

@@ -7,7 +7,8 @@ import org.gradle.api.tasks.TaskAction
 
 /**
  * TODO: Description
- * @author Sion
+ *
+ * @author Sion Williams
  */
 abstract class SoapUITask extends DefaultTask {
     /**
@@ -33,7 +34,7 @@ abstract class SoapUITask extends DefaultTask {
     @Optional
     String settingsPassword
 
-    SoapUITask( String description ) {
+    SoapUITask(String description) {
         this.description = description
         group = 'SoapUI'
     }
@@ -41,8 +42,8 @@ abstract class SoapUITask extends DefaultTask {
     @TaskAction
     void run() {
 
-        if ( !projectFile ) {
-            throw new GradleException( 'soapui-project-file setting is required' )
+        if (!projectFile) {
+            throw new GradleException('soapui-project-file setting is required')
         }
 
         withExceptionHandling {
@@ -53,12 +54,12 @@ abstract class SoapUITask extends DefaultTask {
     /**
      * Catches exception and handles it
      */
-    private void withExceptionHandling( Closure c) {
+    private void withExceptionHandling(Closure c) {
         try {
             c
         }
-        catch ( Exception e ) {
-            throw new GradleException( e.message )
+        catch (Exception e) {
+            throw new GradleException(e.message)
         }
     }
 

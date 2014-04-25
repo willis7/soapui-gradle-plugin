@@ -1,8 +1,9 @@
 package com.eviware.soapui.gradle.extensions
 
 /**
- * TODO: Description
- * @author Sion
+ * Defines the mocking service convention
+ *
+ * @author Sion Williams
  */
 class SoapUIMockConvention {
     String projectFile

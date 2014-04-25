@@ -1,10 +1,7 @@
 package com.eviware.soapui.gradle
 
 import com.eviware.soapui.gradle.extensions.SoapUIPluginExtension
-import com.eviware.soapui.gradle.tasks.LoadTestTask
-import com.eviware.soapui.gradle.tasks.MockServiceTask
-import com.eviware.soapui.gradle.tasks.TestTask
-import com.eviware.soapui.gradle.tasks.ToolTask
+import com.eviware.soapui.gradle.tasks.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -30,6 +27,7 @@ class SoapUIPlugin implements Plugin<Project> {
         configTool(project, soapUIPluginExtension)
         configMock(project, soapUIPluginExtension)
         configLoad(project, soapUIPluginExtension)
+        configSecurityTest(project, soapUIPluginExtension)
     }
 
     /**
@@ -135,6 +133,40 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.loadTest = { soapUIPluginExtension.load.loadTest }
             conventionMapping.limit = { soapUIPluginExtension.load.limit }
             conventionMapping.threadCount = { soapUIPluginExtension.load.threadCount }
+        }
+    }
+
+    /**
+     * Configures soap security test task.
+     *
+     * @param project Project
+     * @param soapUIPluginExtension SoapUIPluginExtension
+     */
+    private void configSecurityTest(Project project, SoapUIPluginExtension soapUIPluginExtension) {
+        project.task(SECURITY_TEST_TASK, type: SecurityTestTask) {
+            conventionMapping.projectFile = { soapUIPluginExtension.security.projectFile }
+            conventionMapping.settingsFile = { soapUIPluginExtension.security.settingsFile }
+            conventionMapping.projectPassword = { soapUIPluginExtension.security.projectPassword }
+            conventionMapping.settingsPassword = { soapUIPluginExtension.security.settingsPassword }
+            conventionMapping.securityTest = { soapUIPluginExtension.security.securityTest }
+            conventionMapping.testSuite = { soapUIPluginExtension.security.testSuite }
+            conventionMapping.testCase = { soapUIPluginExtension.security.testCase }
+            conventionMapping.username = { soapUIPluginExtension.security.username }
+            conventionMapping.password = { soapUIPluginExtension.security.password }
+            conventionMapping.wssPasswordType = { soapUIPluginExtension.security.wssPasswordType }
+            conventionMapping.domain = { soapUIPluginExtension.security.domain }
+            conventionMapping.host = { soapUIPluginExtension.security.host }
+            conventionMapping.endpoint = { soapUIPluginExtension.security.endpoint }
+            conventionMapping.skip = { soapUIPluginExtension.security.skip }
+            conventionMapping.globalProperties = { soapUIPluginExtension.security.globalProperties }
+            conventionMapping.projectProperties = { soapUIPluginExtension.security.projectProperties }
+            conventionMapping.outputFolder = { soapUIPluginExtension.security.outputFolder }
+            conventionMapping.printReport = { soapUIPluginExtension.security.printReport }
+            conventionMapping.interactive = { soapUIPluginExtension.security.interactive }
+            conventionMapping.exportAll = { soapUIPluginExtension.security.exportAll }
+            conventionMapping.junitReport = { soapUIPluginExtension.security.junitReport }
+            conventionMapping.testFailIgnore = { soapUIPluginExtension.security.testFailIgnore }
+            conventionMapping.saveAfterRun = { soapUIPluginExtension.security.saveAfterRun }
         }
     }
 }

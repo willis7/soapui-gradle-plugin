@@ -1,9 +1,9 @@
 package com.eviware.soapui.gradle.extensions
 
 /**
- * TDefines Load task convention.
+ * Defines Load task convention.
  *
- * @author Sion
+ * @author Sion Williams
  */
 class SoapUILoadConvention {
     String projectFile
