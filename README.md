@@ -23,11 +23,13 @@ The following code snippet shows an example on how to retrieve it from Bintray:
 ```groovy
 buildscript {
     repositories {
-        jcenter()
+        // This order is important
+        maven { url 'http://dl.bintray.com/sion5/gradle-plugins/' }
+        maven { url "http://www.eviware.com/repository/maven2" }
+        maven { url "http://repo.maven.apache.org/maven2" }
     }
-
     dependencies {
-        classpath 'com.eviware.soapui.gradle:soapui-gradle-plugin:VERSION'
+        classpath 'com.smartbear.soapui.gradle:soapui-gradle-plugin:VERSION'
     }
 }
 ```
