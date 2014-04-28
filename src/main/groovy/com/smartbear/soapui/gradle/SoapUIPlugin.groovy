@@ -1,6 +1,6 @@
 package com.smartbear.soapui.gradle
 
-import com.smartbear.soapui.gradle.extensions.SoapUIPluginExtension
+import com.smartbear.soapui.gradle.extensions.*
 import com.smartbear.soapui.gradle.tasks.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -22,6 +22,11 @@ class SoapUIPlugin implements Plugin<Project> {
     void apply(Project project) {
         // Create and install the extension object
         SoapUIPluginExtension soapUIPluginExtension = project.extensions.create(EXTENSION_NAME, SoapUIPluginExtension)
+		soapUIPluginExtension.extensions.create("tool", SoapUIToolConvention)
+		soapUIPluginExtension.extensions.create("security", SoapUISecurityConvention)
+		soapUIPluginExtension.extensions.create("load", SoapUILoadConvention)
+		soapUIPluginExtension.extensions.create("test", SoapUITestConvention)
+		soapUIPluginExtension.extensions.create("mock", SoapUIMockConvention)
 
         configSoapTest(project, soapUIPluginExtension)
         configTool(project, soapUIPluginExtension)
