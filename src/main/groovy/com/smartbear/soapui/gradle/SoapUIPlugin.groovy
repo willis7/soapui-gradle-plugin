@@ -22,11 +22,11 @@ class SoapUIPlugin implements Plugin<Project> {
     void apply(Project project) {
         // Create and install the extension object
         SoapUIPluginExtension soapUIPluginExtension = project.extensions.create(EXTENSION_NAME, SoapUIPluginExtension)
-		soapUIPluginExtension.extensions.create("tool", SoapUIToolConvention)
-		soapUIPluginExtension.extensions.create("security", SoapUISecurityConvention)
-		soapUIPluginExtension.extensions.create("load", SoapUILoadConvention)
-		soapUIPluginExtension.extensions.create("test", SoapUITestConvention)
-		soapUIPluginExtension.extensions.create("mock", SoapUIMockConvention)
+        soapUIPluginExtension.extensions.create("tool", SoapUIToolConvention)
+        soapUIPluginExtension.extensions.create("security", SoapUISecurityConvention)
+        soapUIPluginExtension.extensions.create("load", SoapUILoadConvention)
+        soapUIPluginExtension.extensions.create("test", SoapUITestConvention)
+        soapUIPluginExtension.extensions.create("mock", SoapUIMockConvention)
 
         configSoapTest(project, soapUIPluginExtension)
         configTool(project, soapUIPluginExtension)
