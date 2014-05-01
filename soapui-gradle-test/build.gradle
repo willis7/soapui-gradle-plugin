@@ -1,0 +1,27 @@
+buildscript {
+    repositories {        
+        mavenLocal()
+        maven { url 'http://dl.bintray.com/sion5/gradle-plugins/' }
+        maven { url "http://www.eviware.com/repository/maven2" }
+        maven { url "http://repo.maven.apache.org/maven2" }
+    }
+
+    dependencies {
+        classpath 'com.smartbear.soapui.gradle:soapui-gradle-plugin:0.1'
+    }
+}
+
+apply plugin: 'soapui'
+
+
+soapui {
+    test {
+        projectFile = 'soapui-projects/sample-soapui-project.xml'
+        printReport = true
+        exportAll = true
+        junitReport = true
+        interactive = false
+        testFailIgnore = true
+        saveAfterRun = false
+    }
+}
