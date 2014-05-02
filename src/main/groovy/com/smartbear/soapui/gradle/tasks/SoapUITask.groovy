@@ -42,7 +42,7 @@ abstract class SoapUITask extends DefaultTask {
     @TaskAction
     void run() {
 
-        if (!projectFile) {
+        if (!getProjectFile()) {
             throw new GradleException('soapui-project-file setting is required')
         }
 

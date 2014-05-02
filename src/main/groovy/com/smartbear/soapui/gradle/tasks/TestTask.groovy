@@ -130,69 +130,69 @@ class TestTask extends SoapUITask {
 
         SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
-        runner.projectFile = projectFile
+        runner.projectFile = getProjectFile()
 
-        if (endpoint) {
-            runner.endpoint = endpoint
+        if (getEndpoint()) {
+            runner.endpoint = getEndpoint()
         }
 
-        if (testSuite) {
-            runner.testSuite = testSuite
+        if (getTestSuite()) {
+            runner.testSuite = getTestSuite()
         }
 
-        if (testCase) {
-            runner.testCase = testCase
+        if (getTestCase()) {
+            runner.testCase = getTestCase()
         }
 
-        if (username) {
-            runner.username = username
+        if (getUsername()) {
+            runner.username = getUsername()
         }
 
-        if (password) {
-            runner.password = password
+        if (getPassword()) {
+            runner.password = getPassword()
         }
 
-        if (wssPasswordType) {
-            runner.wssPasswordType = wssPasswordType
+        if (getWssPasswordType()) {
+            runner.wssPasswordType = getWssPasswordType()
         }
 
-        if (domain) {
-            runner.domain = domain
+        if (getDomain()) {
+            runner.domain = getDomain()
         }
 
-        if (host) {
-            runner.host = host
+        if (getHost()) {
+            runner.host = getHost()
         }
 
-        if (outputFolder) {
-            runner.outputFolder = outputFolder
+        if (getOutputFolder()) {
+            runner.outputFolder = getOutputFolder()
         }
 
-        runner.printReport = printReport
-        runner.exportAll = exportAll
-        runner.junitReport = junitReport
-        runner.enableUI = interactive
-        runner.ignoreError = testFailIgnore
-        runner.saveAfterRun = saveAfterRun
+        runner.printReport = getPrintReport()
+        runner.exportAll = getExportAll()
+        runner.junitReport = getJunitReport()
+        runner.enableUI = getInteractive()
+        runner.ignoreError = getTestFailIgnore()
+        runner.saveAfterRun = getSaveAfterRun()
 
-        if (settingsFile) {
-            runner.settingsFile = settingsFile
+        if (getSettingsFile()) {
+            runner.settingsFile = getSettingsFile()
         }
 
-        if (projectPassword) {
-            runner.projectPassword = projectPassword
+        if (getProjectPassword()) {
+            runner.projectPassword = getProjectPassword()
         }
 
-        if (settingsPassword) {
-            runner.soapUISettingsPassword = settingsPassword
+        if (getSettingsPassword()) {
+            runner.soapUISettingsPassword = getSettingsPassword()
         }
 
-        if (globalProperties) {
-            runner.globalProperties = globalProperties
+        if (getGlobalProperties()) {
+            runner.globalProperties = getGlobalProperties()
         }
 
-        if (projectProperties) {
-            runner.projectProperties = projectProperties
+        if (getProjectProperties()) {
+            runner.projectProperties = getProjectProperties()
         }
 
         if (soapuiProperties && soapuiProperties.size() > 0) {
