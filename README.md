@@ -78,7 +78,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 
 
 ## Task properties
-### test properties
+### soaptest properties
 
 To configure the SoapUI test task you can choose to set the following properties within the `soaptest` closure of the
 `soapui` extension:
@@ -154,7 +154,7 @@ To configure the SoapUI load test task you can choose to set the following prope
 
 ```groovy
 soapui {
-    test {
+    soaptest {
         projectFile = 'sample-soapui-project.xml'
         testSuite = 'OleTest'
         printReport = true
