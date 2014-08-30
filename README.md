@@ -23,13 +23,14 @@ The following code snippet shows an example on how to retrieve it from Bintray:
 ```groovy
 buildscript {
     repositories {
-        // This order is important
-        maven { url 'http://dl.bintray.com/sion5/gradle-plugins/' }
-        maven { url "http://www.eviware.com/repository/maven2" }
-        maven { url "http://repo.maven.apache.org/maven2" }
-    }
+        JCenter()
+    }    
+    
     dependencies {
-        classpath 'com.smartbear.soapui.gradle:soapui-gradle-plugin:VERSION'
+        compile files('/path/to/your/SoapUI-5.0.0/bin/soapui-5.0.0.jar')
+        compile fileTree(dir: "/path/to/your/SoapUI-5.0.0/lib", include: '*.jar')
+        
+        classpath 'com.lv.plugins:soapui-gradle-plugin:VERSION'
     }
 }
 ```
@@ -41,7 +42,7 @@ The `soapui` plugin helps you get started quickly. If you are OK if the preconfi
 preferrable option. Most plugin users will go with this option. To use the Tomcat plugin, include the following code snippet
 in your build script:
 
-    apply plugin: 'soapui'
+    apply plugin: 'com.lv.soapui'
 
 
 ## Tasks
@@ -60,17 +61,17 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
         <td>Runs the SoapUI tests as specified by the plugin properties. Internally invokes the SoapUITestCaseRunner class as described there.</td>
     </tr>
     <tr>
-        <td>loadtest</td>
+        <td>soapload</td>
         <td>LoadTestTask</td>
         <td>Runs the SoapUI loadtests as specified by the plugin properties. Internally invokes the SoapUILoadTestRunner class as described there.</td>
     </tr>
     <tr>
-        <td>tool</td>
+        <td>soaptool</td>
         <td>ToolTask</td>
         <td>Runs the specified and configured code-generation tool. Internally invokes the SoapUIToolRunner class as described there.</td>
     </tr>
     <tr>
-        <td>mock</td>
+        <td>soapmock</td>
         <td>MockServiceTask</td>
         <td>Runs the specified and configured code-generation tool. Internally invokes the SoapUIMockServiceRunner class as described there.</td>
     </tr>
@@ -80,7 +81,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 ## Task properties
 ### soaptest properties
 
-To configure the SoapUI test task you can choose to set the following properties within the `soaptest` closure of the
+To configure the SoapUI test task you can choose to set the following properties within the `test` closure of the
 `soapui` extension:
 
 * `projectFile` : Specified the name of the SoapUI project file to use
@@ -106,7 +107,7 @@ To configure the SoapUI test task you can choose to set the following properties
 
 ### loadtest properties
 
-To configure the SoapUI load test task you can choose to set the following properties within the `loadtest` closure of the
+To configure the SoapUI load test task you can choose to set the following properties within the `load` closure of the
 `soapui` extension:
 
 * `projectFile` : Specified the name of the SoapUI project file to use
@@ -154,13 +155,13 @@ To configure the SoapUI load test task you can choose to set the following prope
 
 ```groovy
 soapui {
-    soaptest {
+    test {
         projectFile = 'sample-soapui-project.xml'
         testSuite = 'OleTest'
         printReport = true
         junitReport = true
     }
-    loadtest {
+    load {
         projectFile = 'sample-soapui-load-project.xml'
         printReport = true
     }
@@ -173,7 +174,6 @@ soapui {
 ```
 
 ## CI build
-
 
 [![Built on Travis](http://about.travis-ci.org/images/travis-mascot-200px.png)](https://travis-ci.org/)
 

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="calculator" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CalculatorSoapBinding" type="wsdl" bindingName="{http://opensourcesoftwareandme.org/}CalculatorSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/calculator?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/calculator?wsdl"><con:part><con:url>http://localhost:8080/calculator?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="Calculator" targetNamespace="http://opensourcesoftwareandme.org/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://opensourcesoftwareandme.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://opensourcesoftwareandme.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Add" type="tns:Add"/>
+      <xs:element name="AddResponse" type="tns:AddResponse"/>
+      <xs:element name="Divide" type="tns:Divide"/>
+      <xs:element name="DivideResponse" type="tns:DivideResponse"/>
+      <xs:element name="Multiply" type="tns:Multiply"/>
+      <xs:element name="MultiplyResponse" type="tns:MultiplyResponse"/>
+      <xs:element name="Subtract" type="tns:Subtract"/>
+      <xs:element name="SubtractResponse" type="tns:SubtractResponse"/>
+      <xs:complexType name="Divide">
+        <xs:sequence>
+          <xs:element name="x" type="xs:float"/>
+          <xs:element name="y" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DivideResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Multiply">
+        <xs:sequence>
+          <xs:element name="x" type="xs:float"/>
+          <xs:element name="y" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MultiplyResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Subtract">
+        <xs:sequence>
+          <xs:element name="x" type="xs:float"/>
+          <xs:element name="y" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SubtractResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Add">
+        <xs:sequence>
+          <xs:element name="x" type="xs:float"/>
+          <xs:element name="y" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AddResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:float"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Add">
+    <wsdl:part element="tns:Add" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MultiplyResponse">
+    <wsdl:part element="tns:MultiplyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DivideResponse">
+    <wsdl:part element="tns:DivideResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Divide">
+    <wsdl:part element="tns:Divide" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Subtract">
+    <wsdl:part element="tns:Subtract" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddResponse">
+    <wsdl:part element="tns:AddResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Multiply">
+    <wsdl:part element="tns:Multiply" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SubtractResponse">
+    <wsdl:part element="tns:SubtractResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Calculator">
+    <wsdl:operation name="Divide">
+      <wsdl:input message="tns:Divide" name="Divide"></wsdl:input>
+      <wsdl:output message="tns:DivideResponse" name="DivideResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Multiply">
+      <wsdl:input message="tns:Multiply" name="Multiply"></wsdl:input>
+      <wsdl:output message="tns:MultiplyResponse" name="MultiplyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subtract">
+      <wsdl:input message="tns:Subtract" name="Subtract"></wsdl:input>
+      <wsdl:output message="tns:SubtractResponse" name="SubtractResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input message="tns:Add" name="Add"></wsdl:input>
+      <wsdl:output message="tns:AddResponse" name="AddResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculatorSoapBinding" type="tns:Calculator">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Divide">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="Divide">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DivideResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Multiply">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="Multiply">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="MultiplyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Subtract">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="Subtract">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SubtractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="Add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AddResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Calculator">
+    <wsdl:port binding="tns:CalculatorSoapBinding" name="CalculatorPort">
+      <soap:address location="http://localhost:8080/calculator"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/calculator</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="Add" bindingOperationName="Add" type="Request-Response" outputName="AddResponse" inputName="Add" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="Divide" bindingOperationName="Divide" type="Request-Response" outputName="DivideResponse" inputName="Divide" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="Multiply" bindingOperationName="Multiply" type="Request-Response" outputName="MultiplyResponse" inputName="Multiply" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation><con:operation isOneWay="false" action="" name="Subtract" bindingOperationName="Subtract" type="Request-Response" outputName="SubtractResponse" inputName="Subtract" receivesAttachments="false" sendsAttachments="false"><con:settings/></con:operation></con:interface><con:testSuite name="CalculatorSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Add TestCase" searchProperties="true" id="818cee83-3b80-4e1c-b9a9-0b1061dad4e3"><con:settings/><con:testStep type="request" name="Add"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CalculatorSoapBinding</con:interface><con:operation>Add</con:operation><con:request name="Add"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:Add>
+         <x>8</x>
+         <y>6</y>
+      </open:Add>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="XPath Match" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://opensourcesoftwareandme.org/';
+
+/soap:Envelope/soap:Body/ns1:AddResponse/return</path><content>14.0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://opensourcesoftwareandme.org/Calculator/Add" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Divide TestCase" searchProperties="true" id="cd828370-7667-4c6a-9d9b-159dda0135fa"><con:settings/><con:testStep type="request" name="Divide"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CalculatorSoapBinding</con:interface><con:operation>Divide</con:operation><con:request name="Divide"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:Divide>
+         <x>4</x>
+         <y>2</y>
+      </open:Divide>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="XPath Match" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://opensourcesoftwareandme.org/';
+
+/soap:Envelope/soap:Body/ns1:DivideResponse/return</path><content>2.0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://opensourcesoftwareandme.org/Calculator/Divide" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Multiply TestCase" searchProperties="true" id="ce48ca42-4170-4de6-98b1-a5139c3e1bf9"><con:settings/><con:testStep type="request" name="Multiply"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CalculatorSoapBinding</con:interface><con:operation>Multiply</con:operation><con:request name="Multiply"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:Multiply>
+         <x>9</x>
+         <y>5</y>
+      </open:Multiply>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="XPath Match" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns1='http://opensourcesoftwareandme.org/';
+
+/soap:Envelope/soap:Body/ns1:MultiplyResponse/return</path><content>45.0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://opensourcesoftwareandme.org/Calculator/Multiply" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Subtract TestCase" searchProperties="true" id="4c0083c7-f182-4440-86cc-e4e5ef33b959"><con:settings/><con:testStep type="request" name="Subtract"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CalculatorSoapBinding</con:interface><con:operation>Subtract</con:operation><con:request name="Subtract"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/calculator</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:Subtract>
+         <x>7</x>
+         <y>1</y>
+      </open:Subtract>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:assertion type="Schema Compliance" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="XPath Match" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+declare namespace ns2='http://opensourcesoftwareandme.org/';
+
+/soap:Envelope/soap:Body/ns2:SubtractResponse/return</path><content>6.0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://opensourcesoftwareandme.org/Calculator/Subtract" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="8080" path="/" host="unknown-e4-ce-8f-47-4a-8a.lan" name="SquareRootSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="Add" interface="CalculatorSoapBinding" operation="Add"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:AddResponse>
+         <return>14.0</return>
+      </open:AddResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://opensourcesoftwareandme.org/Calculator/AddResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="Divide" interface="CalculatorSoapBinding" operation="Divide"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:DivideResponse>
+         <return>2.0</return>
+      </open:DivideResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://opensourcesoftwareandme.org/Calculator/DivideResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="Multiply" interface="CalculatorSoapBinding" operation="Multiply"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:MultiplyResponse>
+         <return>45.0</return>
+      </open:MultiplyResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://opensourcesoftwareandme.org/Calculator/MultiplyResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="Subtract" interface="CalculatorSoapBinding" operation="Subtract"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:open="http://opensourcesoftwareandme.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <open:SubtractResponse>
+         <return>6.0</return>
+      </open:SubtractResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://opensourcesoftwareandme.org/Calculator/SubtractResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

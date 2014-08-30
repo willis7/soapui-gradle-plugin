@@ -1,186 +1,41 @@
-buildscript {
-    repositories {
-        maven { url 'http://jcenter.bintray.com' }
-    }
-
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
-    }
-}
-
 apply plugin: 'groovy'
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
-apply plugin: 'bintray'
 
-group = 'com.smartbear.soapui.gradle'
+description 'Gradle plugin for running SoapUI projects'
+group 'com.lv.plugins'
 version = '0.1'
 
-description = """soapUI - Gradle compatible plugin"""
-
 repositories {
-    maven { url "http://www.eviware.com/repository/maven2" }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    if( project.hasProperty('internalArtifactRepository') ){
+        maven { url project.internalArtifactRepository }
+    } else {
+        mavenCentral()
+        jcenter()
+    }
 }
 
 dependencies {
     compile localGroovy()
     compile gradleApi()
-    compile group: 'eviware', name: 'soapui', version: '4.5.0-SNAPSHOT'
-    compile group: 'javax.activation', name: 'activation', version: '1.1'
-    compile group: 'javax.mail', name: 'mail', version: '1.4'
-    compile group: 'wsdl4j', name: 'wsdl4j', version: '1.6.2-fixed'
-    compile group: 'log4j', name: 'log4j', version: '1.2.14'
-    compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
-    compile group: 'commons-collections', name: 'commons-collections', version: '3.2.1'
-    compile group: 'commons-lang', name: 'commons-lang', version: '2.4'
-    compile group: 'commons-io', name: 'commons-io', version: '1.3.2'
-    compile group: 'commons-ssl', name: 'not-yet-commons-ssl', version: '0.3.11'
-    compile group: 'commons-cli', name: 'commons-cli', version: '1.0'
-    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.7.0'
-    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
-    compile group: 'json', name: 'json-lib', version: '2.2.2-jdk15'
-    compile group: 'ezmorph', name: 'ezmorph', version: '1.0.5'
-    compile group: 'xom', name: 'xom', version: '1.1'
-    compile group: 'swingx', name: 'swingx', version: 'soapui'
-    compile group: 'commons-codec', name: 'commons-codec', version: '1.3'
-    compile group: 'groovy', name: 'groovy-all', version: '1.8.0'
-    compile group: 'rhino', name: 'js', version: '1.7R2'
-    compile group: 'jetty', name: 'jetty', version: '6.1.26'
-    compile group: 'jetty', name: 'jetty-util', version: '6.1.26'
-    compile group: 'jetty', name: 'servlet-api', version: '2.5-20081211'
-    compile group: 'net-components', name: 'netcomponents', version: '1.3.8a'
-    compile group: 'xmlbeans', name: 'xbean', version: 'fixed-2.4.0'
-    compile group: 'xmlbeans', name: 'xbean_xpath', version: '2.4.0'
-    compile group: 'xmlbeans', name: 'xmlpublic', version: '2.4.0'
-    compile group: 'xmlbeans', name: 'jsr173', version: 'xmlbeans-2.4.0'
-    compile group: 'eviware', name: 'soapui-xmlbeans', version: '4.0.0'
-    compile group: 'eviware', name: 'policy-xmlbeans', version: '1.5'
-    compile group: 'eviware', name: 'soap-xmlbeans', version: '1.2'
-    compile group: 'eviware', name: 'wadl-xmlbeans', version: '1.1'
-    compile group: 'eviware', name: 'j2ee-xmlbeans', version: '1.4'
-    compile group: 'eviware', name: 'ext-xmlbeans', version: '1.2'
-    compile group: 'saxon', name: 'saxon', version: '9.1.0.8j'
-    compile group: 'saxon', name: 'saxon-dom', version: '9.1.0.8j'
-    compile group: 'xmlunit', name: 'xmlunit', version: '1.2'
-    compile group: 'xml-security', name: 'xmlsec', version: '1.4.3'
-    compile group: 'opensaml', name: 'opensaml', version: '1.1'
-    compile group: 'xalan', name: 'xalan', version: '2.7.1'
-    compile group: 'xerces', name: 'xercesImpl', version: '2.9.1'
-    compile group: 'wss4j', name: 'wss4j', version: '1.5.8'
-    compile group: 'bouncycastle', name: 'bcprov-jdk15', version: '144'
-    compile group: 'net.sf.jtidy', name: 'jtidy', version: 'r938'
-    compile group: 'javax.jms', name: 'jms', version: '1.1'
-    compile group: 'hermesjms', name: 'hermes', version: '1.14'
-    compile group: 'amf', name: 'flex-messaging-common', version: '1.0'
-    compile group: 'amf', name: 'flex-messaging-core', version: '1.0'
-    compile group: 'amf', name: 'flex-messaging-opt', version: '1.0'
-    compile group: 'amf', name: 'flex-messaging-proxy', version: '1.0'
-    compile group: 'amf', name: 'flex-messaging-remoting', version: '1.0'
-    compile group: 'thoughtworks', name: 'xstream', version: '1.3.1'
-    compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.7'
-    compile group: 'org.w3c.css', name: 'sac', version: '1.3'
-    compile group: 'net.sourceforge.htmlunit', name: 'htmlunit-core-js', version: '2.7'
-    compile group: 'net.sourceforge.cssparser', name: 'cssparser', version: '0.9.5'
-    compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.14'
 
-    testCompile("org.spockframework:spock-core:0.7-groovy-1.8") {
-        exclude module: 'groovy-all'
-    }
+    /**
+     * SoapUI dependencies
+     */
+    compile files('D:\\tools\\SoapUI-5.0.0\\bin\\soapui-5.0.0.jar')
+    compile fileTree(dir: "D:\\tools\\SoapUI-5.0.0\\lib", include: '*.jar')
+
+    testCompile 'com.netflix.nebula:nebula-test:1.12.2'
 }
 
 sourceSets {
-    integrationTest {
-        groovy.srcDir file('src/integTest/groovy')
+    integTest {
+        java.srcDir file('src/integTest/groovy')
         resources.srcDir file('src/integTest/resources')
-        compileClasspath = sourceSets.main.output + configurations.testRuntime
-        runtimeClasspath = output + compileClasspath
     }
 }
 
-task integrationTest(type: Test, dependsOn: test) {
-    description = 'Runs the integration tests.'
-    group = 'verification'
-    testClassesDir = sourceSets.integrationTest.output.classesDir
-    classpath = sourceSets.integrationTest.runtimeClasspath
+task integTest(type: Test) {
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
 }
 
-check.dependsOn integrationTest
-
-idea.module {
-    testSourceDirs += file('src/integTest/groovy')
-}
-
-jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Smartbear SoapUI plugin',
-                'Implementation-Version': version,
-                'Built-By': System.getProperty('user.name'),
-                'Built-Date': new Date(),
-                'Built-JDK': System.getProperty('java.version'),
-                'Built-Gradle': gradle.gradleVersion
-    }
-}
-
-task sourcesJar(type: Jar) {
-    classifier 'sources'
-    from sourceSets.main.allSource
-}
-
-task groovydocJar(type: Jar, dependsOn: groovydoc) {
-    classifier 'groovydoc'
-    from groovydoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives groovydocJar
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact groovydocJar
-
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('name', 'Gradle Smartbear SoapUI plugin')
-                root.appendNode('description', 'Gradle plugin for running SoapUI projects.')
-                root.appendNode('inceptionYear', '2014')
-
-                def scm = root.appendNode('scm')
-                scm.appendNode('url', 'https://github.com/willis7/soapui-gradle-plugin')
-
-                def license = root.appendNode('licenses').appendNode('license')
-                license.appendNode('name', 'GPLv2')
-                license.appendNode('url', 'https://www.gnu.org/licenses/gpl-2.0.txt')
-                license.appendNode('distribution', 'repo')
-
-                def developers = root.appendNode('developers')
-                def willis7 = developers.appendNode('developer')
-                willis7.appendNode('id', 'willis7')
-                willis7.appendNode('name', 'Sion Williams')
-                willis7.appendNode('email', 'sion5@hotmail.co.uk')
-            }
-        }
-    }
-}
-
-bintrayUpload.dependsOn jar
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.getProperty('bintrayUser') : null
-    key = project.hasProperty('bintrayKey') ? project.getProperty('bintrayKey') : null
-    publications = ['mavenJava']
-
-    pkg {
-        repo = 'gradle-plugins'
-        name = 'soapui-gradle-plugin'
-        desc = 'Gradle plugin for running SoapUI projects.'
-        labels = ['gradle', 'groovy', 'soapui', 'plugin']
-        licenses = ['GPL-2.0']
-    }
-    dryRun = false // whether to run this as dry-run, without deploying
-}
+check.dependsOn integTest
