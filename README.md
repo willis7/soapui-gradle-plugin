@@ -23,7 +23,7 @@ The following code snippet shows an example on how to retrieve it from Bintray:
 ```groovy
 buildscript {
     repositories {
-        JCenter()
+        jcenter()
     }    
     
     dependencies {
