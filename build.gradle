@@ -8,6 +8,7 @@ repositories {
     if( project.hasProperty('internalArtifactRepository') ){
         maven { url project.internalArtifactRepository }
     } else {
+        maven { url 'http://www.eviware.com/repository/maven2/' }
         mavenCentral()
         jcenter()
     }
@@ -20,8 +21,14 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    compile files('D:\\tools\\SoapUI-5.0.0\\bin\\soapui-5.0.0.jar')
-    compile fileTree(dir: "D:\\tools\\SoapUI-5.0.0\\lib", include: '*.jar')
+    //compile files('D:\\tools\\SoapUI-5.0.0\\bin\\soapui-5.0.0.jar')
+    //compile fileTree(dir: "D:\\tools\\SoapUI-5.0.0\\lib", include: '*.jar')
+
+    // This is really horrible and hacky, but it seems the only way to resolve
+    // the dependencies needed by SoapUI
+    compile ('eviware:maven-soapui-plugin:4.5.0') {
+        exclude( module: 'jtidy' )
+    }
 
     testCompile 'com.netflix.nebula:nebula-test:1.12.2'
 }
@@ -30,6 +37,8 @@ sourceSets {
     integTest {
         java.srcDir file('src/integTest/groovy')
         resources.srcDir file('src/integTest/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
     }
 }
 
