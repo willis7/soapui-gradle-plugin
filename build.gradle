@@ -1,8 +1,26 @@
+buildscript {
+    repositories {
+        if( project.hasProperty('internalArtifactRepository') ){
+            maven { url project.internalArtifactRepository }
+        } else {
+            jcenter()
+        }
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
+    }
+}
+
 apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
 description 'Gradle plugin for running SoapUI projects'
 group 'com.lv.plugins'
 version = '0.1'
+targetCompatibility = 1.6
+sourceCompatibility = 1.6
 
 repositories {
     if( project.hasProperty('internalArtifactRepository') ){
@@ -25,9 +43,14 @@ dependencies {
         exclude( module: 'jtidy' )
     }
 
-    testCompile 'com.netflix.nebula:nebula-test:1.12.2'
+    testCompile ('com.netflix.nebula:nebula-test:2.2.+'){
+        exclude group: 'org.codehaus.groovy'
+    }
 }
 
+/**
+ * Integration Testing
+ */
 sourceSets {
     integTest {
         java.srcDir file('src/integTest/groovy')
@@ -43,4 +66,74 @@ task integTest(type: Test) {
     reports.html.destination = file("${buildDir}/reports/integTests")
 }
 
+integTest.mustRunAfter test
 check.dependsOn integTest
+
+/**
+ * Publishing
+ */
+task sourcesJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+task groovydocJar(type: Jar, dependsOn: groovydoc) {
+    classifier 'groovydoc'
+    from groovydoc.destinationDir
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives groovydocJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact groovydocJar
+            artifact javadocJar
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty( 'bintray_user' ) ? project.getProperty( 'bintray_user') : null
+    key = project.hasProperty( 'bintray_api_key') ? project.getProperty('bintray_api_key') : null
+    publications = ['mavenJava'] //When uploading Maven-based publication files
+
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = true //If version should be auto published after an upload
+
+    pkg {
+        repo = 'gradle-plugins'
+        name = 'soapui-gradle-plugin'
+        desc = 'Gradle plugin for running SoapUI projects'
+    }
+
+    pkg {
+        websiteUrl = 'https://github.com/willis7/soapui-gradle-plugin'
+        issueTrackerUrl = 'https://github.com/willis7/soapui-gradle-plugin/issues'
+        vcsUrl = 'https://github.com/willis7/soapui-gradle-plugin.git'
+        licenses = ['GPL-2.0']
+        labels = ['gradle', 'plugin', 'soapui']
+        publicDownloadNumbers = true
+
+        attributes = ['gradle-plugin': ["com.lv.plugins.soapui:${project.group}:${project.name}"]]
+
+        version {
+            vcsTag = "v$project.version"
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = 2.3
+}
