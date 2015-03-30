@@ -21,11 +21,6 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    //compile files('D:\\tools\\SoapUI-5.0.0\\bin\\soapui-5.0.0.jar')
-    //compile fileTree(dir: "D:\\tools\\SoapUI-5.0.0\\lib", include: '*.jar')
-
-    // This is really horrible and hacky, but it seems the only way to resolve
-    // the dependencies needed by SoapUI
     compile ('eviware:maven-soapui-plugin:4.5.0') {
         exclude( module: 'jtidy' )
     }
@@ -45,6 +40,7 @@ sourceSets {
 task integTest(type: Test) {
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
+    reports.html.destination = file("${buildDir}/reports/integTests")
 }
 
 check.dependsOn integTest

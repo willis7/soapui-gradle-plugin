@@ -41,9 +41,8 @@ abstract class SoapUITask extends DefaultTask {
 
     @TaskAction
     void run() {
-        withExceptionHandling {
-            executeAction()
-        }
+        executeAction()
+
     }
 
     /**

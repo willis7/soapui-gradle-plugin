@@ -9,16 +9,22 @@ import org.gradle.api.logging.LogLevel
  */
 class SoapuiPluginIntegSpec extends IntegrationSpec   {
 
+    def setup() {
+        copyResources('Amazon-soapui-project.xml', 'Amazon-soapui-project.xml')
+    }
+
     def 'apply plugin, setup and run SoapUI test'() {
+        setup:
         buildFile << '''
             apply plugin: 'com.lv.soapui'
 
             soapui{
                 test{
-                    projectFile = 'sample-soapui-project.xml'
+                    projectFile = 'Amazon-soapui-project.xml'
                 }
             }
         '''.stripIndent()
+        //logLevel = LogLevel.DEBUG
 
         when:
         ExecutionResult result = runTasksSuccessfully('soaptest')

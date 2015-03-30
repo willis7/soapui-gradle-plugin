@@ -127,97 +127,96 @@ class TestTask extends SoapUITask {
 
     @Override
     void executeAction() {
-
         SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
         runner.projectFile = getProjectFile()
 
         if ( getEndpoint() ) {
             runner.endpoint = getEndpoint()
-            logger.debug "Runner endpoint" + getEndpoint()
+            logger.debug "Runner endpoint: " + getEndpoint()
         }
 
         if ( getTestSuite() ) {
             runner.testSuite = getTestSuite()
-            logger.debug "Runner testSuite" + getTestSuite()
+            logger.debug "Runner testSuite: " + getTestSuite()
         }
 
         if ( getTestCase() ) {
             runner.testCase = getTestCase()
-            logger.debug "Runner testCase" + getTestCase()
+            logger.debug "Runner testCase: " + getTestCase()
         }
 
         if ( getUsername() ) {
             runner.username = getUsername()
-            logger.debug "Runner username" + getUsername()
+            logger.debug "Runner username: " + getUsername()
         }
 
         if ( getPassword() ) {
             runner.password = getPassword()
-            logger.debug "Runner password" + getPassword()
+            logger.debug "Runner password: " + getPassword()
         }
 
         if ( getWssPasswordType() ) {
             runner.wssPasswordType = getWssPasswordType()
-            logger.debug "Runner wssPasswordType" + getWssPasswordType()
+            logger.debug "Runner wssPasswordType: " + getWssPasswordType()
         }
 
         if ( getDomain() ) {
             runner.domain = getDomain()
-            logger.debug "Runner domain" + getDomain()
+            logger.debug "Runner domain: " + getDomain()
         }
 
         if ( getHost() ) {
             runner.host = getHost()
-            logger.debug "Runner host" + getHost()
+            logger.debug "Runner host: " + getHost()
         }
 
         if ( getOutputFolder() ) {
             runner.outputFolder = getOutputFolder()
-            logger.debug "Runner outputFolder" + getOutputFolder()
+            logger.debug "Runner outputFolder: " + getOutputFolder()
         }
 
         runner.printReport = getPrintReport()
-        logger.debug "Runner printReport" + getPrintReport()
+        logger.debug "Runner printReport: " + getPrintReport()
 
         runner.exportAll = getExportAll()
-        logger.debug "Runner exportAll" + getExportAll()
+        logger.debug "Runner exportAll: " + getExportAll()
 
         runner.junitReport = getJunitReport()
-        logger.debug "Runner junitReport" + getJunitReport()
+        logger.debug "Runner junitReport: " + getJunitReport()
 
         runner.enableUI = getInteractive()
-        logger.debug "Runner enableUI" + getInteractive()
+        logger.debug "Runner enableUI: " + getInteractive()
 
         runner.ignoreError = getTestFailIgnore()
-        logger.debug "Runner ignoreError" + getTestFailIgnore()
+        logger.debug "Runner ignoreError: " + getTestFailIgnore()
 
         runner.saveAfterRun = getSaveAfterRun()
-        logger.debug "Runner saveAfterRun" + getSaveAfterRun()
+        logger.debug "Runner saveAfterRun: " + getSaveAfterRun()
 
         if ( getSettingsFile() ) {
             runner.settingsFile = getSettingsFile()
-            logger.debug "Runner settingsFile" + getSettingsFile()
+            logger.debug "Runner settingsFile: " + getSettingsFile()
         }
 
         if ( getProjectPassword() ) {
             runner.projectPassword = getProjectPassword()
-            logger.debug "Runner projectPassword" + getProjectPassword()
+            logger.debug "Runner projectPassword: " + getProjectPassword()
         }
 
         if ( getSettingsPassword() ) {
             runner.soapUISettingsPassword = getSettingsPassword()
-            logger.debug "Runner soapUISettingsPassword" + getSettingsPassword()
+            logger.debug "Runner soapUISettingsPassword: " + getSettingsPassword()
         }
 
         if ( getGlobalProperties() ) {
             runner.globalProperties = getGlobalProperties()
-            logger.debug "Runner getGlobalProperties" + getGlobalProperties()
+            logger.debug "Runner getGlobalProperties: " + getGlobalProperties()
         }
 
         if ( getProjectProperties() ) {
             runner.projectProperties = getProjectProperties()
-            logger.debug "Runner projectProperties" + projectProperties()
+            logger.debug "Runner projectProperties: " + projectProperties()
         }
 
         if ( getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
@@ -226,6 +225,7 @@ class TestTask extends SoapUITask {
                 System.setProperty((String) key, soapuiProperties.getProperty((String) key))
             }
         }
+
 
         runner.run()
         logger.info "SoapUI test case runner complete."

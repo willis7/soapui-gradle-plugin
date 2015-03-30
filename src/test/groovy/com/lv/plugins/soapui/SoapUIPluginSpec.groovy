@@ -8,7 +8,7 @@ import nebula.test.PluginProjectSpec
  *
  * @author Sion Williams
  */
-class SoapuiPluginSpec extends PluginProjectSpec  {
+class SoapUIPluginSpec extends PluginProjectSpec  {
     static final String PLUGIN_ID = 'com.lv.soapui'
 
     @Override
