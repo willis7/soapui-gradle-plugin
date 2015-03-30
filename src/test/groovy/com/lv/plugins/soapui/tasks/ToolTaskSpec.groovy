@@ -23,7 +23,7 @@ class ToolTaskSpec extends Specification {
         expect:
         project.tasks.findByName(TASK_NAME) == null
         when:
-        project.task(TASK_NAME, type: TestTask) {
+        project.task(TASK_NAME, type: ToolTask) {
             projectFile = 'sample-soapui-tool-project.xml'
             tool = 'wsi,axis1,axis2'
             iface = 'IOrderService'
@@ -32,7 +32,7 @@ class ToolTaskSpec extends Specification {
         Task task = project.tasks.findByName(TASK_NAME)
         task != null
         task.group == 'SoapUI'
-        task.description == 'Runs soapUI functional tests'
+        task.description == 'Runs soapUI tools'
 
         task.projectFile == 'sample-soapui-tool-project.xml'
         task.tool == 'wsi,axis1,axis2'
@@ -43,7 +43,7 @@ class ToolTaskSpec extends Specification {
         expect:
         project.tasks.findByName(TASK_NAME) == null
         when:
-        Task task = project.task(TASK_NAME, type: TestTask) {
+        Task task = project.task(TASK_NAME, type: ToolTask) {
             tool = 'wsi,axis1,axis2'
             iface = 'IOrderService'
         }

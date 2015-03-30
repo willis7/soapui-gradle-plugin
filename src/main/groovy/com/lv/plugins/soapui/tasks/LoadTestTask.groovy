@@ -161,7 +161,7 @@ class LoadTestTask extends SoapUITask {
             runner.limit = limit.intValue()
         }
 
-        if (threadCouny) {
+        if (threadCount) {
             runner.threadCount = threadCount.intValue()
         }
 
