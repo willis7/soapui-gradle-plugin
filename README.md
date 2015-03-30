@@ -173,7 +173,14 @@ soapui {
 }
 ```
 
-## CI build
+## Contribute
 
-[![Built on Travis](http://about.travis-ci.org/images/travis-mascot-200px.png)](https://travis-ci.org/)
+- Issue Tracker: [github.com/willis7/soapui-gradle-plugin/issues](https://github.com/willis7/soapui-gradle-plugin/issues)
+- Source Code: [github.com/willis7/soapui-gradle-plugin](https://github.com/willis7/soapui-gradle-plugin)
+
+
+## License
+
+The project is licensed under the MIT license.
+
 
