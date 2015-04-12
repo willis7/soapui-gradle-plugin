@@ -21,10 +21,10 @@ class SoapuiPluginIntegSpec extends IntegrationSpec   {
             soapui{
                 test{
                     projectFile = 'Amazon-soapui-project.xml'
+                    testSuite = 'TestSuite 1'
                 }
             }
         '''.stripIndent()
-        //logLevel = LogLevel.DEBUG
 
         when:
         ExecutionResult result = runTasksSuccessfully('soaptest')

@@ -39,8 +39,10 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    compile ('eviware:maven-soapui-plugin:4.5.0') {
+    compile ('com.smartbear.soapui:soapui-maven-plugin:5.1.2'){
         exclude( module: 'jtidy' )
+        exclude( module: 'cajo' )
+        exclude( module: 'groovy-all' )
     }
 
     testCompile ('com.netflix.nebula:nebula-test:2.2.+'){
