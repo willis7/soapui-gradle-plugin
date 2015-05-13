@@ -196,7 +196,7 @@ class LoadTestTask extends SoapUITask {
             runner.projectProperties = projectProperties
         }
 
-        if (!soapuiProperties && soapuiProperties.size() > 0)
+        if (soapuiProperties != null && soapuiProperties.size() > 0)
             for (Object key : soapuiProperties.keySet()) {
                 println('Setting ' + (String) key + ' value ' + soapuiProperties.getProperty((String) key))
                 System.setProperty((String) key, soapuiProperties.getProperty((String) key))

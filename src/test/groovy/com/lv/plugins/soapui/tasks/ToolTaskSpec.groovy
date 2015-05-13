@@ -4,6 +4,7 @@ import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
+import spock.lang.Ignore
 import spock.lang.Specification
 
 /**
@@ -39,6 +40,8 @@ class ToolTaskSpec extends Specification {
         task.iface == 'IOrderService'
     }
 
+    //TODO Convert to integTest
+    @Ignore
     def "run tool task with no project.xml defined"() {
         expect:
         project.tasks.findByName(TASK_NAME) == null

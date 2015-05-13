@@ -2,6 +2,7 @@ package com.lv.plugins.soapui.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
@@ -11,9 +12,11 @@ import org.gradle.api.tasks.TaskAction
  * @author Sion Williams
  */
 abstract class SoapUITask extends DefaultTask {
+
     /**
      * The soapUI project file to test with
      */
+    @Input
     String projectFile
 
     /**

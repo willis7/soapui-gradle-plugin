@@ -70,7 +70,7 @@ class MockServiceTask extends SoapUITask {
     @Override
     public void executeAction() {
 
-        SoapUIMockServiceRunner runner = new SoapUIMockServiceRunner(
+        SoapUIMockServiceRunner runner = new MySoapUIMockServiceRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle MockService Runner')
         runner.projectFile = projectFile
 
@@ -118,5 +118,14 @@ class MockServiceTask extends SoapUITask {
         }
 
         runner.run()
+    }
+}
+
+public class MySoapUIMockServiceRunner extends SoapUIMockServiceRunner {
+    public MySoapUIMockServiceRunner(){super()}
+    public MySoapUIMockServiceRunner(String title){super(title)}
+
+    @Override
+    void initGroovyLog() {
     }
 }
