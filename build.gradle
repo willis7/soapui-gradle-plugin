@@ -32,6 +32,24 @@ repositories {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force 'log4j:log4j:1.2.10',
+                'commons-codec:commons-codec:1.4',
+                'commons-io:commons-io:1.4',
+                'org.apache.httpcomponents:httpcore:4.2.5',
+                'org.apache.httpcomponents:httpclient:4.2.5',
+                'commons-logging:commons-logging:1.1.1',
+                'commons-lang:commons-lang:2.4',
+                'xalan:xalan:2.7.1',
+                'xml-apis:xml-apis:1.3.04',
+                'junit:junit:4.10',
+                'xom:xom:1.1',
+                'org.apache.santuario:xmlsec:1.4.5'
+    }
+}
+
 dependencies {
     compile localGroovy()
     compile gradleApi()
@@ -39,8 +57,12 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    compile ('eviware:maven-soapui-plugin:4.5.0') {
-        exclude( module: 'jtidy' )
+    compile ('com.smartbear.soapui:soapui:5.0.1') {
+        exclude module: 'commons-logging'
+        exclude( module: 'log4j' )
+        exclude module: 'jtidy'
+        exclude module: 'cajo'
+        exclude group: 'org.codehaus.groovy'
     }
 
     testCompile ('com.netflix.nebula:nebula-test:2.2.+'){
