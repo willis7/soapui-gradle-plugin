@@ -127,9 +127,9 @@ class TestTask extends SoapUITask {
 
     @Override
     void executeAction() {
-        SoapUITestCaseRunner runner = new SoapUITestCaseRunner(
+        SoapUITestCaseRunner runner = new MySoapUITestCaseRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
-        runner.projectFile = getProjectFile()
+        runner.setProjectFile( getProjectFile() )
 
         if ( getEndpoint() ) {
             runner.endpoint = getEndpoint()
@@ -182,7 +182,7 @@ class TestTask extends SoapUITask {
         runner.exportAll = getExportAll()
         logger.debug "Runner exportAll: " + getExportAll()
 
-        runner.junitReport = getJunitReport()
+        runner.setJUnitReport(getJunitReport())
         logger.debug "Runner junitReport: " + getJunitReport()
 
         runner.enableUI = getInteractive()
@@ -226,8 +226,17 @@ class TestTask extends SoapUITask {
             }
         }
 
-
+        runner.getLog().info('log me!')
         runner.run()
         logger.info "SoapUI test case runner complete."
+    }
+}
+
+public class MySoapUITestCaseRunner extends SoapUITestCaseRunner {
+    public MySoapUITestCaseRunner(){super()}
+    public MySoapUITestCaseRunner(String title){super(title)}
+
+    @Override
+    void initGroovyLog() {
     }
 }

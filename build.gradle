@@ -39,10 +39,12 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    compile ('com.smartbear.soapui:soapui-maven-plugin:5.1.2'){
-        exclude( module: 'jtidy' )
-        exclude( module: 'cajo' )
-        exclude( module: 'groovy-all' )
+    compile ('com.smartbear.soapui:soapui:5.0.1') {
+        exclude module: 'commons-logging'
+        exclude( module: 'log4j' )
+        exclude module: 'jtidy'
+        exclude module: 'cajo'
+        exclude group: 'org.codehaus.groovy'
     }
 
     testCompile ('com.netflix.nebula:nebula-test:2.2.+'){
@@ -62,7 +64,7 @@ sourceSets {
     }
 }
 
-task integTest(type: Test) {
+task integTest(type: Test, group: 'verification') {
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
     reports.html.destination = file("${buildDir}/reports/integTests")
