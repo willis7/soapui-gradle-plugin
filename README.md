@@ -12,7 +12,7 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 ## Usage
 
-To use the plugin's functionality, you will need to add the its binary artifact to your build script's classpath and apply the plugin.
+To use the plugin's functionality, you will need to add the binary artifact to your build script's classpath and apply the plugin.
 
 ### Adding the plugin binary to the build
 
@@ -26,21 +26,13 @@ buildscript {
         jcenter()
     }    
     
-    dependencies {
-        compile files('/path/to/your/SoapUI-5.0.0/bin/soapui-5.0.0.jar')
-        compile fileTree(dir: "/path/to/your/SoapUI-5.0.0/lib", include: '*.jar')
-        
+    dependencies {        
         classpath 'com.lv.plugins:soapui-gradle-plugin:VERSION'
     }
 }
 ```
 
 ### Provided plugins
-
-
-The `soapui` plugin helps you get started quickly. If you are OK if the preconfigured tasks, this is the
-preferrable option. Most plugin users will go with this option. To use the Tomcat plugin, include the following code snippet
-in your build script:
 
     apply plugin: 'com.lv.soapui'
 

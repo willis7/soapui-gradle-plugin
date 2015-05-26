@@ -82,7 +82,7 @@ sourceSets {
     }
 }
 
-task integTest(type: Test) {
+task integTest(type: Test, group: 'verification') {
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
     reports.html.destination = file("${buildDir}/reports/integTests")
