@@ -125,9 +125,9 @@ class LoadTestTask extends SoapUITask {
 
     @Override
     public void executeAction() {
-        SoapUILoadTestRunner runner = new SoapUILoadTestRunner(
+        SoapUILoadTestRunner runner = new MySoapUILoadTestRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle LoadTest Runner')
-        runner.projectFile = projectFile
+        runner.projectFile = getProjectFile()
 
         if (endpoint) {
             runner.endpoint = endpoint
@@ -203,5 +203,14 @@ class LoadTestTask extends SoapUITask {
             }
 
         runner.run()
+    }
+}
+
+public class MySoapUILoadTestRunner extends SoapUILoadTestRunner {
+    public MySoapUILoadTestRunner(){super()}
+    public MySoapUILoadTestRunner(String title){super(title)}
+
+    @Override
+    void initGroovyLog() {
     }
 }

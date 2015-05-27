@@ -43,8 +43,8 @@ class ToolTask extends SoapUITask {
     @Override
     void executeAction() {
 
-        SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner')
-        runner.projectFile = projectFile
+        SoapUIToolRunner runner = new MySoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner')
+        runner.projectFile = getProjectFile()
 
         if (iface) {
             runner.interface = iface
@@ -77,5 +77,14 @@ class ToolTask extends SoapUITask {
             }
 
         runner.run()
+    }
+}
+
+public class MySoapUIToolRunner extends SoapUIToolRunner {
+    public MySoapUIToolRunner(){super()}
+    public MySoapUIToolRunner(String title){super(title)}
+
+    @Override
+    void initGroovyLog() {
     }
 }

@@ -39,21 +39,4 @@ class ToolTaskSpec extends Specification {
         task.tool == 'wsi,axis1,axis2'
         task.iface == 'IOrderService'
     }
-
-    //TODO Convert to integTest
-    @Ignore
-    def "run tool task with no project.xml defined"() {
-        expect:
-        project.tasks.findByName(TASK_NAME) == null
-        when:
-        Task task = project.task(TASK_NAME, type: ToolTask) {
-            tool = 'wsi,axis1,axis2'
-            iface = 'IOrderService'
-        }
-        task.run()
-
-        then:
-        project.tasks.findByName(TASK_NAME) != null
-        thrown(GradleException)
-    }
 }

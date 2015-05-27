@@ -136,9 +136,9 @@ class SecurityTestTask extends SoapUITask {
     @TaskAction
     public void executeAction() {
 
-        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner(
+        SoapUISecurityTestRunner runner = new MySoapUISecurityTestRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Security Test Runner')
-        runner.projectFile = projectFile
+        runner.projectFile = getProjectFile()
 
         if (endpoint) {
             runner.endpoint = endpoint
@@ -213,5 +213,14 @@ class SecurityTestTask extends SoapUITask {
         }
 
         runner.run()
+    }
+}
+
+public class MySoapUISecurityTestRunner extends SoapUISecurityTestRunner {
+    public MySoapUISecurityTestRunner(){super()}
+    public MySoapUISecurityTestRunner(String title){super(title)}
+
+    @Override
+    void initGroovyLog() {
     }
 }

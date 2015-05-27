@@ -35,18 +35,4 @@ class MockServiceTaskSpec extends Specification {
 
         task.projectFile == 'sample-soapui-project.xml'
     }
-
-    //TODO Convert to integTest
-    @Ignore
-    def "run mock with no project.xml defined"() {
-        expect:
-        project.tasks.findByName(TASK_NAME) == null
-        when:
-        Task task = project.task(TASK_NAME, type: MockServiceTask)
-        task.run()
-
-        then:
-        project.tasks.findByName(TASK_NAME) != null
-        thrown(GradleException)
-    }
 }

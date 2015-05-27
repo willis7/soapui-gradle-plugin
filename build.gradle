@@ -15,10 +15,13 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply from: "$rootDir/gradle/jacoco.gradle"
+apply from: "$rootDir/gradle/sonar.gradle"
 
 description 'Gradle plugin for running SoapUI projects'
 group 'com.lv.plugins'
 version = '0.1'
+
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
 
@@ -29,6 +32,24 @@ repositories {
         maven { url 'http://www.eviware.com/repository/maven2/' }
         mavenCentral()
         jcenter()
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force 'log4j:log4j:1.2.10',
+                'commons-codec:commons-codec:1.4',
+                'commons-io:commons-io:1.4',
+                'org.apache.httpcomponents:httpcore:4.2.5',
+                'org.apache.httpcomponents:httpclient:4.2.5',
+                'commons-logging:commons-logging:1.1.1',
+                'commons-lang:commons-lang:2.4',
+                'xalan:xalan:2.7.1',
+                'xml-apis:xml-apis:1.3.04',
+                'junit:junit:4.10',
+                'xom:xom:1.1',
+                'org.apache.santuario:xmlsec:1.4.5'
     }
 }
 
@@ -70,8 +91,20 @@ task integTest(type: Test, group: 'verification') {
     reports.html.destination = file("${buildDir}/reports/integTests")
 }
 
+task jacocoIntegTestReport(type: JacocoReport) {
+    sourceSets sourceSets.main
+    executionData integTest
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/jacocoInteg"
+    }
+}
+
 integTest.mustRunAfter test
 check.dependsOn integTest
+test.finalizedBy jacocoTestReport
+integTest.finalizedBy jacocoIntegTestReport
 
 /**
  * Publishing
