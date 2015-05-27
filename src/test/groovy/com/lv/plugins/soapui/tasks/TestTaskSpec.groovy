@@ -47,26 +47,4 @@ class TestTaskSpec extends Specification {
         task.testFailIgnore == true
         task.saveAfterRun == false
     }
-
-    //TODO Convert to integTest
-    @Ignore
-    def "run soapTest with no project.xml defined"() {
-        expect:
-        project.tasks.findByName( 'soaptest' ) == null
-
-        when:
-        Task task = project.task( 'soaptest', type: TestTask) {
-            printReport = true
-            exportAll = true
-            junitReport = true
-            interactive = false
-            testFailIgnore = true
-            saveAfterRun = false
-        }
-        task.run()
-
-        then:
-        project.tasks.findByName( 'soaptest' ) != null
-        thrown(GradleException)
-    }
 }

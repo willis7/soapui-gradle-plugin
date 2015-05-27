@@ -72,7 +72,7 @@ class MockServiceTask extends SoapUITask {
 
         SoapUIMockServiceRunner runner = new MySoapUIMockServiceRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle MockService Runner')
-        runner.projectFile = projectFile
+        runner.setProjectFile( getProjectFile() )
 
 
         if (mockService) {
@@ -117,6 +117,7 @@ class MockServiceTask extends SoapUITask {
             }
         }
 
+        println runner.projectFile
         runner.run()
     }
 }

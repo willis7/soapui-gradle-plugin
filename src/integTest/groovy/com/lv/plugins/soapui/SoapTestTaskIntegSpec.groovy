@@ -8,7 +8,7 @@ import org.gradle.api.logging.LogLevel
  * @author Sion Williams
  * @author Iain Adams
  */
-class SoapuiPluginIntegSpec extends IntegrationSpec   {
+class SoapTestTaskIntegSpec extends IntegrationSpec   {
 
     def setup() {
         copyResources('TemperatureConversions-soapui-project_PASS.xml', 'example-pass.xml')
@@ -55,5 +55,16 @@ class SoapuiPluginIntegSpec extends IntegrationSpec   {
 
         then:
         result.standardOutput.contains('Total TestCases: 4 (1 failed)')
+    }
+
+    def 'run with no project.xml defined'() {
+        setup:
+        buildFile << """apply plugin: 'com.lv.soapui'"""
+
+        when:
+        ExecutionResult result = runTasksWithFailure('soaptest')
+
+        then:
+        result.standardError.contains("No value has been specified for property 'projectFile'.")
     }
 }

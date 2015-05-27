@@ -15,10 +15,13 @@ apply plugin: 'groovy'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply from: "$rootDir/gradle/jacoco.gradle"
+apply from: "$rootDir/gradle/sonar.gradle"
 
 description 'Gradle plugin for running SoapUI projects'
 group 'com.lv.plugins'
 version = '0.1'
+
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
 
@@ -88,8 +91,20 @@ task integTest(type: Test, group: 'verification') {
     reports.html.destination = file("${buildDir}/reports/integTests")
 }
 
+task jacocoIntegTestReport(type: JacocoReport) {
+    sourceSets sourceSets.main
+    executionData integTest
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/jacocoInteg"
+    }
+}
+
 integTest.mustRunAfter test
 check.dependsOn integTest
+test.finalizedBy jacocoTestReport
+integTest.finalizedBy jacocoIntegTestReport
 
 /**
  * Publishing
