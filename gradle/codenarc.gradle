@@ -1,0 +1,4 @@
+apply plugin: 'codenarc'
+
+// Note there is an additional config file too
+// config/codenarc

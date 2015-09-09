@@ -27,14 +27,14 @@ buildscript {
     }    
     
     dependencies {        
-        classpath 'com.lv.plugins:soapui-gradle-plugin:VERSION'
+        classpath 'io.byteshifter:soapui-gradle-plugin:VERSION'
     }
 }
 ```
 
 ### Provided plugins
 
-    apply plugin: 'com.lv.soapui'
+    apply plugin: 'io.byteshifter.soapui'
 
 
 ## Tasks
@@ -167,8 +167,8 @@ soapui {
 
 ## Contribute
 
-- Issue Tracker: [github.com/willis7/soapui-gradle-plugin/issues](https://github.com/willis7/soapui-gradle-plugin/issues)
-- Source Code: [github.com/willis7/soapui-gradle-plugin](https://github.com/willis7/soapui-gradle-plugin)
+- Issue Tracker: [github.com/byte-shifter-ltd/soapui-gradle-plugin/issues](https://github.com/byte-shifter-ltd/soapui-gradle-plugin/issues)
+- Source Code: [github.com/byte-shifter-ltd/soapui-gradle-plugin](https://github.com/byte-shifter-ltd/soapui-gradle-plugin)
 
 
 ## License

@@ -1,0 +1,17 @@
+/**
+ * Integration Testing
+ */
+sourceSets {
+    integTest {
+        java.srcDir file('src/integTest/groovy')
+        resources.srcDir file('src/integTest/resources')
+        compileClasspath = sourceSets.main.output + configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+}
+
+task integTest(type: Test, group: 'verification') {
+    testClassesDir = sourceSets.integTest.output.classesDir
+    classpath = sourceSets.integTest.runtimeClasspath
+    reports.html.destination = file("${buildDir}/reports/integTests")
+}
