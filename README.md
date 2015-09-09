@@ -7,30 +7,14 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 ## Build Status
 
-[![Build Status](https://travis-ci.org/willis7/soapui-gradle-plugin.svg?branch=master)](https://travis-ci.org/willis7/soapui-gradle-plugin)
+[![Build Status](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin.svg)](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin)
 
 
 ## Usage
 
-To use the plugin's functionality, you will need to add the binary artifact to your build script's classpath and apply the plugin.
+This plugin is now hosted in the Gradle Plugin Portal. Please see their website for more information:
 
-### Adding the plugin binary to the build
-
-The plugin JAR needs to be defined in the classpath of your build script. It is directly available on
-[Bintray](https://bintray.com/sion5/gradle-plugins/soapui-gradle-plugin).
-The following code snippet shows an example on how to retrieve it from Bintray:
-
-```groovy
-buildscript {
-    repositories {
-        jcenter()
-    }    
-    
-    dependencies {        
-        classpath 'io.byteshifter:soapui-gradle-plugin:VERSION'
-    }
-}
-```
+[Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.byteshifter.soapui)
 
 ### Provided plugins
 
