@@ -1,4 +1,15 @@
 apply plugin: "jacoco"
+apply plugin: org.kt3k.gradle.plugin.CoverallsPlugin
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
+    }
+}
 
 jacocoTestReport {
     reports {
