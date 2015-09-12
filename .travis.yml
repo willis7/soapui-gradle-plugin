@@ -1,5 +1,7 @@
 env:
    - TERM=dumb
+   
+sudo: false
 
 language: groovy
 jdk:
