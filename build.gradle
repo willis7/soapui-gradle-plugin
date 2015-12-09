@@ -6,6 +6,7 @@ apply from: "${rootDir}/gradle/compileGroovy.gradle"
 apply from: "${rootDir}/gradle/integTest.gradle"
 apply from: "${rootDir}/gradle/codenarc.gradle"
 apply from: "${rootDir}/gradle/jacoco.gradle"
+apply from: "${rootDir}/gradle/license.gradle"
 
 description 'Gradle plugin for running SoapUI projects'
 group 'io.byteshifter'

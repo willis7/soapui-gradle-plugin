@@ -20,7 +20,7 @@ pluginBundle {
     tags = ['soapui', 'testing', 'soap', 'rest']
 
     plugins {
-        dbDeployPlugin {
+        soapuiPlugin {
             id = 'io.byteshifter.soapui'
             displayName = 'Gradle plugin for running SoapUI projects'
         }
