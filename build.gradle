@@ -10,7 +10,7 @@ apply from: "${rootDir}/gradle/license.gradle"
 
 description 'Gradle plugin for running SoapUI projects'
 group 'io.byteshifter'
-version = '0.1'
+version = '0.2'
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
 
