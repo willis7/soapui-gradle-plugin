@@ -239,13 +239,13 @@ class TestTask extends SoapUITask {
 
         if ( getProjectProperties() ) {
             runner.projectProperties = getProjectProperties()
-            logger.debug "Runner projectProperties: " + projectProperties()
+            logger.debug "Runner projectProperties: " + getProjectProperties()
         }
 
         if ( getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
-            soapuiProperties.keySet().each { key ->
-                logger.debug "Setting ${key} value ${soapuiProperties.getProperty("${key}")}"
-                System.setProperty((String) key, soapuiProperties.getProperty((String) key))
+            getSoapuiProperties().keySet().each { key ->
+                logger.debug "Setting ${key} value ${getSoapuiProperties().getProperty("${key}")}"
+                System.setProperty((String) key, getSoapuiProperties().getProperty((String) key))
             }
         }
 
