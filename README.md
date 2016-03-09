@@ -12,13 +12,31 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 ## Usage
 
-This plugin is now hosted in the Gradle Plugin Portal. Please see their website for more information:
+This plugin has a fairly complex dependency tree which also has exclusions. Gradle appears to have some odd behaviour in this regard, and so the user will need to add the following in the build file otherwise the plugin fails:
+
+```
+buildscript {
+  repositories {
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "http://www.soapui.org/repository/maven2/" }
+    mavenCentral()
+  }
+  dependencies {
+    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:0.2") {
+        exclude module: 'commons-logging'
+        exclude module: 'log4j'
+        exclude module: 'jtidy'
+        exclude module: 'cajo'
+        exclude group: 'org.codehaus.groovy'
+      }
+  }
+}
+
+apply plugin: 'io.byteshifter.soapui'
+```
+
 
 [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.byteshifter.soapui)
-
-### Provided plugins
-
-    apply plugin: 'io.byteshifter.soapui'
 
 
 ## Tasks
