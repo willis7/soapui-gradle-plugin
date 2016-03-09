@@ -18,7 +18,7 @@ repositories {
     if( project.hasProperty('internalArtifactRepository') ){
         maven { url project.internalArtifactRepository }
     } else {
-        maven { url 'http://www.eviware.com/repository/maven2/' }
+        maven { url 'http://www.soapui.org/repository/maven2/' }
         mavenCentral()
         jcenter()
     }
