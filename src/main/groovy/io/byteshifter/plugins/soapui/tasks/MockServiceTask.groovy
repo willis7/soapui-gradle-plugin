@@ -144,6 +144,10 @@ class MockServiceTask extends SoapUITask {
     }
 }
 
+/*
+ * This class is a hack
+ * see https://discuss.gradle.org/t/classpath-hell-soapui-and-gradle-api-logging-conflicts/8830/6?u=sion_williams
+ */
 public class MySoapUIMockServiceRunner extends SoapUIMockServiceRunner {
     public MySoapUIMockServiceRunner(){super()}
     public MySoapUIMockServiceRunner(String title){super(title)}

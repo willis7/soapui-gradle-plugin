@@ -167,6 +167,30 @@ soapui {
 }
 ```
 
+## Complex Example
+
+There may be times when you have multiple test suites inside the same SoapUI project. You wouldn't want to maintain several Gradle projects, so the plugin uses convention mapping. This means you can have many tasks, but override the properties at runtime. Here's an example:
+
+```groovy
+soapui {
+    test {
+        projectFile = 'sample-soapui-project.xml'
+        printReport = true
+        junitReport = true
+    }
+}
+
+task testSuiteA(type: TestTask) {
+    testSuite = 'SuiteA'
+}
+
+task testSuiteB(type: TestTask) {
+    testSuite = 'SuiteB'
+}
+```
+What you should notice in the example above is that we still use the `soapui` convention block with the nested `test` section. You may also have noticed that we have defined 2 new tasks of type `TestTask`. The `TestTask` is what runs the `SoapUITestCaseRunner`. The only difference between the 2 tasks is that they set their own value for `testSuite`. Through the magic of convention mapping the rest of the values are inherited.
+
+
 ## Contribute
 
 - Issue Tracker: [github.com/byte-shifter-ltd/soapui-gradle-plugin/issues](https://github.com/byte-shifter-ltd/soapui-gradle-plugin/issues)

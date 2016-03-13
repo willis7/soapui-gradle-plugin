@@ -255,6 +255,9 @@ class TestTask extends SoapUITask {
     }
 }
 
+/*
+ * This class is a hack, see https://discuss.gradle.org/t/classpath-hell-soapui-and-gradle-api-logging-conflicts/8830/6?u=sion_williams
+ */
 public class MySoapUITestCaseRunner extends SoapUITestCaseRunner {
     public MySoapUITestCaseRunner(){super()}
     public MySoapUITestCaseRunner(String title){super(title)}
