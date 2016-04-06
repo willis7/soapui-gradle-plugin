@@ -5,6 +5,23 @@
 The plugin provides tasks for running SoapUI tests and mocks during a Gradle build.
 
 
+<table border=1>
+    <tr>
+        <td>
+            Unfortunately, I don't have much time to contribute anymore. In practice this means far less activity, 
+            responsiveness on issues and new releases from my end.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            I am  ctively looking for contributors willing to take on maintenance and implementation of the project. If you are interested and would love to see this 
+            plugin continue to thrive, shoot me a <a href="mailto:sion5@hotmail.co.uk">mail</a>.
+        </td>
+    </tr>
+</table>
+
+
+
 ## Build Status
 
 [![Build Status](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin.svg)](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin)
