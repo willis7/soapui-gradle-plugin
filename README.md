@@ -218,4 +218,7 @@ What you should notice in the example above is that we still use the `soapui` co
 
 The project is licensed under the MIT license.
 
+## Thanks
 
+For the Open Source licence ....
+<img src="https://cdn.pbrd.co/images/8eFlobE.png" width="150" height="75" />
