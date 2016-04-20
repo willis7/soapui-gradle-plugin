@@ -29,7 +29,7 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 ## Usage
 
-This plugin has a fairly complex dependency tree which also has exclusions. Gradle appears to have some odd behaviour in this regard, and so the user will need to add the following in the build file otherwise the plugin fails:
+This plugin has a fairly complex dependency tree. To use this plugin successfully we need to override some dependencies through forcing versions or completely substituting modules. As a result your build file will need to look like this:
 
 ```
 buildscript {
@@ -40,11 +40,24 @@ buildscript {
   }
   dependencies {
     classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:0.2") {
-        exclude module: 'commons-logging'
-        exclude module: 'log4j'
-        exclude module: 'jtidy'
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
+      }
+  }
+  configurations.all {
+      resolutionStrategy {
+          // force certain versions of dependencies (including transitive)
+          force 'com.jgoodies:forms:1.1.0',
+                  'com.fifesoft:rsyntaxtextarea:2.5.8',
+                  'xalan:xalan:2.7.2',
+                  'joda-time:joda-time:2.0',
+                  'org.slf4j:slf4j-api:1.6.2'
+
+          // add dependency substitution rules
+          dependencySubstitution {
+              substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
+              substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
+          }
       }
   }
 }

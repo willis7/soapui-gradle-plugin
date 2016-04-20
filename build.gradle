@@ -11,6 +11,7 @@ apply from: "${rootDir}/gradle/license.gradle"
 description 'Gradle plugin for running SoapUI projects'
 group 'io.byteshifter'
 version = '0.2'
+
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
 
@@ -25,22 +26,37 @@ repositories {
 }
 
 dependencies {
-    compile localGroovy()
     compile gradleApi()
+    compile localGroovy()
 
     /**
      * SoapUI dependencies
      */
     compile ('com.smartbear.soapui:soapui:5.0.1') {
-        exclude module: 'commons-logging'
-        exclude module: 'log4j'
-        exclude module: 'jtidy'
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
     }
 
-    testCompile ('com.netflix.nebula:nebula-test:2.2.+'){
+    testCompile ('com.netflix.nebula:nebula-test:3.1.0'){
         exclude group: 'org.codehaus.groovy'
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        // force certain versions of dependencies (including transitive)
+        force 'com.jgoodies:forms:1.1.0',
+                'com.fifesoft:rsyntaxtextarea:2.5.8',
+                'xalan:xalan:2.7.2',
+                'joda-time:joda-time:2.0',
+                'org.slf4j:slf4j-api:1.6.2',
+                'org.spockframework:spock-core:1.0-groovy-2.4'
+
+        // add dependency substitution rules
+        dependencySubstitution {
+            substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
+            substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
+        }
     }
 }
 
@@ -59,5 +75,5 @@ pluginBundle {
 }
 
 wrapper {
-    gradleVersion = 2.3
+    gradleVersion = 2.12
 }
