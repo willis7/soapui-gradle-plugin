@@ -39,7 +39,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:0.2") {
+    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.0.1") {
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
       }
@@ -219,6 +219,20 @@ task testSuiteB(type: TestTask) {
 }
 ```
 What you should notice in the example above is that we still use the `soapui` convention block with the nested `test` section. You may also have noticed that we have defined 2 new tasks of type `TestTask`. The `TestTask` is what runs the `SoapUITestCaseRunner`. The only difference between the 2 tasks is that they set their own value for `testSuite`. Through the magic of convention mapping the rest of the values are inherited.
+
+
+## SoapUI test runner and plugin versions mapping
+
+Previously, versions between soapui-gradle-plugin and SoapUI test runner was't synchronized.
+But from version 5.0.1 we will try to keep them synchronized as soon as newer SoapUI will be released.
+
+| soapui-gradle-plugin | SoapUI test runner |
+| -------------------- | ------------------ |
+| 0.2                  | 5.0.1              |
+| 5.0.1                | 5.0.1              |
+| .....                | .....              |
+| 5.3.0                | 5.3.0              |
+| 5.3.1-RC             | 5.3.1-RC           |
 
 
 ## Contribute

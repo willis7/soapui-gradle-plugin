@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        soapUiVersion = '5.0.1'
+    }
+}
+
 plugins {
     id 'com.gradle.plugin-publish' version '0.9.1'
 }
@@ -10,7 +16,7 @@ apply from: "${rootDir}/gradle/license.gradle"
 
 description 'Gradle plugin for running SoapUI projects'
 group 'io.byteshifter'
-version = '0.2'
+version = "$soapUiVersion"
 
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
@@ -32,7 +38,7 @@ dependencies {
     /**
      * SoapUI dependencies
      */
-    compile ('com.smartbear.soapui:soapui:5.0.1') {
+    compile ("com.smartbear.soapui:soapui:$soapUiVersion") {
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
     }
