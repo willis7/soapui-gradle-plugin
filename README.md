@@ -39,7 +39,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.0") {
+    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.1") {
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
       }
@@ -224,12 +224,12 @@ What you should notice in the example above is that we still use the `soapui` co
 ## SoapUI test runner and plugin versions mapping
 
 Previously, versions between soapui-gradle-plugin and SoapUI test runner was't synchronized.
-But from version 5.0.1 we will try to keep them synchronized as soon as newer SoapUI will be released.
+But after version 5.0.1 we will try to keep them synchronized as soon as newer SoapUI will be released.
 
 | soapui-gradle-plugin | SoapUI test runner |
 | -------------------- | ------------------ |
 | 0.2                  | 5.0.1              |
-| 5.0.1                | 5.0.1              |
+| 5.1.0                | 5.1.0              |
 | .....                | .....              |
 | 5.3.0                | 5.3.0              |
 | 5.3.1-RC             | 5.3.1-RC           |
