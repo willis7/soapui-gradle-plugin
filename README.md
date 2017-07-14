@@ -39,7 +39,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.1") {
+    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.2") {
         exclude module: 'cajo'
         exclude group: 'org.codehaus.groovy'
       }
