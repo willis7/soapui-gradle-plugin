@@ -210,6 +210,8 @@ soapui {
     }
 }
 
+import io.byteshifter.plugins.soapui.tasks.TestTask
+
 task testSuiteA(type: TestTask) {
     testSuite = 'SuiteA'
 }
