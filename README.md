@@ -34,7 +34,7 @@ This plugin has a fairly complex dependency tree. To use this plugin successfull
 ```groovy
 buildscript {
     ext {
-        soapUIVersion = '5.1.2'
+        soapUIVersion = '5.1.3'
     }
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
@@ -78,7 +78,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.2')
+        classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.3')
     }
 }
 
