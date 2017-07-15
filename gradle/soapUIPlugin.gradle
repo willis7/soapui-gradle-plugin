@@ -10,7 +10,7 @@ repositories {
     if (project.hasProperty('internalArtifactRepository')) {
         maven { url project.internalArtifactRepository }
     } else {
-        maven { url 'http://www.soapui.org/repository/maven2/' }
+        maven { url 'http://smartbearsoftware.com/repository/maven2/' }
         mavenCentral()
         jcenter()
     }
@@ -28,29 +28,29 @@ dependencies {
      * SoapUI dependencies
      */
     compile("com.smartbear.soapui:soapui:$soapUIVersion") {
-        exclude module: 'cajo'
-        exclude group: 'org.codehaus.groovy'
+        exclude module: 'cajo'                  // cajo-1.142.jar
+        exclude group: 'org.codehaus.groovy'    // groovy-all-2.1.7.jar
     }
 
     testCompile('com.netflix.nebula:nebula-test:3.1.0') {
-        exclude group: 'org.codehaus.groovy'
+        exclude group: 'org.codehaus.groovy'    // groovy-all-2.1.7.jar
     }
 }
 
 configurations.all {
     resolutionStrategy {
         // force certain versions of dependencies (including transitive)
-        force 'com.jgoodies:forms:1.1.0',
-              'com.fifesoft:rsyntaxtextarea:2.5.8',
-              'xalan:xalan:2.7.2',
-              'joda-time:joda-time:2.0',
-              'org.slf4j:slf4j-api:1.6.2',
-              'org.spockframework:spock-core:1.0-groovy-2.4'
+        force 'com.jgoodies:forms:1.1.0',                       // forms-1.0.7.jar
+              'com.fifesoft:rsyntaxtextarea:2.5.8',             // rsyntaxtextarea-2.5.0.jar
+              'xalan:xalan:2.7.2',                              // xalan-2.7.1.jar
+              'joda-time:joda-time:2.0',                        // joda-time-1.6.2.jar
+              'org.slf4j:slf4j-api:1.6.2',                      // slf4j-api-1.6.1.jar
+              'org.spockframework:spock-core:1.0-groovy-2.4'    // groovy-all-2.1.7.jar
 
         // add dependency substitution rules
         dependencySubstitution {
-            substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
-            substitute module("jetty:jetty:$jettyVersion") with module("org.mortbay.jetty:jetty:$jettyVersion")
+            substitute module('jtidy:jtidy:r872-jdk15')     with module('net.sf.jtidy:jtidy:r938')                  // jtidy-r872-jdk15.jar
+            substitute module("jetty:jetty:$jettyVersion")  with module("org.mortbay.jetty:jetty:$jettyVersion")    // jetty-6.1.26.jar
         }
     }
 }

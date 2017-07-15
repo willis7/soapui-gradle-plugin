@@ -5,17 +5,21 @@ buildscript {
 }
 
 plugins {
-    id 'com.gradle.plugin-publish' version '0.9.1'
+    id 'groovy'
+    id 'jacoco'
+    id 'codenarc'
+    id 'com.github.kt3k.coveralls' version '2.8.1'
+    id 'com.gradle.plugin-publish' version '0.9.7'
+    id 'com.github.hierynomus.license' version '0.14.0'
 }
 
 group 'io.byteshifter'
 version "$soapUIVersion"
 description 'Gradle plugin for testing SoapUI test projects using testrunner'
 
-apply from: "${rootDir}/gradle/compileGroovy.gradle"
-apply from: "${rootDir}/gradle/integTest.gradle"
-apply from: "${rootDir}/gradle/codenarc.gradle"
-apply from: "${rootDir}/gradle/jacoco.gradle"
-apply from: "${rootDir}/gradle/license.gradle"
-apply from: "${rootDir}/gradle/pluginPortal.gradle"
-apply from: "${rootDir}/gradle/soapUIPlugin.gradle"
+apply from: "$rootDir/gradle/compileGroovy.gradle"
+apply from: "$rootDir/gradle/integTest.gradle"
+apply from: "$rootDir/gradle/jacoco.gradle"
+apply from: "$rootDir/gradle/license.gradle"
+apply from: "$rootDir/gradle/pluginPortal.gradle"
+apply from: "$rootDir/gradle/soapUIPlugin.gradle"

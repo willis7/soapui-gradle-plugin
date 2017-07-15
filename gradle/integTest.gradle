@@ -11,7 +11,9 @@ sourceSets {
 }
 
 task integTest(type: Test, group: 'verification') {
+    // // gradle 4:
+    // testClassesDirs = sourceSets.integTest.output.classesDirs
     testClassesDir = sourceSets.integTest.output.classesDir
     classpath = sourceSets.integTest.runtimeClasspath
-    reports.html.destination = file("${buildDir}/reports/integTests")
+    reports.html.setDestination(file("$buildDir/reports/integTests"))
 }
