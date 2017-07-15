@@ -21,11 +21,11 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 </table>
 
 
-
 ## Build Status
 
 [![Build Status](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin.svg)](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin)
 [![Coverage Status](https://coveralls.io/repos/github/byte-shifter-ltd/soapui-gradle-plugin/badge.svg?branch=master)](https://coveralls.io/github/byte-shifter-ltd/soapui-gradle-plugin?branch=master)
+
 
 ## Usage
 
@@ -65,7 +65,6 @@ buildscript {
 apply plugin: 'io.byteshifter.soapui'
 ```
 
-
 [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.byteshifter.soapui)
 
 
@@ -103,6 +102,7 @@ The `soapui` plugin pre-defines the following tasks out-of-the-box:
 
 
 ## Task properties
+
 ### soaptest properties
 
 To configure the SoapUI test task you can choose to set the following properties within the `test` closure of the
@@ -164,6 +164,7 @@ To configure the SoapUI load test task you can choose to set the following prope
 * `outputFolder` : Set which folder results/reports are saved to
 
 ### mock properties
+
 * `projectFile` : Specified the name of the SoapUI project file to use
 * `mockService` : Specified the MockService to run
 * `port` : The local port to listen on, overrides the port configured for the MockService
@@ -197,6 +198,7 @@ soapui {
 }
 ```
 
+
 ## Complex Example
 
 There may be times when you have multiple test suites inside the same SoapUI project. You wouldn't want to maintain several Gradle projects, so the plugin uses convention mapping. This means you can have many tasks, but override the properties at runtime. Here's an example:
@@ -223,6 +225,28 @@ task testSuiteB(type: TestTask) {
 What you should notice in the example above is that we still use the `soapui` convention block with the nested `test` section. You may also have noticed that we have defined 2 new tasks of type `TestTask`. The `TestTask` is what runs the `SoapUITestCaseRunner`. The only difference between the 2 tasks is that they set their own value for `testSuite`. Through the magic of convention mapping the rest of the values are inherited.
 
 
+## Tons of TestSuites for enterprise-grade SoapUI test projects
+
+In case of many TestSuites you might want use such approach to reduce a lot of duplications in your build script code:
+
+```groovy
+import io.byteshifter.plugins.soapui.tasks.TestTask
+
+[
+    'SuiteA',
+    'SuiteB',
+    // ...
+    'SuiteZ',
+
+].each { suiteName ->
+    tasks.create(name: suiteName, type: TestTask) {
+        testSuite = suiteName
+    }
+}
+```
+Please, note: to run all of the TestSuites in this case, you can use only `gradle soaptest` command.
+
+
 ## SoapUI test runner and plugin versions mapping
 
 Previously, versions between soapui-gradle-plugin and SoapUI test runner was't synchronized.
@@ -246,6 +270,7 @@ But after version 5.0.1 we will try to keep them synchronized as soon as newer S
 ## License
 
 The project is licensed under the MIT license.
+
 
 ## Thanks
 
