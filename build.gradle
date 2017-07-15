@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        soapUIVersion = '5.2.1'
+        soapUIVersion = '5.3.0'
     }
 }
 
