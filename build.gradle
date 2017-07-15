@@ -8,15 +8,16 @@ plugins {
     id 'com.gradle.plugin-publish' version '0.9.1'
 }
 
+group 'io.byteshifter'
+version "$soapUiVersion"
+description 'Gradle plugin for testing SoapUI test projects using testrunner'
+
 apply from: "${rootDir}/gradle/compileGroovy.gradle"
 apply from: "${rootDir}/gradle/integTest.gradle"
 apply from: "${rootDir}/gradle/codenarc.gradle"
 apply from: "${rootDir}/gradle/jacoco.gradle"
 apply from: "${rootDir}/gradle/license.gradle"
-
-description 'Gradle plugin for running SoapUI projects'
-group 'io.byteshifter'
-version = "$soapUiVersion"
+apply from: "${rootDir}/gradle/pluginPortal.gradle"
 
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
@@ -62,20 +63,6 @@ configurations.all {
         dependencySubstitution {
             substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
             substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
-        }
-    }
-}
-
-pluginBundle {
-    website = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-    vcsUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-    description = 'Gradle plugin for running SoapUI projects'
-    tags = ['soapui', 'testing', 'soap', 'rest']
-
-    plugins {
-        soapuiPlugin {
-            id = 'io.byteshifter.soapui'
-            displayName = 'Gradle plugin for running SoapUI projects'
         }
     }
 }

@@ -1,28 +1,26 @@
 buildscript {
+    ext {
+        projectUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
+    }
     repositories {
-        if( project.hasProperty('internalArtifactRepository') ){
+        if (project.hasProperty('internalArtifactRepository')) {
             maven { url project.internalArtifactRepository }
         } else {
-            maven { url "https://plugins.gradle.org/m2/"}
+            maven { url 'https://plugins.gradle.org/m2/' }
         }
-    }
-    dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.0'
     }
 }
 
-apply plugin: "com.gradle.plugin-publish"
-
 pluginBundle {
-    website = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-    vcsUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-    description = 'Gradle plugin for running SoapUI projects'
-    tags = ['soapui', 'testing', 'soap', 'rest']
+    website = "$projectUrl"
+    vcsUrl = "$projectUrl"
+    description = "$description"
+    tags = ['soapui', 'testing', 'soap', 'rest', 'testrunner']
 
     plugins {
         soapuiPlugin {
-            id = 'io.byteshifter.soapui'
-            displayName = 'Gradle plugin for running SoapUI projects'
+            id = "${group}.soapui"
+            displayName = "$description"
         }
     }
 }
