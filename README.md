@@ -31,38 +31,58 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 This plugin has a fairly complex dependency tree. To use this plugin successfully we need to override some dependencies through forcing versions or completely substituting modules. As a result your build file will need to look like this:
 
-```
+```groovy
 buildscript {
-  repositories {
-    maven { url "https://plugins.gradle.org/m2/" }
-    maven { url "http://www.soapui.org/repository/maven2/" }
-    mavenCentral()
-  }
-  dependencies {
-    classpath ("gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.2") {
-        exclude module: 'cajo'
-        exclude group: 'org.codehaus.groovy'
-      }
-  }
-  configurations.all {
-      resolutionStrategy {
-          // force certain versions of dependencies (including transitive)
-          force 'com.jgoodies:forms:1.1.0',
+    ext {
+        soapUIVersion = '5.1.2'
+    }
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://www.soapui.org/repository/maven2/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("gradle.plugin.io.byteshifter:soapui-gradle-plugin:$soapUIVersion") {
+            exclude module: 'cajo'
+            exclude group: 'org.codehaus.groovy'
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            // force certain versions of dependencies (including transitive)
+            force 'com.jgoodies:forms:1.1.0',
                   'com.fifesoft:rsyntaxtextarea:2.5.8',
                   'xalan:xalan:2.7.2',
                   'joda-time:joda-time:2.0',
                   'org.slf4j:slf4j-api:1.6.2'
 
-          // add dependency substitution rules
-          dependencySubstitution {
-              substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
-              substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
-          }
-      }
-  }
+            // add dependency substitution rules
+            dependencySubstitution {
+                substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
+                substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
+            }
+        }
+    }
 }
 
 apply plugin: 'io.byteshifter.soapui'
+```
+
+But for most common and trivial use-cases, buildscript configuration could be much simpler:
+
+```groovy
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://smartbearsoftware.com/repository/maven2/' }
+        jcenter()
+    }
+    dependencies {
+        classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.1.2')
+    }
+}
+
+apply plugin: io.byteshifter.plugins.soapui.SoapUIPlugin
 ```
 
 [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.byteshifter.soapui)
@@ -222,6 +242,7 @@ task testSuiteB(type: TestTask) {
     testSuite = 'SuiteB'
 }
 ```
+
 What you should notice in the example above is that we still use the `soapui` convention block with the nested `test` section. You may also have noticed that we have defined 2 new tasks of type `TestTask`. The `TestTask` is what runs the `SoapUITestCaseRunner`. The only difference between the 2 tasks is that they set their own value for `testSuite`. Through the magic of convention mapping the rest of the values are inherited.
 
 
@@ -244,6 +265,7 @@ import io.byteshifter.plugins.soapui.tasks.TestTask
     }
 }
 ```
+
 Please, note: to run all of the TestSuites in this case, you can use only `gradle soaptest` command.
 
 
