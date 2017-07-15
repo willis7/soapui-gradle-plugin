@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        jettyVersion = '6.1.26'
+    }
+}
+
+targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_6
+
+repositories {
+    if (project.hasProperty('internalArtifactRepository')) {
+        maven { url project.internalArtifactRepository }
+    } else {
+        maven { url 'http://www.soapui.org/repository/maven2/' }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+wrapper {
+    gradleVersion = 2.12
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+
+    /**
+     * SoapUI dependencies
+     */
+    compile("com.smartbear.soapui:soapui:$soapUIVersion") {
+        exclude module: 'cajo'
+        exclude group: 'org.codehaus.groovy'
+    }
+
+    testCompile('com.netflix.nebula:nebula-test:3.1.0') {
+        exclude group: 'org.codehaus.groovy'
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        // force certain versions of dependencies (including transitive)
+        force 'com.jgoodies:forms:1.1.0',
+              'com.fifesoft:rsyntaxtextarea:2.5.8',
+              'xalan:xalan:2.7.2',
+              'joda-time:joda-time:2.0',
+              'org.slf4j:slf4j-api:1.6.2',
+              'org.spockframework:spock-core:1.0-groovy-2.4'
+
+        // add dependency substitution rules
+        dependencySubstitution {
+            substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
+            substitute module("jetty:jetty:$jettyVersion") with module("org.mortbay.jetty:jetty:$jettyVersion")
+        }
+    }
+}

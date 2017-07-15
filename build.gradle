@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        soapUiVersion = '5.1.2'
+        soapUIVersion = '5.1.2'
     }
 }
 
@@ -9,7 +9,7 @@ plugins {
 }
 
 group 'io.byteshifter'
-version "$soapUiVersion"
+version "$soapUIVersion"
 description 'Gradle plugin for testing SoapUI test projects using testrunner'
 
 apply from: "${rootDir}/gradle/compileGroovy.gradle"
@@ -18,55 +18,4 @@ apply from: "${rootDir}/gradle/codenarc.gradle"
 apply from: "${rootDir}/gradle/jacoco.gradle"
 apply from: "${rootDir}/gradle/license.gradle"
 apply from: "${rootDir}/gradle/pluginPortal.gradle"
-
-targetCompatibility = 1.6
-sourceCompatibility = 1.6
-
-repositories {
-    if( project.hasProperty('internalArtifactRepository') ){
-        maven { url project.internalArtifactRepository }
-    } else {
-        maven { url 'http://www.soapui.org/repository/maven2/' }
-        mavenCentral()
-        jcenter()
-    }
-}
-
-dependencies {
-    compile gradleApi()
-    compile localGroovy()
-
-    /**
-     * SoapUI dependencies
-     */
-    compile ("com.smartbear.soapui:soapui:$soapUiVersion") {
-        exclude module: 'cajo'
-        exclude group: 'org.codehaus.groovy'
-    }
-
-    testCompile ('com.netflix.nebula:nebula-test:3.1.0'){
-        exclude group: 'org.codehaus.groovy'
-    }
-}
-
-configurations.all {
-    resolutionStrategy {
-        // force certain versions of dependencies (including transitive)
-        force 'com.jgoodies:forms:1.1.0',
-                'com.fifesoft:rsyntaxtextarea:2.5.8',
-                'xalan:xalan:2.7.2',
-                'joda-time:joda-time:2.0',
-                'org.slf4j:slf4j-api:1.6.2',
-                'org.spockframework:spock-core:1.0-groovy-2.4'
-
-        // add dependency substitution rules
-        dependencySubstitution {
-            substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
-            substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
-        }
-    }
-}
-
-wrapper {
-    gradleVersion = 2.12
-}
+apply from: "${rootDir}/gradle/soapUIPlugin.gradle"
