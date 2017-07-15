@@ -15,7 +15,13 @@ pluginBundle {
     website = "$projectUrl"
     vcsUrl = "$projectUrl"
     description = "$description"
-    tags = ['soapui', 'testing', 'soap', 'rest', 'testrunner']
+    tags = [
+        'soapui',
+        'testing',
+        'soap',
+        'rest',
+        'testrunner',
+    ]
 
     plugins {
         soapuiPlugin {
