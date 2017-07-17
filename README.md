@@ -29,7 +29,9 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 
 ## Usage
 
-This plugin has a fairly complex dependency tree. To use this plugin successfully we need to override some dependencies through forcing versions or completely substituting modules. As a result your build file will need to look like this:
+This plugin has a fairly complex dependency tree. To use this plugin successfully we need to override some dependencies through forcing versions or completely substituting modules.
+See approach [SmartBear uses solve jar-hell problem in their maven plugin.](http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.1-RC/soapui-maven-plugin-5.3.1-RC.pom)
+As a result your build file can look like this:
 
 ```groovy
 buildscript {
@@ -42,25 +44,17 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("gradle.plugin.io.byteshifter:soapui-gradle-plugin:$soapUIVersion") {
-            exclude module: 'cajo'
-            exclude group: 'org.codehaus.groovy'
+        compile("com.smartbear.soapui:soapui:$soapUIVersion") {
+            exclude group: 'com.jgoodies', module: 'forms'
+            exclude group: 'com.jgoodies', module: 'looks'
+            exclude group: 'com.jgoodies', module: 'binding'
         }
     }
     configurations.all {
         resolutionStrategy {
-            // force certain versions of dependencies (including transitive)
-            force 'com.jgoodies:forms:1.1.0',
-                  'com.fifesoft:rsyntaxtextarea:2.5.8',
-                  'xalan:xalan:2.7.2',
-                  'joda-time:joda-time:2.0',
-                  'org.slf4j:slf4j-api:1.6.2'
-
-            // add dependency substitution rules
-            dependencySubstitution {
-                substitute module('jtidy:jtidy:r872-jdk15') with module('net.sf.jtidy:jtidy:r938')
-                substitute module('jetty:jetty:6.1.26') with module('org.mortbay.jetty:jetty:6.1.26')
-            }
+            force 'com.jgoodies:binding:2.0.1',
+                  'com.jgoodies:forms:1.0.7',
+                  'com.jgoodies:looks:2.2.0'
         }
     }
 }
@@ -73,9 +67,9 @@ But for most common and trivial use-cases, buildscript configuration could be mu
 ```groovy
 buildscript {
     repositories {
+        jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'http://smartbearsoftware.com/repository/maven2/' }
-        jcenter()
     }
     dependencies {
         classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.3.1-RC')
@@ -251,17 +245,15 @@ What you should notice in the example above is that we still use the `soapui` co
 In case of many TestSuites you might want use such approach to reduce a lot of duplications in your build script code:
 
 ```groovy
-import io.byteshifter.plugins.soapui.tasks.TestTask
-
 [
     'SuiteA',
     'SuiteB',
     // ...
     'SuiteZ',
 
-].each { suiteName ->
-    tasks.create(name: suiteName, type: TestTask) {
-        testSuite = suiteName
+].each { suite ->
+    tasks.create(name: suite, type: io.byteshifter.plugins.soapui.tasks.TestTask) {
+        testSuite = suite
     }
 }
 ```
@@ -278,7 +270,7 @@ But after version 5.0.1 we will try to keep them synchronized as soon as newer S
 | -------------------- | ------------------ |
 | 0.2                  | 5.0.1              |
 | 5.1.0                | 5.1.0              |
-| .....                | .....              |
+| ...                  | ...                |
 | 5.3.0                | 5.3.0              |
 | 5.3.1-RC             | 5.3.1-RC           |
 

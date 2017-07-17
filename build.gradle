@@ -1,7 +1,14 @@
 buildscript {
     ext {
         soapUIVersion = '5.3.1-RC'
+        jgoodiesBindingVersion = '2.0.1'
+        jgoodiesFormsVersion = '1.0.7'
+        jgoodiesLooksVersion = '2.2.0'
+        gradleApiVersion = 2.12
+        projectUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
+        info = 'Gradle plugin for running SoapUI test projects using testrunner'
     }
+    apply from: "$rootDir/gradle/repositories.gradle"
 }
 
 plugins {
@@ -13,10 +20,7 @@ plugins {
     id 'com.github.hierynomus.license' version '0.14.0'
 }
 
-group 'io.byteshifter'
-version "$soapUIVersion"
-description 'Gradle plugin for running SoapUI test projects using testrunner'
-
+apply from: "$rootDir/gradle/repositories.gradle"
 apply from: "$rootDir/gradle/compileGroovy.gradle"
 apply from: "$rootDir/gradle/integTest.gradle"
 apply from: "$rootDir/gradle/jacoco.gradle"
