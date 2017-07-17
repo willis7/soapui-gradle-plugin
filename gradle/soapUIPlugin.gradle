@@ -1,23 +1,7 @@
-buildscript {
-    ext {
-        jettyVersion = '6.1.26'
-    }
-}
-
 targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_6
 
-repositories {
-    if (project.hasProperty('internalArtifactRepository')) {
-        maven { url project.internalArtifactRepository }
-    } else {
-        maven { url 'http://smartbearsoftware.com/repository/maven2/' }
-        mavenCentral()
-        jcenter()
-    }
-}
-
 wrapper {
-    gradleVersion = 2.12
+    gradleVersion = gradleApiVersion
 }
 
 dependencies {
@@ -25,32 +9,31 @@ dependencies {
     compile localGroovy()
 
     /**
-     * SoapUI dependencies
+     * SoapUI dependencies.
+     * <br/>
+     *
+     * TODO: must be tested and can be reverted in case wont luck...
+     * Try use approach like SmartBear is using to solve jar-hell issue using for theirs maven plugin.
+     * @see: http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.0/soapui-maven-plugin-5.3.0.pom
      */
     compile("com.smartbear.soapui:soapui:$soapUIVersion") {
-        exclude module: 'cajo'                  // cajo-1.142.jar
-        exclude group: 'org.codehaus.groovy'    // groovy-all-2.1.7.jar
+        exclude group: 'com.jgoodies', module: 'forms'
+        exclude group: 'com.jgoodies', module: 'looks'
+        exclude group: 'com.jgoodies', module: 'binding'
+        exclude group: 'org.codehaus.groovy'    // SoapUI 5.3.0 uses groovy-all-2.1.7.jar
     }
 
     testCompile('com.netflix.nebula:nebula-test:3.1.0') {
-        exclude group: 'org.codehaus.groovy'    // groovy-all-2.1.7.jar
+        exclude group: 'org.codehaus.groovy'
     }
 }
 
 configurations.all {
     resolutionStrategy {
-        // force certain versions of dependencies (including transitive)
-        force 'com.jgoodies:forms:1.1.0',                       // forms-1.0.7.jar
-              'com.fifesoft:rsyntaxtextarea:2.5.8',             // rsyntaxtextarea-2.5.0.jar
-              'xalan:xalan:2.7.2',                              // xalan-2.7.1.jar
-              'joda-time:joda-time:2.0',                        // joda-time-1.6.2.jar
-              'org.slf4j:slf4j-api:1.6.2',                      // slf4j-api-1.6.1.jar
-              'org.spockframework:spock-core:1.0-groovy-2.4'    // groovy-all-2.1.7.jar
-
-        // add dependency substitution rules
-        dependencySubstitution {
-            substitute module('jtidy:jtidy:r872-jdk15')     with module('net.sf.jtidy:jtidy:r938')                  // jtidy-r872-jdk15.jar
-            substitute module("jetty:jetty:$jettyVersion")  with module("org.mortbay.jetty:jetty:$jettyVersion")    // jetty-6.1.26.jar
-        }
+        // force current SoapUI versions of dependencies + right spock version
+        force "com.jgoodies:binding:$jgoodiesBindingVersion",
+              "com.jgoodies:forms:$jgoodiesFormsVersion",
+              "com.jgoodies:looks:$jgoodiesLooksVersion",
+              'org.spockframework:spock-core:1.0-groovy-2.4'
     }
 }

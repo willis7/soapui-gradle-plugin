@@ -1,20 +1,10 @@
-buildscript {
-    ext {
-        projectUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-    }
-    repositories {
-        if (project.hasProperty('internalArtifactRepository')) {
-            maven { url project.internalArtifactRepository }
-        } else {
-            maven { url 'https://plugins.gradle.org/m2/' }
-        }
-    }
-}
+group = 'io.byteshifter'
+version = "${soapUIVersion}.RELEASE"
 
 pluginBundle {
-    website = "$projectUrl"
+    website = projectUrl
     vcsUrl = "${projectUrl}.git"
-    description = "$description"
+    description = info
     tags = [
         'soapui',
         'testing',
@@ -26,7 +16,7 @@ pluginBundle {
     plugins {
         soapuiPlugin {
             id = "${group}.soapui"
-            displayName = "$description"
+            displayName = info
         }
     }
 }
