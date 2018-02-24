@@ -30,13 +30,13 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 ## Usage
 
 This plugin has a fairly complex dependency tree. To use this plugin successfully we need to override some dependencies through forcing versions or completely substituting modules.
-See approach [SmartBear uses solve jar-hell problem in their maven plugin.](http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.1-RC/soapui-maven-plugin-5.3.1-RC.pom)
+See approach [SmartBear uses solve jar-hell problem in their maven plugin.](http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.0/soapui-maven-plugin-5.3.0.pom)
 As a result your build file can look like this:
 
 ```groovy
 buildscript {
     ext {
-        soapUIVersion = '5.3.1-RC'
+        soapUIVersion = '5.3.0.RELEASE'
     }
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
@@ -72,7 +72,7 @@ buildscript {
         maven { url 'http://smartbearsoftware.com/repository/maven2/' }
     }
     dependencies {
-        classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.3.1-RC')
+        classpath('gradle.plugin.io.byteshifter:soapui-gradle-plugin:5.3.0.RELEASE')
     }
 }
 
@@ -271,9 +271,14 @@ But after version 5.0.1 we will try to keep them synchronized as soon as newer S
 | 0.2                  | 5.0.1              |
 | 5.1.0                | 5.1.0              |
 | ...                  | ...                |
-| 5.3.0                | 5.3.0              |
 | 5.3.1-RC             | 5.3.1-RC           |
+| 5.3.0.RELEASE        | 5.3.0              |
 
+Using Open Source Version:
+We do recommend use SoapUI runner version 5.3.0 - it's last fully featured and quite stable version of SoapUI. 
+Version 5.3.1-RC1 was not released.
+Version 5.4.0 is very limited: LoadUI integration has been removed. 
+To create and run advanced load tests, use LoadUI Pro, which is part of the ReadyAPI application suite.
 
 ## Contribute
 

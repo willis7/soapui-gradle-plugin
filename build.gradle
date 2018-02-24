@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        soapUIVersion = '5.3.1-RC'
+        soapUIVersion = '5.3.0'
         jgoodiesBindingVersion = '2.0.1'
         jgoodiesFormsVersion = '1.0.7'
         jgoodiesLooksVersion = '2.2.0'

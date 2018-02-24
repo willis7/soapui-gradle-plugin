@@ -14,7 +14,7 @@ dependencies {
      *
      * TODO: must be tested and can be reverted in case wont luck...
      * Try use approach like SmartBear is using to solve jar-hell issue using for theirs maven plugin.
-     * @see: http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.1-RC/soapui-maven-plugin-5.3.1-RC.pom
+     * @see: http://smartbearsoftware.com/repository/maven2/com/smartbear/soapui/soapui-maven-plugin/5.3.0/soapui-maven-plugin-5.3.0.pom
      */
     compile("com.smartbear.soapui:soapui:$soapUIVersion") {
         exclude group: 'com.jgoodies', module: 'forms'
