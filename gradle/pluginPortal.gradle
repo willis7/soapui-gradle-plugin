@@ -2,9 +2,9 @@ group = 'io.byteshifter'
 version = "${soapUIVersion}.RELEASE"
 
 pluginBundle {
-    website = projectUrl
-    vcsUrl = "${projectUrl}.git"
-    description = info
+    website = "$project.projectUrl"
+    vcsUrl = "${project.projectUrl}.git"
+    description = "$project.info"
     tags = [
         'soapui',
         'testing',
@@ -16,7 +16,7 @@ pluginBundle {
     plugins {
         soapuiPlugin {
             id = "${group}.soapui"
-            displayName = info
+            displayName = "$project.info"
         }
     }
 }
