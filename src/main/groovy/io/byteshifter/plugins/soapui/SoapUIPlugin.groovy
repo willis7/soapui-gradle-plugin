@@ -93,6 +93,7 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.junitReport = { soapUIPluginExtension.test.junitReport }
             conventionMapping.testFailIgnore = { soapUIPluginExtension.test.testFailIgnore }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.test.saveAfterRun }
+            conventionMapping.environment  = { soapUIPluginExtension.test.environment  }
         }
     }
 

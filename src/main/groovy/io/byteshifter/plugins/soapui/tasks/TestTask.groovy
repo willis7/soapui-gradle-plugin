@@ -25,6 +25,7 @@ package io.byteshifter.plugins.soapui.tasks
 
 import com.eviware.soapui.SoapUI
 import com.eviware.soapui.tools.SoapUITestCaseRunner
+import com.eviware.soapui.SoapUIProTestCaseRunner
 import org.gradle.api.tasks.Optional
 
 /**
@@ -139,6 +140,12 @@ class TestTask extends SoapUITask {
     boolean saveAfterRun
 
     /**
+     * set environment for SoapUi Pro
+     */
+    @Optional
+    String environment;
+
+    /**
      * SoapUI Properties.
      */
     Properties soapuiProperties
@@ -152,6 +159,8 @@ class TestTask extends SoapUITask {
     void executeAction() {
         SoapUITestCaseRunner runner = new MySoapUITestCaseRunner(
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
+        SoapUIProTestCaseRunner runnerPro = new SoapUIProTestCaseRunner(
+                'soapUIPro ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
         runner.setProjectFile( getProjectFile() )
 
         if ( getEndpoint() ) {
@@ -216,6 +225,9 @@ class TestTask extends SoapUITask {
 
         runner.saveAfterRun = getSaveAfterRun()
         logger.debug "Runner saveAfterRun: " + getSaveAfterRun()
+
+        runnerPro.environment = getEnvironment()
+        logger.debug "Runner environment: " + getEnvironment()
 
         if ( getSettingsFile() ) {
             runner.settingsFile = getSettingsFile()
