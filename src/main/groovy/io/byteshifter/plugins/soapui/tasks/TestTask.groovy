@@ -143,7 +143,7 @@ class TestTask extends SoapUITask {
      * set environment for SoapUi Pro
      */
     @Optional
-    String environment;
+    String environment
 
     /**
      * SoapUI Properties.
@@ -162,6 +162,7 @@ class TestTask extends SoapUITask {
         SoapUIProTestCaseRunner runnerPro = new SoapUIProTestCaseRunner(
                 'soapUIPro ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
         runner.setProjectFile( getProjectFile() )
+        runnerPro.setProjectFile( getProjectFile() )
 
         if ( getEndpoint() ) {
             runner.endpoint = getEndpoint()

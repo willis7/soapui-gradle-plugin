@@ -54,6 +54,7 @@ class TestTaskSpec extends Specification {
             interactive = false
             testFailIgnore = true
             saveAfterRun = false
+            environment = 'dev'
         }
 
         then:
@@ -69,6 +70,7 @@ class TestTaskSpec extends Specification {
         task.interactive == false
         task.testFailIgnore == true
         task.saveAfterRun == false
+        task.environment == 'dev'
     }
 
     //TODO Convert to integTest
@@ -85,6 +87,7 @@ class TestTaskSpec extends Specification {
             interactive = false
             testFailIgnore = true
             saveAfterRun = false
+            environment = 'dev'
         }
         task.run()
 
