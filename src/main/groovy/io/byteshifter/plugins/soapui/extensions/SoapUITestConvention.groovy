@@ -53,4 +53,5 @@ class SoapUITestConvention {
     boolean saveAfterRun
     boolean printReport
     boolean testFailIgnore
+    boolean environment
 }
