@@ -6,12 +6,13 @@ buildscript {
         jgoodiesLooksVersion = '2.2.0'
         gradleApiVersion = 2.12
         projectUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-        info = 'Gradle plugin for running SoapUI test projects using testrunner'
+        description = 'Gradle plugin for running SoapUI test projects using testrunner'
     }
     apply from: "$rootDir/gradle/repositories.gradle"
 }
 
 plugins {
+    id 'idea'
     id 'groovy'
     id 'jacoco'
     id 'codenarc'

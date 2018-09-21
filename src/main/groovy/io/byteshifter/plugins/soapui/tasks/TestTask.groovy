@@ -154,47 +154,47 @@ class TestTask extends SoapUITask {
                 'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
         runner.setProjectFile( getProjectFile() )
 
-        if ( getEndpoint() ) {
+        if (getEndpoint()) {
             runner.endpoint = getEndpoint()
             logger.debug "Runner endpoint: " + getEndpoint()
         }
 
-        if ( getTestSuite() ) {
+        if (getTestSuite()) {
             runner.testSuite = getTestSuite()
             logger.debug "Runner testSuite: " + getTestSuite()
         }
 
-        if ( getTestCase() ) {
+        if (getTestCase()) {
             runner.testCase = getTestCase()
             logger.debug "Runner testCase: " + getTestCase()
         }
 
-        if ( getUsername() ) {
+        if (getUsername()) {
             runner.username = getUsername()
             logger.debug "Runner username: " + getUsername()
         }
 
-        if ( getPassword() ) {
+        if (getPassword()) {
             runner.password = getPassword()
             logger.debug "Runner password: " + getPassword()
         }
 
-        if ( getWssPasswordType() ) {
+        if (getWssPasswordType()) {
             runner.wssPasswordType = getWssPasswordType()
             logger.debug "Runner wssPasswordType: " + getWssPasswordType()
         }
 
-        if ( getDomain() ) {
+        if (getDomain()) {
             runner.domain = getDomain()
             logger.debug "Runner domain: " + getDomain()
         }
 
-        if ( getHost() ) {
+        if (getHost()) {
             runner.host = getHost()
             logger.debug "Runner host: " + getHost()
         }
 
-        if ( getOutputFolder() ) {
+        if (getOutputFolder()) {
             runner.outputFolder = getOutputFolder()
             logger.debug "Runner outputFolder: " + getOutputFolder()
         }
@@ -217,32 +217,32 @@ class TestTask extends SoapUITask {
         runner.saveAfterRun = getSaveAfterRun()
         logger.debug "Runner saveAfterRun: " + getSaveAfterRun()
 
-        if ( getSettingsFile() ) {
+        if (getSettingsFile()) {
             runner.settingsFile = getSettingsFile()
             logger.debug "Runner settingsFile: " + getSettingsFile()
         }
 
-        if ( getProjectPassword() ) {
+        if (getProjectPassword()) {
             runner.projectPassword = getProjectPassword()
             logger.debug "Runner projectPassword: " + getProjectPassword()
         }
 
-        if ( getSettingsPassword() ) {
+        if (getSettingsPassword()) {
             runner.soapUISettingsPassword = getSettingsPassword()
             logger.debug "Runner soapUISettingsPassword: " + getSettingsPassword()
         }
 
-        if ( getGlobalProperties() ) {
+        if (getGlobalProperties()) {
             runner.globalProperties = getGlobalProperties()
             logger.debug "Runner getGlobalProperties: " + getGlobalProperties()
         }
 
-        if ( getProjectProperties() ) {
+        if (getProjectProperties()) {
             runner.projectProperties = getProjectProperties()
             logger.debug "Runner projectProperties: " + getProjectProperties()
         }
 
-        if ( getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
+        if (getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
             getSoapuiProperties().keySet().each { key ->
                 logger.debug "Setting ${key} value ${getSoapuiProperties().getProperty("${key}")}"
                 System.setProperty((String) key, getSoapuiProperties().getProperty((String) key))
@@ -258,11 +258,8 @@ class TestTask extends SoapUITask {
 /*
  * This class is a hack, see https://discuss.gradle.org/t/classpath-hell-soapui-and-gradle-api-logging-conflicts/8830/6?u=sion_williams
  */
-public class MySoapUITestCaseRunner extends SoapUITestCaseRunner {
-    public MySoapUITestCaseRunner(){super()}
-    public MySoapUITestCaseRunner(String title){super(title)}
-
-    @Override
-    void initGroovyLog() {
-    }
+class MySoapUITestCaseRunner extends SoapUITestCaseRunner {
+    MySoapUITestCaseRunner() { super() }
+    MySoapUITestCaseRunner(String title) { super(title) }
+    @Override void initGroovyLog() { }
 }

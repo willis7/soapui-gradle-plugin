@@ -5,22 +5,22 @@ language: groovy
 jdk: oraclejdk8
 
 before_cache:
-- bash -c 'for lockFile in $(find ~/.gradle -name "*.lock"); do sudo rm -rf $lockFile ; done'
+- for lockFile in $(find ~/.gradle -name "*.lock");
+    do sudo rm -rf $lockFile;
+  done
 
 cache:
   directories:
   - $HOME/.m2
   - $HOME/.gradle
-  - $HOME/.docker
 
 addons:
   apt:
-    update: true
     packages:
     - bash
 
 install: true
-script: bash gradlew clean build
+script: ./gradlew clean build
 
-after_success: bash gradlew jacocoTestReport coveralls
-after_failure: bash gradlew clean check --debug
+after_success: ./gradlew jacocoTestReport coveralls
+after_failure: ./gradlew clean check --debug
