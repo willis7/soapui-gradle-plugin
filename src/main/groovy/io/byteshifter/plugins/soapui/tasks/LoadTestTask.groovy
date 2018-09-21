@@ -23,8 +23,7 @@
  */
 package io.byteshifter.plugins.soapui.tasks
 
-import com.eviware.soapui.SoapUI
-import com.eviware.soapui.tools.SoapUILoadTestRunner
+import com.eviware.soapui.SoapUIProLoadTestRunner
 import org.gradle.api.tasks.Optional
 
 /**
@@ -136,6 +135,12 @@ class LoadTestTask extends SoapUITask {
      */
     boolean saveAfterRun
 
+    // pro
+    @Optional String environment
+    @Optional String reportName
+    @Optional String[] reportFormats
+    @Optional boolean openReport
+
     /**
      * SoapUI Properties.
      */
@@ -147,9 +152,8 @@ class LoadTestTask extends SoapUITask {
     }
 
     @Override
-    public void executeAction() {
-        SoapUILoadTestRunner runner = new SoapUILoadTestRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle LoadTest Runner')
+    void executeAction() {
+        SoapUIProLoadTestRunner runner = new SoapUIProLoadTestRunner('soapUI Pro 5.1.2 Gradle LoadTest Runner')
         runner.projectFile = projectFile
 
         if (endpoint) {
@@ -225,6 +229,16 @@ class LoadTestTask extends SoapUITask {
                 System.setProperty((String) key, soapuiProperties.getProperty((String) key))
             }
         }
+
+        // pro
+        if (getEnvironment()) runner.environment = getEnvironment()
+        logger.debug "environment: ${getEnvironment()}"
+        runner.reportName = getReportName() ?: 'defaultReportName'
+        logger.debug "reportName: ${getReportName()}"
+        if (getReportFormats()) runner.reportFormats = getReportFormats() ?: ['TXT']
+        logger.debug "reportFormats: ${getReportFormats()}"
+        if (isOpenReport()) runner.openReport = isOpenReport()
+        logger.debug "openReport: ${isOpenReport()}"
 
         runner.run()
     }

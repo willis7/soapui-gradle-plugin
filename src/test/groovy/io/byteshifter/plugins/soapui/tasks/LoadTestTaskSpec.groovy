@@ -49,6 +49,10 @@ class LoadTestTaskSpec extends Specification {
         when:
         project.task(TASK_NAME, type: LoadTestTask) {
             projectFile = 'sample-soapui-project.xml'
+            environment = 'test'
+            reportName = 'test-report-name'
+            reportFormats = ['PDF', 'XLS', 'HTML', 'RTF', 'CSV', 'TXT', 'XML']
+            openReport = false
         }
         then:
         Task task = project.tasks.findByName(TASK_NAME)

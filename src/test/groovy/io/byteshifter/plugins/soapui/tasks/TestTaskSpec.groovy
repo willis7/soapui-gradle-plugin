@@ -54,6 +54,10 @@ class TestTaskSpec extends Specification {
             interactive = false
             testFailIgnore = true
             saveAfterRun = false
+            environment = 'test'
+            reportName = 'test-report-name'
+            reportFormats = ['PDF', 'XLS', 'HTML', 'RTF', 'CSV', 'TXT', 'XML']
+            openReport = false
         }
 
         then:

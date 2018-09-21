@@ -1,12 +1,13 @@
 buildscript {
     ext {
-        soapUIVersion = '5.3.0'
+        soapUIVersion = '5.1.2'
+        findbugsVersion = '2.0.0'
         jgoodiesBindingVersion = '2.0.1'
         jgoodiesFormsVersion = '1.0.7'
         jgoodiesLooksVersion = '2.2.0'
         gradleApiVersion = 2.12
         projectUrl = 'https://github.com/byte-shifter-ltd/soapui-gradle-plugin'
-        info = 'Gradle plugin for running SoapUI test projects using testrunner'
+        description = 'Gradle plugin for running SoapUI test projects using testrunner'
     }
     apply from: "$rootDir/gradle/repositories.gradle"
 }

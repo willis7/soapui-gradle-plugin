@@ -49,6 +49,8 @@ class MockServiceTaskSpec extends Specification {
         when:
         project.task(TASK_NAME, type: MockServiceTask) {
             projectFile = 'sample-soapui-project.xml'
+            outputFolder = '/tmp'
+            openReport = false
         }
         then:
         Task task = project.tasks.findByName(TASK_NAME)
