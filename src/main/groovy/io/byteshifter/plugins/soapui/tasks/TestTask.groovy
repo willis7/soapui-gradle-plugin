@@ -23,8 +23,7 @@
  */
 package io.byteshifter.plugins.soapui.tasks
 
-import com.eviware.soapui.SoapUI
-import com.eviware.soapui.tools.SoapUITestCaseRunner
+import com.eviware.soapui.SoapUIProTestCaseRunner
 import org.gradle.api.tasks.Optional
 
 /**
@@ -143,6 +142,12 @@ class TestTask extends SoapUITask {
      */
     Properties soapuiProperties
 
+    // pro
+    @Optional String environment
+    @Optional String reportName
+    @Optional String[] reportFormats
+    @Optional boolean openReport
+
     TestTask() {
         super('Runs soapUI functional tests')
     }
@@ -150,51 +155,50 @@ class TestTask extends SoapUITask {
 
     @Override
     void executeAction() {
-        SoapUITestCaseRunner runner = new MySoapUITestCaseRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle TestCase Runner')
+        SoapUIProTestCaseRunner runner = new MySoapUITestCaseRunner('soapUI Pro 5.1.2 Gradle TestCase Runner')
         runner.setProjectFile( getProjectFile() )
 
-        if ( getEndpoint() ) {
+        if (getEndpoint()) {
             runner.endpoint = getEndpoint()
             logger.debug "Runner endpoint: " + getEndpoint()
         }
 
-        if ( getTestSuite() ) {
+        if (getTestSuite()) {
             runner.testSuite = getTestSuite()
             logger.debug "Runner testSuite: " + getTestSuite()
         }
 
-        if ( getTestCase() ) {
+        if (getTestCase()) {
             runner.testCase = getTestCase()
             logger.debug "Runner testCase: " + getTestCase()
         }
 
-        if ( getUsername() ) {
+        if (getUsername()) {
             runner.username = getUsername()
             logger.debug "Runner username: " + getUsername()
         }
 
-        if ( getPassword() ) {
+        if (getPassword()) {
             runner.password = getPassword()
             logger.debug "Runner password: " + getPassword()
         }
 
-        if ( getWssPasswordType() ) {
+        if (getWssPasswordType()) {
             runner.wssPasswordType = getWssPasswordType()
             logger.debug "Runner wssPasswordType: " + getWssPasswordType()
         }
 
-        if ( getDomain() ) {
+        if (getDomain()) {
             runner.domain = getDomain()
             logger.debug "Runner domain: " + getDomain()
         }
 
-        if ( getHost() ) {
+        if (getHost()) {
             runner.host = getHost()
             logger.debug "Runner host: " + getHost()
         }
 
-        if ( getOutputFolder() ) {
+        if (getOutputFolder()) {
             runner.outputFolder = getOutputFolder()
             logger.debug "Runner outputFolder: " + getOutputFolder()
         }
@@ -217,39 +221,48 @@ class TestTask extends SoapUITask {
         runner.saveAfterRun = getSaveAfterRun()
         logger.debug "Runner saveAfterRun: " + getSaveAfterRun()
 
-        if ( getSettingsFile() ) {
+        if (getSettingsFile()) {
             runner.settingsFile = getSettingsFile()
             logger.debug "Runner settingsFile: " + getSettingsFile()
         }
 
-        if ( getProjectPassword() ) {
+        if (getProjectPassword()) {
             runner.projectPassword = getProjectPassword()
             logger.debug "Runner projectPassword: " + getProjectPassword()
         }
 
-        if ( getSettingsPassword() ) {
+        if (getSettingsPassword()) {
             runner.soapUISettingsPassword = getSettingsPassword()
             logger.debug "Runner soapUISettingsPassword: " + getSettingsPassword()
         }
 
-        if ( getGlobalProperties() ) {
+        if (getGlobalProperties()) {
             runner.globalProperties = getGlobalProperties()
             logger.debug "Runner getGlobalProperties: " + getGlobalProperties()
         }
 
-        if ( getProjectProperties() ) {
+        if (getProjectProperties()) {
             runner.projectProperties = getProjectProperties()
             logger.debug "Runner projectProperties: " + getProjectProperties()
         }
 
-        if ( getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
+        if (getSoapuiProperties() && getSoapuiProperties().size() > 0 ) {
             getSoapuiProperties().keySet().each { key ->
                 logger.debug "Setting ${key} value ${getSoapuiProperties().getProperty("${key}")}"
                 System.setProperty((String) key, getSoapuiProperties().getProperty((String) key))
             }
         }
 
-        runner.getLog().info('log me!')
+        // pro
+        if (getEnvironment()) runner.environment = getEnvironment()
+        logger.debug "environment: ${getEnvironment()}"
+        if (getReportName()) runner.reportName = getReportName() ?: 'defaultReportName'
+        logger.debug "reportName: ${getReportName()}"
+        if (getReportFormats()) runner.reportFormats = getReportFormats() ?: ['TXT']
+        logger.debug "reportFormats: ${getReportFormats()}"
+        if (isOpenReport()) runner.openReport = isOpenReport()
+        logger.debug "openReport: ${isOpenReport()}"
+
         runner.run()
         logger.info "SoapUI test case runner complete."
     }
@@ -258,11 +271,8 @@ class TestTask extends SoapUITask {
 /*
  * This class is a hack, see https://discuss.gradle.org/t/classpath-hell-soapui-and-gradle-api-logging-conflicts/8830/6?u=sion_williams
  */
-public class MySoapUITestCaseRunner extends SoapUITestCaseRunner {
-    public MySoapUITestCaseRunner(){super()}
-    public MySoapUITestCaseRunner(String title){super(title)}
-
-    @Override
-    void initGroovyLog() {
-    }
+class MySoapUITestCaseRunner extends SoapUIProTestCaseRunner {
+    MySoapUITestCaseRunner() { super() }
+    MySoapUITestCaseRunner(String title) { super(title) }
+    @Override void initGroovyLog() { }
 }

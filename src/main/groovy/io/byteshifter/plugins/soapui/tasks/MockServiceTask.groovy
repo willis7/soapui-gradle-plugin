@@ -23,8 +23,7 @@
  */
 package io.byteshifter.plugins.soapui.tasks
 
-import com.eviware.soapui.SoapUI
-import com.eviware.soapui.tools.SoapUIMockServiceRunner
+import com.eviware.soapui.SoapUIProMockServiceRunner
 import org.gradle.api.tasks.Optional
 
 /**
@@ -86,15 +85,19 @@ class MockServiceTask extends SoapUITask {
     @Optional
     Properties soapuiProperties
 
+    // pro
+    @Optional String outputFolder
+    @Optional boolean openReport
+
     MockServiceTask() {
         super('Runs soapUI mock service')
     }
 
     @Override
-    public void executeAction() {
+    void executeAction() {
 
-        SoapUIMockServiceRunner runner = new MySoapUIMockServiceRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle MockService Runner')
+        SoapUIProMockServiceRunner runner =
+            new MySoapUIMockServiceRunner('soapUI Pro 5.1.2 Gradle MockService Runner')
         runner.projectFile = projectFile
 
 
@@ -140,6 +143,12 @@ class MockServiceTask extends SoapUITask {
             }
         }
 
+        // pro
+        if (getOutputFolder()) runner.outputFolder = getOutputFolder()
+        logger.debug "outputFolder: ${getOutputFolder()}"
+        if (isOpenReport()) runner.openReport = isOpenReport()
+        logger.debug "openReport: ${isOpenReport()}"
+
         runner.run()
     }
 }
@@ -148,11 +157,8 @@ class MockServiceTask extends SoapUITask {
  * This class is a hack
  * see https://discuss.gradle.org/t/classpath-hell-soapui-and-gradle-api-logging-conflicts/8830/6?u=sion_williams
  */
-public class MySoapUIMockServiceRunner extends SoapUIMockServiceRunner {
-    public MySoapUIMockServiceRunner(){super()}
-    public MySoapUIMockServiceRunner(String title){super(title)}
-
-    @Override
-    void initGroovyLog() {
-    }
+class MySoapUIMockServiceRunner extends SoapUIProMockServiceRunner {
+    MySoapUIMockServiceRunner() { super() }
+    MySoapUIMockServiceRunner(String title) { super(title) }
+    @Override void initGroovyLog() { }
 }

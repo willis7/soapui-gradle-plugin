@@ -23,8 +23,7 @@
  */
 package io.byteshifter.plugins.soapui.tasks
 
-import com.eviware.soapui.SoapUI
-import com.eviware.soapui.tools.SoapUISecurityTestRunner
+import com.eviware.soapui.SoapUIProSecurityTestRunner
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
@@ -152,15 +151,21 @@ class SecurityTestTask extends SoapUITask {
     @Optional
     String securityTest
 
+    // pro
+    @Optional String environment      // ("E", true, "Sets the environment")
+    @Optional String reportName       // ("R", true, "Report to Generate");
+    @Optional String[] reportFormats  // ("F", true, "Report format. Used with -R. Valid options PDF, XLS, HTML, RTF, CSV, TXT, and XML (comma-separated)");
+    @Optional boolean openReport      // ("o", false, "Opens generated report(s) in a browser");
+
     SecurityTestTask() {
         super('Runs soapUI security tests')
     }
 
     @TaskAction
-    public void executeAction() {
+    void executeAction() {
 
-        SoapUISecurityTestRunner runner = new SoapUISecurityTestRunner(
-                'soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Security Test Runner')
+        SoapUIProSecurityTestRunner runner =
+            new SoapUIProSecurityTestRunner('soapUI Pro 5.1.2 Gradle Security Test Runner')
         runner.projectFile = projectFile
 
         if (endpoint) {
@@ -235,6 +240,16 @@ class SecurityTestTask extends SoapUITask {
         if (securityTest && securityTest.length() > 0) {
             runner.securityTestName = securityTest
         }
+
+        // pro
+        if (getEnvironment()) runner.environment = getEnvironment()
+        logger.debug "environment: ${getEnvironment()}"
+        if (getReportName()) runner.reportName = getReportName() ?: 'defaultReportName'
+        logger.debug "reportName: ${getReportName()}"
+        if (getReportFormats()) runner.reportFormats = getReportFormats() ?: ['TXT']
+        logger.debug "reportFormats: ${getReportFormats()}"
+        if (isOpenReport()) runner.openReport = isOpenReport()
+        logger.debug "openReport: ${isOpenReport()}"
 
         runner.run()
     }

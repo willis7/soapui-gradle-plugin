@@ -28,7 +28,6 @@ package io.byteshifter.plugins.soapui.extensions
  * @author Sion Williams
  */
 class SoapUIPluginExtension {
-
     // the following convention properties are added dynamically when the plugin is applied:
     // SoapUIToolConvention tool
     // SoapUISecurityConvention security

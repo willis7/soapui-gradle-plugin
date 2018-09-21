@@ -55,4 +55,10 @@ class SoapUISecurityConvention {
     boolean printReport
     String outputFolder
     boolean testFailIgnore
+
+    // pro
+    String environment      // ("E", true, "Sets the environment")
+    String reportName       // ("R", true, "Report to Generate");
+    String[] reportFormats  // ("F", true, "Report format. Used with -R. Valid options PDF, XLS, HTML, RTF, CSV, TXT, and XML (comma-separated)");
+    boolean openReport      // ("o", false, "Opens generated report(s) in a browser");
 }

@@ -93,6 +93,11 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.junitReport = { soapUIPluginExtension.test.junitReport }
             conventionMapping.testFailIgnore = { soapUIPluginExtension.test.testFailIgnore }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.test.saveAfterRun }
+            // pro
+            conventionMapping.environment = { soapUIPluginExtension.test.environment }
+            conventionMapping.reportName = { soapUIPluginExtension.test.reportName }
+            conventionMapping.reportFormats = { soapUIPluginExtension.test.reportFormats }
+            conventionMapping.openReport = { soapUIPluginExtension.test.openReport }
         }
     }
 
@@ -134,6 +139,9 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.projectProperties = { soapUIPluginExtension.mock.projectProperties }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.mock.saveAfterRun }
             conventionMapping.soapuiProperties = { soapUIPluginExtension.mock.soapuiProperties }
+            // pro
+            conventionMapping.outputFolder = { soapUIPluginExtension.mock.outputFolder }
+            conventionMapping.openReport = { soapUIPluginExtension.mock.openReport }
         }
     }
 
@@ -165,6 +173,11 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.loadTest = { soapUIPluginExtension.load.loadTest }
             conventionMapping.limit = { soapUIPluginExtension.load.limit }
             conventionMapping.threadCount = { soapUIPluginExtension.load.threadCount }
+            // pro
+            conventionMapping.environment = { soapUIPluginExtension.test.environment }
+            conventionMapping.reportName = { soapUIPluginExtension.test.reportName }
+            conventionMapping.reportFormats = { soapUIPluginExtension.test.reportFormats }
+            conventionMapping.openReport = { soapUIPluginExtension.test.openReport }
         }
     }
 
@@ -200,6 +213,11 @@ class SoapUIPlugin implements Plugin<Project> {
             conventionMapping.junitReport = { soapUIPluginExtension.security.junitReport }
             conventionMapping.testFailIgnore = { soapUIPluginExtension.security.testFailIgnore }
             conventionMapping.saveAfterRun = { soapUIPluginExtension.security.saveAfterRun }
+            // pro
+            conventionMapping.environment = { soapUIPluginExtension.security.environment }
+            conventionMapping.reportName = { soapUIPluginExtension.security.reportName }
+            conventionMapping.reportFormats = { soapUIPluginExtension.security.reportFormats }
+            conventionMapping.openReport = { soapUIPluginExtension.security.openReport }
         }
     }
 }

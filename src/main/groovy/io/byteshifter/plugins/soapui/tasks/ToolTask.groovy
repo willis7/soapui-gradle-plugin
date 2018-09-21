@@ -23,8 +23,7 @@
  */
 package io.byteshifter.plugins.soapui.tasks
 
-import com.eviware.soapui.SoapUI
-import com.eviware.soapui.tools.SoapUIToolRunner
+import com.eviware.soapui.SoapUIProToolRunner
 import org.gradle.api.tasks.Optional
 
 /**
@@ -66,7 +65,7 @@ class ToolTask extends SoapUITask {
     @Override
     void executeAction() {
 
-        SoapUIToolRunner runner = new SoapUIToolRunner('soapUI ' + SoapUI.SOAPUI_VERSION + ' Gradle Tool Runner')
+        SoapUIProToolRunner runner = new SoapUIProToolRunner('soapUI Pro 5.1.2 Gradle Tool Runner')
         runner.projectFile = projectFile
 
         if (iface) {

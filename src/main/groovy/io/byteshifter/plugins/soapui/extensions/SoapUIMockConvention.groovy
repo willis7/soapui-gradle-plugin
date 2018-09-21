@@ -38,4 +38,9 @@ class SoapUIMockConvention {
     String[] projectProperties
     boolean saveAfterRun
     Properties soapuiProperties
+
+    // pro:
+    // ("g", false, "Sets the output to include Coverage HTML reports")
+    String outputFolder // ("f", true, "Sets the output folder to export results to")
+    boolean openReport  // ("o", false, "Opens the Coverage Report in a browser (with the -g option)")
 }

@@ -53,4 +53,12 @@ class SoapUITestConvention {
     boolean saveAfterRun
     boolean printReport
     boolean testFailIgnore
+
+    // pro
+    // ("g", false, "Sets the output to include Coverage HTML reports");
+    // ("l", true, "Installs an activated SoapUI Pro license file")
+    String environment      // ("E", true, "Sets the environment")
+    String reportName       // ("R", true, "Report to Generate")
+    String[] reportFormats  // ("F", true, "Report format. Used with -R. Valid options PDF, XLS, HTML, RTF, CSV, TXT, and XML (comma-separated)")
+    boolean openReport      // ("o", false, "Opens generated report(s) in a browser")
 }
