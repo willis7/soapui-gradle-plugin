@@ -23,17 +23,8 @@
  */
 package io.byteshifter.plugins.soapui
 
-import io.byteshifter.plugins.soapui.extensions.SoapUILoadConvention
-import io.byteshifter.plugins.soapui.extensions.SoapUIMockConvention
-import io.byteshifter.plugins.soapui.extensions.SoapUIPluginExtension
-import io.byteshifter.plugins.soapui.extensions.SoapUISecurityConvention
-import io.byteshifter.plugins.soapui.extensions.SoapUITestConvention
-import io.byteshifter.plugins.soapui.extensions.SoapUIToolConvention
-import io.byteshifter.plugins.soapui.tasks.LoadTestTask
-import io.byteshifter.plugins.soapui.tasks.MockServiceTask
-import io.byteshifter.plugins.soapui.tasks.SecurityTestTask
-import io.byteshifter.plugins.soapui.tasks.TestTask
-import io.byteshifter.plugins.soapui.tasks.ToolTask
+import io.byteshifter.plugins.soapui.extensions.*
+import io.byteshifter.plugins.soapui.tasks.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

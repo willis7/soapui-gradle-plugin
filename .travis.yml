@@ -1,5 +1,9 @@
 env:
-- TERM=dumb
+  matrix:
+  - TERM=dumb
+  global:
+  - secure: o7bQffEMsStS0X7oWJ/i7QWeHoZTqQASLYx0PsfROyTCwVaNnSjuj5jsEIpO2wSppOSVD+tu6LOiCG06XvwWFA79hZh0DzPPq1nbVof4PhScNljYegCG7X6Nihrn38HOj9oxIZ6CJEZPaeyg1OzAPGs0Kir/MDiCcV3W9NDMwHo=
+  - secure: VHuocNAOIkVh/TcDnTkXQSNBQtstJsCnfsiry4ROk4NCU3TkwkS1VLakhsErwEI1Ri5rl8jSOsYtOUBDfRiJq6nHEg7ilVERz9BVDhTmri6QlQv46OunBDWUrsqJjB1Q6AsEPBl0L1dqTe2RrP3AvmCXglfeFZKoEbWlmDpGSWE=
 
 language: groovy
 jdk: oraclejdk8
@@ -22,5 +26,11 @@ addons:
 install: true
 script: ./gradlew clean build
 
-after_success: ./gradlew jacocoTestReport coveralls
-after_failure: ./gradlew clean check --debug
+after_failure:
+- ./gradlew clean check --debug
+after_success:
+- bash gradlew jacocoTestReport coveralls
+# publishing plugin
+- test -n "$TRAVIS_TAG" && echo "gradle.publish.key=${GRADLE_PUBLISH_KEY}"       >> ~/.gradle/gradle.properties
+- test -n "$TRAVIS_TAG" && echo "gradle.publish.secret=${GRADLE_PUBLISH_SECRET}" >> ~/.gradle/gradle.properties
+- test -n "$TRAVIS_TAG" && ./gradlew publishPlugin -i

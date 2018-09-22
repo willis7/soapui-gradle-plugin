@@ -1,0 +1,10 @@
+apply plugin: 'codenarc'
+
+codenarc {
+  configFile = file("$projectDir/config/codenarc/codenarc.xml")
+  //reportFormat = 'console'
+  //reportFormat = 'html'
+  reportFormat = 'text'
+  ignoreFailures = false
+  reportsDir = file("$buildDir/codenarc")
+}

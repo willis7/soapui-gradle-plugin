@@ -30,7 +30,7 @@ import nebula.test.functional.ExecutionResult
  * @author Sion Williams
  * @author Iain Adams
  */
-class SoapuiPluginIntegSpec extends IntegrationSpec   {
+class SoapuiPluginIntegSpec extends IntegrationSpec {
 
     def setup() {
         copyResources('TemperatureConversions-soapui-project_PASS.xml', 'example-pass.xml')
