@@ -39,7 +39,8 @@ As a result your build file can look like this:
 ```groovy
 buildscript {
     ext {
-        soapUIVersion = '5.3.0.RELEASE'
+        soapUIVersion = '5.3.0.RELEASE' // open source version
+        // soapUIVersion = '5.1.2.PRO-RELEASE' // pro version
     }
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
