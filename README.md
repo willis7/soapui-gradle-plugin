@@ -291,7 +291,9 @@ To create and run advanced load tests, use LoadUI Pro, which is part of the Read
 The project is licensed under the MIT license.
 
 
+<!-- nothing to thanks, JetBrains don't wanna give open-source licene for that project anymore..
 ## Thanks
 
 For the Open Source licence ....
 <img src="https://cdn.pbrd.co/images/8eFlobE.png" width="150" height="75" />
+-->
