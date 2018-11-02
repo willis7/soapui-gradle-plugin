@@ -1,4 +1,4 @@
-version = "${soapUIVersion}.PRO-SNAPSHOT"
+version = "${soapUIVersion}.PRO-RELEASE"
 description = project.pluginDescription
 group = 'io.byteshifter'
 
