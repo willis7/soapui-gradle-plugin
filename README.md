@@ -24,6 +24,7 @@ The plugin provides tasks for running SoapUI tests and mocks during a Gradle bui
 ## Build Status
 
 <!--
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/572454f71bfc4ec4b89ba7786579b716)](https://app.codacy.com/manual/willis7/soapui-gradle-plugin?utm_source=github.com&utm_medium=referral&utm_content=willis7/soapui-gradle-plugin&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin.svg)](https://travis-ci.org/byte-shifter-ltd/soapui-gradle-plugin)
 -->
 [![Build Status](https://travis-ci.org/willis7/soapui-gradle-plugin.svg)](https://travis-ci.org/willis7/soapui-gradle-plugin)
